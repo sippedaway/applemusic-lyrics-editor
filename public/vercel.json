@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/applemusic-lyrics-generator",
+      "destination": "https://applemusic-lyrics-generator.vercel.app"
+    }
+  ]
+}
