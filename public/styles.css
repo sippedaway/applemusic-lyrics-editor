@@ -1,12 +1,12 @@
 @font-face {
   font-family: 'SF Pro Display';
-  src: url('font.ttf') format('opentype');
+  src: url('./assets/font.ttf') format('opentype');
   font-weight: bold;
 }
 
 @font-face {
   font-family: 'SF Pro Regular';
-  src: url('font.ttf') format('opentype');
+  src: url('./assets/font.ttf') format('opentype');
   font-weight: regular;
 }
 
