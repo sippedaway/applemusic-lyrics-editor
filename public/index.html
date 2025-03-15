@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Apple Music Lyrics Editor</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+  <div id="top-bar">
+    <div>
+      <button id="saveButton"><i class="fas fa-save"></i>Save</button>
+      <button id="openButton"><i class="fas fa-upload"></i>Open</button>
+      <input type="file" id="fileInput" style="display:none;" accept="application/json">
+    </div>
+    <div>
+      <button id="playButton"><i class="fas fa-play"></i>Play</button>
+      <button id="stopButton"><i class="fas fa-stop"></i>Stop</button>
+    </div>
+    <div>
+      <button onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-generator', '_blank')"><i class="fab fa-github"></i>GitHub</button>
+    </div>
+  </div>
+  <div id="container">
+    <div id="editor">
+      <h2>Editor</h2>
+      <p>This is a realistic Apple Music lyrics generator! Feel free to use it for any project. Shortcuts:<br>F - add line<br>Q - select left alignment<br>E - select right alignment</p>
+      <div id="linesContainer"></div>
+      <button id="addLineButton">Add Line</button>
+    </div>
+    <div id="divider"></div>
+    <div id="preview">
+      <div id="previewContainer"></div>
+    </div>
+  </div>
+  <script src="project.js" defer></script>
+  <script src="playback.js" defer></script>
+</body>
+</html>
