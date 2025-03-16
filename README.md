@@ -18,21 +18,33 @@ A very close depiction of the Apple Music song lyrics. Create any lyrics, backgr
 ## Examples
 > These are JSON files that you can Open and then preview, play, share or change them
 
-<details open>
+<details>
 <summary>Future, Metro Boomin, Kendrick Lamar - <b>Like That</b></summary>
   
 Exact 1:1 lyrics experience with background noises, multiple people rapping
 
 Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json
 </details>
+<details>
+<summary>Billie Eilish - <b>BLUE</b></summary>
+  
+Exact 1:1 lyrics experience with background noises, multiple singing vocals at the same time, **SYLLABLES**, details and more! It's really cool and it took me a while, please check it out! :)
+
+Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Billie%20Eilish%20-%20BLUE.json
+</details>
 
 ## Key features
 - **Realistic depiction**: looks pretty much identical to the actual Apple Music song lyrics
+- **Syllables**: you can timestamp every word so that high notes and accents on certain words of a lyric REALLY stands out!
 - **Timestamp lyric lines**: just add a "Begin" and "End" timestamp to a lyric and it will automatically sync
 - **Background lyrics**: add background lyrics to any main lyric line
 - **Save and open projects**: everything you do will auto-save. Or, save your project as a .JSON and share it!
 
 ## Version
+#### 1.2
+- **Release date**: 2025-03-16
+- **Added:**
+- Syllables system: timestamp specific words in a lyric
 #### 1.1
 - **Release date**: 2025-03-16
 - **Added:**
