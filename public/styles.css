@@ -170,9 +170,10 @@ body.resizing {
   margin-left: auto;  
 }
 
-.preview-word.finished {
+.preview-line.finished .preview-letter {
   animation: none;
   top: -5px;
+  color: gray;
 }
 
 .preview-word {
