@@ -33,6 +33,13 @@ Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-gene
 - **Save and open projects**: everything you do will auto-save. Or, save your project as a .JSON and share it!
 
 ## Version
+#### 1.1
+- **Release date**: 2025-03-16
+- **Added:**
+- Preview time & project time displayed on navbar
+- Mobile support & tabs
+- Cleaned up navbar with dropdown
+- Access to project [example](#examples) from navbar
 #### 1.0
 - **Release date**: 2025-03-15
 - Hosted on Vercel
