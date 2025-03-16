@@ -378,3 +378,36 @@ document.addEventListener('keydown', (e) => {
             break;
     }
 });
+
+document.getElementById('exampleButton').addEventListener('click', async () => {
+  if (confirm('This will replace your current project with an example. Are you sure?')) {
+    try {
+      const response = await fetch('https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json');
+      if (!response.ok) {
+        throw new Error('Failed to fetch example project');
+      }
+      const data = await response.json();
+      populateEditor(data);
+      updatePreview();
+      autoSave();
+    } catch (err) {
+      alert('Failed to load example project. Please try again later.');
+      console.error('Error loading example:', err);
+    }
+  }
+});
+
+document.querySelectorAll('.tab-button').forEach(button => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+    document.querySelector('#editor').classList.remove('active');
+    document.querySelector('#preview').classList.remove('active');
+    
+    button.classList.add('active');
+    document.querySelector(`#${button.dataset.tab}`).classList.add('active');
+  });
+});
+
+if (window.innerWidth <= 768) {
+  document.querySelector('#editor').classList.add('active');
+}

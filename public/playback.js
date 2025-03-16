@@ -132,158 +132,174 @@ function updatePreview() {
       const endTime = parseTimestamp(item.end);
       previewData.push({ begin: beginTime, end: endTime, letterSpans: allLetters, wordContainers: wordContainers, element: lineDiv, sublyrics: subLyricsData });
     });
+    updateTimeDisplay(0);
 }
 
   let lastFinishedIndex = -1; 
 
-  function updatePlayback() {
-    const currentTime = (performance.now() / 1000) - playStartTime;
-    let maxEnd = 0;
-    let currentActiveLine = null;
+function formatTime(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+}
 
-    previewData.forEach((line, index) => {
+function updateTimeDisplay(currentTime) {
+  const timeDisplay = document.getElementById('timeDisplay');
+  const maxEnd = Math.max(...previewData.map(line => line.end));
+  timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(maxEnd)}`;
+}
+
+function updatePlayback() {
+  const currentTime = (performance.now() / 1000) - playStartTime;
+  let maxEnd = 0;
+  let currentActiveLine = null;
+
+  updateTimeDisplay(currentTime);
+
+  previewData.forEach((line, index) => {
+    const nextLine = previewData[index + 1];
+    if (nextLine && currentTime >= nextLine.begin - 0.7) {  
+      const dotsElement = line.element.nextElementSibling;
+      if (dotsElement?.classList.contains('waiting-dots')) {
+        dotsElement.classList.add('disappearing');
+
+        setTimeout(() => dotsElement.remove(), 500);
+      }
+    }
+  });
+
+  previewData.forEach((line, index) => {
+    if (line.end > maxEnd) maxEnd = line.end;
+    const totalLetters = line.letterSpans.length;
+    const letterDuration = (line.end - line.begin) / totalLetters;
+
+    if (currentTime < line.begin) {
+
+      line.letterSpans.forEach(span => span.classList.remove('active'));
+      line.wordContainers.forEach(wordObj => wordObj.container.classList.remove('finished'));
+      line.element.classList.remove('active', 'finished');
+    } else if (currentTime >= line.end + 0.4) { 
+
+      line.letterSpans.forEach(span => span.classList.remove('active'));
+      line.element.classList.remove('active');
+      line.element.classList.add('finished');
+      line.wordContainers.forEach(wordObj => wordObj.container.classList.add('finished'));
+
       const nextLine = previewData[index + 1];
-      if (nextLine && currentTime >= nextLine.begin - 0.7) {  
-        const dotsElement = line.element.nextElementSibling;
-        if (dotsElement?.classList.contains('waiting-dots')) {
-          dotsElement.classList.add('disappearing');
+      if (nextLine && (nextLine.begin - line.end) > 5 && currentTime < nextLine.begin) {
+        if (!line.element.nextElementSibling?.classList.contains('waiting-dots')) {
+          const dotsDiv = document.createElement('div');
+          dotsDiv.className = 'waiting-dots';
 
-          setTimeout(() => dotsElement.remove(), 500);
-        }
-      }
-    });
-
-    previewData.forEach((line, index) => {
-      if (line.end > maxEnd) maxEnd = line.end;
-      const totalLetters = line.letterSpans.length;
-      const letterDuration = (line.end - line.begin) / totalLetters;
-
-      if (currentTime < line.begin) {
-
-        line.letterSpans.forEach(span => span.classList.remove('active'));
-        line.wordContainers.forEach(wordObj => wordObj.container.classList.remove('finished'));
-        line.element.classList.remove('active', 'finished');
-      } else if (currentTime >= line.end + 0.4) { 
-
-        line.letterSpans.forEach(span => span.classList.remove('active'));
-        line.element.classList.remove('active');
-        line.element.classList.add('finished');
-        line.wordContainers.forEach(wordObj => wordObj.container.classList.add('finished'));
-
-        const nextLine = previewData[index + 1];
-        if (nextLine && (nextLine.begin - line.end) > 5 && currentTime < nextLine.begin) {
-          if (!line.element.nextElementSibling?.classList.contains('waiting-dots')) {
-            const dotsDiv = document.createElement('div');
-            dotsDiv.className = 'waiting-dots';
-
-            for (let i = 0; i < 3; i++) {
-              const dot = document.createElement('div');
-              dot.className = 'waiting-dot';
-              dotsDiv.appendChild(dot);
-            }
-
-            line.element.parentNode.insertBefore(dotsDiv, line.element.nextSibling);
-
-            dotsDiv.offsetHeight;
-            dotsDiv.classList.add('visible');
-
-            const waitTime = nextLine.begin - line.end;
-            const dotStartTimes = [
-              line.end + (waitTime * 0.15),
-              line.end + (waitTime * 0.3),
-              line.end + (waitTime * 0.45)
-            ];
-
-            const dots = dotsDiv.children;
-            for (let i = 0; i < dots.length; i++) {
-              if (currentTime >= dotStartTimes[i]) {
-                dots[i].classList.add('active');
-              }
-            }
-          } else {
-
-            const dots = line.element.nextElementSibling.children;
-            const waitTime = nextLine.begin - line.end;
-            const dotStartTimes = [
-              line.end + (waitTime * 0.15),
-              line.end + (waitTime * 0.3),
-              line.end + (waitTime * 0.45)
-            ];
-
-            for (let i = 0; i < dots.length; i++) {
-              if (currentTime >= dotStartTimes[i]) {
-                dots[i].classList.add('active');
-              }
-            }
+          for (let i = 0; i < 3; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'waiting-dot';
+            dotsDiv.appendChild(dot);
           }
-        }
-      } else if (currentTime >= line.begin) {
 
-        if (index === 0 || currentTime >= previewData[index - 1].end) {
-          line.element.classList.add('active');
-          currentActiveLine = index;
-        }
+          line.element.parentNode.insertBefore(dotsDiv, line.element.nextSibling);
 
-        line.letterSpans.forEach((span, idx) => {
-          if (currentTime >= line.begin + (idx + 1) * letterDuration) {
-            span.classList.add('active');
-          } else {
-            span.classList.remove('active');
-          }
-        });
+          dotsDiv.offsetHeight;
+          dotsDiv.classList.add('visible');
 
-        line.wordContainers.forEach(wordObj => {
-          const allActive = wordObj.letters.every(letter => 
-            letter.classList.contains('active'));
-          if (allActive) {
-            wordObj.container.classList.add('finished');
-          }
-        });
-      }
+          const waitTime = nextLine.begin - line.end;
+          const dotStartTimes = [
+            line.end + (waitTime * 0.15),
+            line.end + (waitTime * 0.3),
+            line.end + (waitTime * 0.45)
+          ];
 
-      line.sublyrics?.forEach(sub => {
-        if (currentTime >= line.begin && currentTime < line.end + 0.4) {  
-          sub.element.classList.add('visible');
-
-          if (currentTime >= sub.begin) {  
-            sub.element.classList.add('active');
-
-            const subLetterDuration = (sub.end - sub.begin) / sub.letters.length;
-            sub.letters.forEach((letter, idx) => {
-              if (currentTime >= sub.begin + (idx + 1) * subLetterDuration) {
-                letter.classList.add('active');
-              }
-            });
+          const dots = dotsDiv.children;
+          for (let i = 0; i < dots.length; i++) {
+            if (currentTime >= dotStartTimes[i]) {
+              dots[i].classList.add('active');
+            }
           }
         } else {
-          sub.element.classList.remove('visible');  
+
+          const dots = line.element.nextElementSibling.children;
+          const waitTime = nextLine.begin - line.end;
+          const dotStartTimes = [
+            line.end + (waitTime * 0.15),
+            line.end + (waitTime * 0.3),
+            line.end + (waitTime * 0.45)
+          ];
+
+          for (let i = 0; i < dots.length; i++) {
+            if (currentTime >= dotStartTimes[i]) {
+              dots[i].classList.add('active');
+            }
+          }
+        }
+      }
+    } else if (currentTime >= line.begin) {
+
+      if (index === 0 || currentTime >= previewData[index - 1].end) {
+        line.element.classList.add('active');
+        currentActiveLine = index;
+      }
+
+      line.letterSpans.forEach((span, idx) => {
+        if (currentTime >= line.begin + (idx + 1) * letterDuration) {
+          span.classList.add('active');
+        } else {
+          span.classList.remove('active');
         }
       });
-    });
 
-    if (currentActiveLine !== null && previewData[currentActiveLine]) {
-      const currentElement = previewData[currentActiveLine].element;
-      const container = document.getElementById('previewContainer');
-      const offsetTop = currentElement.offsetTop - (container.clientHeight * 0.4);
-      container.scrollTo({
-        top: offsetTop,
-        behavior: 'smooth'
+      line.wordContainers.forEach(wordObj => {
+        const allActive = wordObj.letters.every(letter => 
+          letter.classList.contains('active'));
+        if (allActive) {
+          wordObj.container.classList.add('finished');
+        }
       });
     }
 
-    if (currentTime < maxEnd) {
-      playRequestId = requestAnimationFrame(updatePlayback);
-    } else {
-      cancelAnimationFrame(playRequestId);
-      isPlaying = false;
-    }
+    line.sublyrics?.forEach(sub => {
+      if (currentTime >= line.begin && currentTime < line.end + 0.4) {  
+        sub.element.classList.add('visible');
+
+        if (currentTime >= sub.begin) {  
+          sub.element.classList.add('active');
+
+          const subLetterDuration = (sub.end - sub.begin) / sub.letters.length;
+          sub.letters.forEach((letter, idx) => {
+            if (currentTime >= sub.begin + (idx + 1) * subLetterDuration) {
+              letter.classList.add('active');
+            }
+          });
+        }
+      } else {
+        sub.element.classList.remove('visible');  
+      }
+    });
+  });
+
+  if (currentActiveLine !== null && previewData[currentActiveLine]) {
+    const currentElement = previewData[currentActiveLine].element;
+    const container = document.getElementById('previewContainer');
+    const offsetTop = currentElement.offsetTop - (container.clientHeight * 0.4);
+    container.scrollTo({
+      top: offsetTop,
+      behavior: 'smooth'
+    });
   }
+
+  if (currentTime < maxEnd) {
+    playRequestId = requestAnimationFrame(updatePlayback);
+  } else {
+    cancelAnimationFrame(playRequestId);
+    isPlaying = false;
+  }
+}
 
 function startPlayback(startTime = 0) {
   updatePreview(); 
   playStartTime = (performance.now() / 1000) - startTime;
   isPlaying = true;
   if (playRequestId) cancelAnimationFrame(playRequestId);
+  updateTimeDisplay(startTime);
   playRequestId = requestAnimationFrame(updatePlayback);
 }
 
@@ -306,4 +322,5 @@ function stopPlayback() {
   });
 
   document.querySelectorAll('.waiting-dots').forEach(dots => dots.remove());
+  updateTimeDisplay(0);
 }

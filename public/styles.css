@@ -35,11 +35,11 @@ body {
   padding: 10px;
 }
 
-#top-bar div {
+#top-bar .div {
   display: flex;
 }
 
-#top-bar button {
+#top-bar .button {
   margin: 0 10px;
   padding: 8px 16px;
   font-size: 16px;
@@ -54,7 +54,7 @@ body {
   transition: all 0.3s ease;
 }
 
-#top-bar button:hover {
+#top-bar .button:hover {
   background: #333;
 }
 
@@ -376,4 +376,167 @@ body.resizing {
 .align-btn.active {
   background: #555;
   color: #fff;
+}
+
+.dropdown-container {
+  display: flex;
+  gap: 10px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  background: #222;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #222;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  width: 83px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.dropdown-help .dropdown-content {
+  width: 130px;
+}
+
+.dropdown-content button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 8px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-content button:hover {
+  background-color: #333;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropdown-btn {
+  background: #333;
+}
+
+.mobile-tabs {
+  display: none;
+  padding: 10px;
+  background: #111;
+  gap: 10px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  background: #222;
+  border: none;
+  color: #666;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.tab-button.active {
+  background: #333;
+  color: white;
+}
+
+.time-display {
+  font-family: 'SF Pro Display', monospace;
+  font-size: 14px;
+  color: #888;
+  margin-left: 15px;
+  min-width: 95px;
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .mobile-tabs {
+    display: flex;
+  }
+
+  #container {
+    flex-direction: column;
+  }
+
+  #editor, #preview {
+    width: 100%;
+    height: calc(100vh - 110px);
+    display: none;
+  }
+
+  #previewContainer {
+    padding: 0;
+  }
+
+  #editor.active, #preview.active {
+    display: block;
+  }
+
+  #divider {
+    display: none;
+  }
+
+  #editor p br:first-of-type,
+  #editor p br:last-of-type {
+    display: none;
+  }
+
+  .right-lyric {
+    margin-left: 15%;
+  }
+
+  .grab-handle {
+    display: none;
+  }
+
+  #linesContainer .line input.timestamp {
+    width: 30px;
+  }
+
+  #linesContainer .line input {
+    width: 100px;
+  }
+  
+  .line {
+    flex-direction: unset;
+  }
+
+  .main-line {
+    gap: 0;
+  }
+
+  .dropdown-content {
+    position: fixed;
+    left: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .time-display {
+    font-size: 12px;
+    min-width: 85px;
+    margin-left: 10px;
+  }
 }

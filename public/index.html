@@ -8,18 +8,39 @@
 </head>
 <body>
   <div id="top-bar">
-    <div>
-      <button id="saveButton"><i class="fas fa-save"></i>Save</button>
-      <button id="openButton"><i class="fas fa-upload"></i>Open</button>
-      <input type="file" id="fileInput" style="display:none;" accept="application/json">
+    <div class="dropdown-container">
+      <div class="dropdown">
+        <button class="dropdown-btn button">File</button>
+        <div class="dropdown-content">
+          <button id="saveButton"><i class="fas fa-save"></i>Save</button>
+          <button id="openButton"><i class="fas fa-upload"></i>Open</button>
+          <input type="file" id="fileInput" style="display:none;" accept="application/json">
+        </div>
+      </div>
+      <div class="dropdown dropdown-help">
+        <button class="dropdown-btn button">Help</button>
+        <div class="dropdown-content">
+          <button id="githubButton" onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-generator', '_blank')">
+            <i class="fab fa-github"></i>GitHub
+          </button>
+          <button id="kofiButton" onclick="window.open('https://ko-fi.com/sipped', '_blank')">
+            <i class="fas fa-coffee"></i>Support me on Ko-fi
+          </button>
+          <button id="exampleButton">
+            <i class="fas fa-file-alt"></i>Load Example
+          </button>
+        </div>
+      </div>
     </div>
-    <div>
-      <button id="playButton"><i class="fas fa-play"></i>Play</button>
-      <button id="stopButton"><i class="fas fa-stop"></i>Stop</button>
+    <div class="div">
+      <button id="playButton" class="button"><i class="fas fa-play"></i>Play</button>
+      <button id="stopButton" class="button"><i class="fas fa-stop"></i>Stop</button>
     </div>
-    <div>
-      <button onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-generator', '_blank')"><i class="fab fa-github"></i>GitHub</button>
-    </div>
+    <div id="timeDisplay" class="time-display">00:00 / 00:00</div>
+  </div>
+  <div class="mobile-tabs">
+    <button class="tab-button active" data-tab="editor">Editor</button>
+    <button class="tab-button" data-tab="preview">Preview</button>
   </div>
   <div id="container">
     <div id="editor">
