@@ -29,11 +29,11 @@ function populateEditor(data) {
     const container = document.getElementById('linesContainer');
     container.innerHTML = '';
     data.forEach(item => {
-      addLine(item.begin, item.end, item.text, item.position, item.sublyrics);  
+      addLine(item.begin, item.end, item.text, item.position, item.sublyrics, item.syllables);  
     });
   }
 
-  function addLine(begin = '', end = '', text = '', position = 'left', sublyrics = []) {
+  function addLine(begin = '', end = '', text = '', position = 'left', sublyrics = [], syllables = []) {
       const container = document.getElementById('linesContainer');
       const lineDiv = document.createElement('div');
       lineDiv.className = 'line';
@@ -132,11 +132,25 @@ function populateEditor(data) {
       });
 
       mainLineDiv.appendChild(addSubButton);
+
+      const syllableButton = document.createElement('button');
+      syllableButton.className = 'syllable-btn';
+      syllableButton.title = 'Edit word timings';
+      syllableButton.innerHTML = '<i class="fas fa-microphone"></i>';
+      syllableButton.addEventListener('click', () => {
+        openSyllableEditor(lineDiv, text, syllables);
+      });
+
+      mainLineDiv.appendChild(syllableButton);
       lineDiv.appendChild(mainLineDiv);
 
       sublyrics.forEach(sub => {
         addSublyric(lineDiv, sub.begin, sub.end, sub.text);
       });
+
+      if (syllables && syllables.length > 0) {
+        lineDiv.dataset.syllables = JSON.stringify(syllables);
+      }
 
       container.appendChild(lineDiv);
   }
@@ -402,7 +416,7 @@ document.querySelectorAll('.tab-button').forEach(button => {
     document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
     document.querySelector('#editor').classList.remove('active');
     document.querySelector('#preview').classList.remove('active');
-    
+
     button.classList.add('active');
     document.querySelector(`#${button.dataset.tab}`).classList.add('active');
   });
@@ -410,4 +424,200 @@ document.querySelectorAll('.tab-button').forEach(button => {
 
 if (window.innerWidth <= 768) {
   document.querySelector('#editor').classList.add('active');
+}
+
+function openSyllableEditor(lineDiv, text, existingSyllables = []) {
+  const overlay = document.createElement('div');
+  overlay.className = 'popup-overlay';
+
+  const popup = document.createElement('div');
+  popup.className = 'syllable-popup';
+
+  const header = document.createElement('div');
+  header.className = 'popup-header';
+
+  const title = document.createElement('h3');
+  title.textContent = 'Word Timing Editor';
+
+  const closeBtn = document.createElement('button');
+  closeBtn.className = 'popup-close';
+  closeBtn.innerHTML = '×';
+  closeBtn.onclick = () => {
+    document.body.removeChild(overlay);
+    document.body.removeChild(popup);
+  };
+
+  header.appendChild(title);
+  header.appendChild(closeBtn);
+  popup.appendChild(header);
+
+  const words = text.trim().split(' ');
+  const begin = lineDiv.querySelector('.timestamp.begin').value;
+  const end = lineDiv.querySelector('.timestamp.end').value;
+  const totalDuration = parseTimestampFlexible(end) - parseTimestampFlexible(begin);
+  const defaultWordDuration = totalDuration / words.length; 
+
+  const wordDivs = [];
+  words.forEach((word, i) => {
+    const wordDiv = document.createElement('div');
+    wordDiv.className = 'syllable-word';
+
+    const existingSyllable = existingSyllables[i] || {};
+    const wordBegin = existingSyllable.begin || formatTimestamp(parseTimestampFlexible(begin) + i * defaultWordDuration);
+    const wordEnd = existingSyllable.end || formatTimestamp(parseTimestampFlexible(begin) + (i + 1) * defaultWordDuration);
+
+    const wordText = document.createElement('span');
+    wordText.className = 'word-text';
+    wordText.textContent = word;
+
+    const beginInput = document.createElement('input');
+    beginInput.type = 'text';
+    beginInput.value = wordBegin;
+    beginInput.placeholder = 'M:SS';
+
+    const endInput = document.createElement('input');
+    endInput.type = 'text';
+    endInput.value = wordEnd;
+    endInput.placeholder = 'M:SS';
+
+    endInput.addEventListener('change', () => {
+      const currentEnd = parseTimestampFlexible(endInput.value);
+      const nextIndex = i + 1;
+
+      if (nextIndex < wordDivs.length) {
+        const diff = currentEnd - parseTimestampFlexible(wordDivs[nextIndex].querySelector('input:first-of-type').value);
+
+        if (diff > 0) {
+
+          for (let j = nextIndex; j < wordDivs.length; j++) {
+            const inputs = wordDivs[j].querySelectorAll('input');
+            const newBegin = parseTimestampFlexible(inputs[0].value) + diff;
+            const newEnd = parseTimestampFlexible(inputs[1].value) + diff;
+            inputs[0].value = formatTimestamp(newBegin);
+            inputs[1].value = formatTimestamp(newEnd);
+          }
+        }
+      }
+    });
+
+    wordDiv.appendChild(wordText);
+    wordDiv.appendChild(beginInput);
+    wordDiv.appendChild(endInput);
+    popup.appendChild(wordDiv);
+    wordDivs.push(wordDiv);
+  });
+
+  const saveBtn = document.createElement('button');
+  saveBtn.textContent = 'Save';
+  saveBtn.className = 'button';
+  saveBtn.onclick = () => {
+    const syllables = Array.from(popup.querySelectorAll('.syllable-word')).map(wordDiv => ({
+      text: wordDiv.querySelector('.word-text').textContent,
+      begin: wordDiv.querySelector('input:first-of-type').value,
+      end: wordDiv.querySelector('input:last-of-type').value
+    }));
+
+    lineDiv.dataset.syllables = JSON.stringify(syllables);
+    updatePreview();
+    autoSave();
+    closeBtn.click();
+  };
+
+  popup.appendChild(saveBtn);
+
+  overlay.classList.add('active');
+  popup.classList.add('active');
+  document.body.appendChild(overlay);
+  document.body.appendChild(popup);
+}
+
+function formatTimestamp(seconds) {
+  const minutes = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60);
+  const ms = Math.floor((seconds % 1) * 1000);
+  return ms > 0 ? 
+    `${minutes}:${String(secs).padStart(2, '0')}:${String(ms).padStart(3, '0')}` :
+    `${minutes}:${String(secs).padStart(2, '0')}`;
+}
+
+function parseTimestampFlexible(ts) {
+  if (!ts) return 0;
+  const parts = ts.split(':').map(p => parseFloat(p));
+  if (parts.length === 2) {
+    return parts[0] * 60 + parts[1];
+  } else if (parts.length === 3) {
+    return parts[0] * 60 + parts[1] + (parts[2] / 1000);
+  }
+  return 0;
+}
+
+function getLyricsData() {
+  const lines = document.querySelectorAll('#linesContainer .line');
+  const data = [];
+  lines.forEach(line => {
+    const begin = line.querySelector('.timestamp.begin').value;
+    const end = line.querySelector('.timestamp.end').value;
+    const text = line.querySelector('.lyricText').value;
+    const position = line.querySelector('.align-btn.active').dataset.position;
+    const sublyrics = Array.from(line.querySelectorAll('.sublyric')).map(sub => ({
+      begin: sub.querySelector('.timestamp.begin').value,
+      end: sub.querySelector('.timestamp.end').value,
+      text: sub.querySelector('.lyricText').value
+    }));
+    const syllables = line.dataset.syllables ? JSON.parse(line.dataset.syllables) : [];
+    data.push({ begin, end, text, position, sublyrics, syllables });
+  });
+  return data;
+}
+
+function updatePreview() {
+  const previewContainer = document.getElementById('previewContainer');
+  previewContainer.innerHTML = '';
+  previewData = getLyricsData();
+
+  previewData.forEach(lineData => {
+    const lineDiv = document.createElement('div');
+    lineDiv.className = `preview-line ${lineData.position}-lyric`;
+
+    if (lineData.syllables && lineData.syllables.length > 0) {
+      lineData.syllables.forEach((syllable, i) => {
+        const wordSpan = document.createElement('span');
+        wordSpan.className = 'preview-word';
+        wordSpan.dataset.begin = syllable.begin;
+        wordSpan.dataset.end = syllable.end;
+
+        const duration = parseTimestampFlexible(syllable.end) - parseTimestampFlexible(syllable.begin);
+        if (duration > 3) {
+          wordSpan.dataset.longDuration = 'true';
+        }
+
+        wordSpan.textContent = syllable.text;
+        if (i < lineData.syllables.length - 1) wordSpan.textContent += ' ';
+        lineDiv.appendChild(wordSpan);
+      });
+    } else {
+      lineDiv.textContent = lineData.text;
+    }
+
+    previewContainer.appendChild(lineDiv);
+  });
+}
+
+function updateActiveLyrics(currentTime) {
+
+  document.querySelectorAll('.preview-word').forEach(word => {
+    const begin = parseTimestampFlexible(word.dataset.begin);
+    const end = parseTimestampFlexible(word.dataset.end);
+
+    if (currentTime >= begin && currentTime <= end) {
+      word.classList.add('active');
+
+      if (word.dataset.longDuration === 'true') {
+        word.classList.add('glow');
+      }
+    } else {
+      word.classList.remove('active', 'glow');
+    }
+  });
+
 }
