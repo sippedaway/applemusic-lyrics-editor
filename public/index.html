@@ -45,12 +45,18 @@
   <div id="container">
     <div id="editor">
       <h2>Editor</h2>
-      <p>This is a realistic Apple Music lyrics generator! Feel free to use it for any project. Shortcuts:<br>F - add line<br>Q - select left alignment<br>E - select right alignment</p>
+      <p>This is a realistic Apple Music lyrics generator! Feel free to use it for any project.
+        <br><br>Shortcuts:<br><b>When hovering line</b><br>S - edit word timings<br>Q - select left alignment<br>E - select right alignment<br>O - delete hovered line<br><b>Project</b><br>F - add line<br>Z - play<br>X - stop<br>Ctrl+S - save project<br>Ctrl+O - open project</p>
       <div id="linesContainer"></div>
       <button id="addLineButton">Add Line</button>
     </div>
     <div id="divider"></div>
     <div id="preview">
+      <div id="sync-control">
+        <button id="toggleSync" class="sync-button">
+          <i class="fas fa-thumbtack"></i>Toggle synchronization
+        </button>
+      </div>
       <div id="previewContainer"></div>
     </div>
   </div>

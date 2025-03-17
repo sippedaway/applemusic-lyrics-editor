@@ -131,7 +131,6 @@ function populateEditor(data) {
         addSublyric(lineDiv);
       });
 
-      mainLineDiv.appendChild(addSubButton);
 
       const syllableButton = document.createElement('button');
       syllableButton.className = 'syllable-btn';
@@ -142,6 +141,7 @@ function populateEditor(data) {
       });
 
       mainLineDiv.appendChild(syllableButton);
+      mainLineDiv.appendChild(addSubButton);
       lineDiv.appendChild(mainLineDiv);
 
       sublyrics.forEach(sub => {
@@ -368,27 +368,58 @@ document.addEventListener('mouseout', (e) => {
 
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT') return;
+
+    // Handle Ctrl+S and Ctrl+O
+    if (e.ctrlKey) {
+        switch(e.key.toLowerCase()) {
+            case 's':
+                e.preventDefault();
+                saveProject();
+                break;
+            case 'o':
+                e.preventDefault();
+                document.getElementById('fileInput').click();
+                break;
+        }
+        return;
+    }
+
+    // Handle regular shortcuts
     switch(e.key.toUpperCase()) {
         case 'F':
             addLine();
             updatePreview();
             autoSave();
             break;
-    case 'Q':
+        case 'Q':
             if (hoveredLine) {
-                const leftBtn = hoveredLine.querySelector('.align-btn[dataqeqe-position="left"]');
-                if (leftBtn) {
-                    leftBtn.click();
-                }
+                const leftBtn = hoveredLine.querySelector('.align-btn[data-position="left"]');
+                if (leftBtn) leftBtn.click();
             }
             break;
         case 'E':
             if (hoveredLine) {
                 const rightBtn = hoveredLine.querySelector('.align-btn[data-position="right"]');
-                if (rightBtn) {
-                    rightBtn.click();
-                }
+                if (rightBtn) rightBtn.click();
             }
+            break;
+        case 'O':
+            if (hoveredLine) {
+                const delBtn = hoveredLine.querySelector('.delete-line');
+                if (delBtn) delBtn.click();
+            }
+            break;
+        case 'S':
+            if (hoveredLine) {
+                const syllableBtn = hoveredLine.querySelector('.syllable-btn');
+                if (syllableBtn) syllableBtn.click();
+            }
+            break;
+        case 'Z':
+            startPlayback();
+            break;
+        case 'X':
+            stopPlayback();
             break;
     }
 });
@@ -427,6 +458,14 @@ if (window.innerWidth <= 768) {
 }
 
 function openSyllableEditor(lineDiv, text, existingSyllables = []) {
+  // Get current text from input rather than using passed text parameter
+  const currentText = lineDiv.querySelector('.lyricText').value.trim();
+  
+  if (!currentText) {
+    alert('Please enter some lyrics first before editing word timings.');
+    return;
+  }
+
   const overlay = document.createElement('div');
   overlay.className = 'popup-overlay';
 
@@ -441,7 +480,6 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
 
   const closeBtn = document.createElement('button');
   closeBtn.className = 'popup-close';
-  closeBtn.innerHTML = '×';
   closeBtn.onclick = () => {
     document.body.removeChild(overlay);
     document.body.removeChild(popup);
@@ -451,7 +489,7 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
   header.appendChild(closeBtn);
   popup.appendChild(header);
 
-  const words = text.trim().split(' ');
+  const words = currentText.split(' ');
   const begin = lineDiv.querySelector('.timestamp.begin').value;
   const end = lineDiv.querySelector('.timestamp.end').value;
   const totalDuration = parseTimestampFlexible(end) - parseTimestampFlexible(begin);
@@ -509,7 +547,7 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
 
   const saveBtn = document.createElement('button');
   saveBtn.textContent = 'Save';
-  saveBtn.className = 'button';
+  saveBtn.className = 'add-sub-button';
   saveBtn.onclick = () => {
     const syllables = Array.from(popup.querySelectorAll('.syllable-word')).map(wordDiv => ({
       text: wordDiv.querySelector('.word-text').textContent,

@@ -422,11 +422,13 @@ previewData.forEach((line, index) => {
 if (currentActiveLine !== null && previewData[currentActiveLine]) {
   const currentElement = previewData[currentActiveLine].element;
   const container = document.getElementById('previewContainer');
-  const offsetTop = currentElement.offsetTop - (container.clientHeight * 0.4);
-  container.scrollTo({
-    top: offsetTop,
-    behavior: 'smooth'
-  });
+  const syncButton = document.getElementById('toggleSync');
+  
+  // Only move container if sync is active
+  if (syncButton.classList.contains('active')) {
+    const offsetTop = currentElement.offsetTop - 50; // Subtract 50px for margin
+    container.style.transform = `translateY(-${offsetTop}px)`;
+  }
 }
 
 if (currentTime < maxEnd) {
@@ -438,32 +440,47 @@ if (currentTime < maxEnd) {
 }
 
 function startPlayback(startTime = 0) {
-updatePreview(); 
-playStartTime = (performance.now() / 1000) - startTime;
-isPlaying = true;
-if (playRequestId) cancelAnimationFrame(playRequestId);
-updateTimeDisplay(startTime);
-playRequestId = requestAnimationFrame(updatePlayback);
+  updatePreview(); 
+  playStartTime = (performance.now() / 1000) - startTime;
+  isPlaying = true;
+  if (playRequestId) cancelAnimationFrame(playRequestId);
+  updateTimeDisplay(startTime);
+  document.getElementById('stopButton').classList.add('active');
+  playRequestId = requestAnimationFrame(updatePlayback);
 }
 
 function stopPlayback() {
-if (playRequestId) {
-  cancelAnimationFrame(playRequestId);
-  playRequestId = null;
-}
-isPlaying = false;
+  if (playRequestId) {
+    cancelAnimationFrame(playRequestId);
+    playRequestId = null;
+  }
+  isPlaying = false;
+  document.getElementById('stopButton').classList.remove('active');
 
-previewData.forEach(line => {
-  line.letterSpans.forEach(span => span.classList.remove('active'));
-  line.wordContainers.forEach(wordObj => wordObj.container.classList.remove('finished'));
-  line.element.classList.remove('active', 'finished');
+  previewData.forEach(line => {
+    line.letterSpans.forEach(span => span.classList.remove('active'));
+    line.wordContainers.forEach(wordObj => wordObj.container.classList.remove('finished'));
+    line.element.classList.remove('active', 'finished');
 
-  line.sublyrics?.forEach(sub => {
-    sub.element.classList.remove('visible', 'active');
-    sub.letters.forEach(letter => letter.classList.remove('active'));
+    line.sublyrics?.forEach(sub => {
+      sub.element.classList.remove('visible', 'active');
+      sub.letters.forEach(letter => letter.classList.remove('active'));
+    });
   });
-});
 
-document.querySelectorAll('.waiting-dots').forEach(dots => dots.remove());
-updateTimeDisplay(0);
+  document.querySelectorAll('.waiting-dots').forEach(dots => dots.remove());
+  updateTimeDisplay(0);
 }
+
+document.getElementById('toggleSync').addEventListener('click', function() {
+  this.classList.toggle('active');
+  
+  // Stop playback when toggling sync
+  stopPlayback();
+  
+  // Reset transform when sync is turned off
+  const container = document.getElementById('previewContainer');
+  if (!this.classList.contains('active')) {
+    container.style.transform = '';
+  }
+});
