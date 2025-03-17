@@ -40,11 +40,39 @@ Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-gene
 - **Background lyrics**: add background lyrics to any main lyric line
 - **Save and open projects**: everything you do will auto-save. Or, save your project as a .JSON and share it!
 
+<details>
+<summary><b>Shortcuts</b></summary>
+  
+Project:
+- `F` - add line
+- `Z` - play
+- `X` - stop
+- `Ctrl`+`S` - save project
+- `Ctrl`+`O` - open project
+
+Hovered lyric line:
+- `S` - edit word timings
+- `Q` - select left alignment
+- `E` - select right alignment
+- `O` - delete hovered line
+
+</details>
+
 ## Version
+#### 1.3
+- **Release date**: 2025-03-17
+- **Added:**
+- Button to toggle lyric synchronization
+- New shortcuts
+- Changed lyric line spacing
+- Red color to Stop button when playback is on
+- **Fixed:**
+- Missing "Save" button design in word timings editor
+- Word timings editor not recognizing changed lyrics
 #### 1.2
 - **Release date**: 2025-03-16
 - **Added:**
-- Syllables system: timestamp specific words in a lyric
+- Word timings system: timestamp specific words in a lyric
 #### 1.1
 - **Release date**: 2025-03-16
 - **Added:**
