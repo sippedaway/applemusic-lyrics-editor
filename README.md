@@ -32,6 +32,14 @@ Exact 1:1 lyrics experience with background noises, multiple singing vocals at t
 
 Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Billie%20Eilish%20-%20BLUE.json
 </details>
+<details>
+<summary>Charli xcx, Ariana Grande - <b>Sympathy is a knife</b></summary>
+  
+Exact 1:1 lyrics experience with background noises, duet lyrics, details and more!
+
+Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json
+</details>
+
 
 ## Key features
 - **Realistic depiction**: looks pretty much identical to the actual Apple Music song lyrics
