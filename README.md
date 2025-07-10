@@ -16,6 +16,7 @@ A very close depiction of the Apple Music song lyrics. Create any lyrics, backgr
 [<kbd> <br> projects.sipped.org/applemusic-lyrics-generator <br> </kbd>](https://projects.sipped.org/applemusic-lyrics-generator)
 
 ## Examples
+Every new update I create lyrics for a new song during the update development!
 > These are JSON files that you can Open and then preview, play, share or change them
 
 <details>
@@ -39,7 +40,13 @@ Exact 1:1 lyrics experience with background noises, duet lyrics, details and mor
 
 Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json
 </details>
+<details>
+<summary>Kendrick Lamar, Zacari - <b>LOVE.</b></summary>
+  
+Exact 1:1 lyrics experience with duet lyrics, background vocals, and more, made using update 1.4 features!
 
+Download the JSON for free: https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json
+</details>
 
 ## Key features
 - **Realistic depiction**: looks pretty much identical to the actual Apple Music song lyrics
@@ -62,11 +69,22 @@ Hovered lyric line:
 - `S` - edit word timings
 - `Q` - select left alignment
 - `E` - select right alignment
-- `O` - delete hovered line
 
 </details>
 
 ## Version
+#### 1.4
+- **Release date**:
+- **Added:**
+- Syncing an audio file to the preview playback
+- Updated word timings editor
+- Lyric timestamp details when hovered in preview
+- Context menu for lyrics, replacing Delete button
+- New Duplicate lyric button in context menu
+- Improved sublyrics system in preview!
+- Miliseconds in time display
+- Updated help information in editor
+- New example project! "LOVE."
 #### 1.3
 - **Release date**: 2025-03-17
 - **Added:**
