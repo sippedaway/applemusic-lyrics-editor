@@ -1,7 +1,136 @@
 let previewData = [];  
 let isPlaying = false;
-let playStartTime = 0;
 let playRequestId = null;
+
+let syncedAudio = null;
+let syncedAudioUrl = null;
+
+const contextMenu = document.createElement('div');
+contextMenu.className = 'context-menu';
+contextMenu.innerHTML = `
+  <button class="context-menu-item duplicate">Duplicate Line</button>
+  <button class="context-menu-item delete">Delete Line</button>
+`;
+document.body.appendChild(contextMenu);
+
+let currentContextLine = null;
+
+function showContextMenu(e, lineDiv) {
+  e.preventDefault();
+  currentContextLine = lineDiv;
+  contextMenu.style.display = 'block';
+  contextMenu.style.left = e.pageX + 'px';
+  contextMenu.style.top = e.pageY + 'px';
+}
+
+function hideContextMenu() {
+  contextMenu.style.display = 'none';
+  currentContextLine = null;
+}
+
+// Context menu event listeners
+contextMenu.addEventListener('click', (e) => {
+  if (!currentContextLine) {
+    hideContextMenu();
+    return;
+  }
+  const container = document.getElementById('linesContainer');
+  if (e.target.classList.contains('delete')) {
+    container.removeChild(currentContextLine);
+    updatePreview();
+    autoSave();
+  } else if (e.target.classList.contains('duplicate')) {
+    // Clone the line (deep clone)
+    const clone = currentContextLine.cloneNode(true);
+
+    // --- Re-attach all necessary event listeners for drag and context menu ---
+    clone.draggable = true;
+    clone.addEventListener('contextmenu', (evt) => {
+      showContextMenu(evt, clone);
+    });
+    clone.addEventListener('dragstart', (e) => {
+      e.target.classList.add('dragging');
+    });
+    clone.addEventListener('dragend', (e) => {
+      e.target.classList.remove('dragging');
+      updatePreview();
+      autoSave();
+    });
+
+    // Also re-attach input listeners for sublyrics (if any)
+    clone.addEventListener('input', (e) => {
+      if (e.target.closest('.sublyric')) {
+        // Update sublyrics dataset if needed (optional, if you use dataset for sublyrics)
+        updatePreview();
+        autoSave();
+      }
+    });
+
+    // Insert after the original
+    if (currentContextLine.nextSibling) {
+      container.insertBefore(clone, currentContextLine.nextSibling);
+    } else {
+      container.appendChild(clone);
+    }
+    updatePreview();
+    autoSave();
+  }
+  hideContextMenu();
+});
+
+document.addEventListener('click', hideContextMenu);
+document.addEventListener('contextmenu', (e) => {
+  if (!e.target.closest('.line')) {
+    hideContextMenu();
+  }
+});
+
+// --- AUDIO SYNC LOGIC START ---
+const audioInput = document.getElementById('audioFileInput');
+const syncAudioButton = document.getElementById('syncAudioButton');
+const audioPlayer = document.getElementById('audioPlayer');
+const audioVolumeBar = document.getElementById('audioVolumeBar');
+const selectAudioFileBtn = document.getElementById('selectAudioFileBtn');
+const syncDropdown = document.getElementById('syncDropdown');
+const syncDropdownContent = document.getElementById('syncDropdownContent');
+
+// Dropdown show/hide logic
+syncAudioButton.addEventListener('click', (e) => {
+  e.stopPropagation();
+  syncDropdownContent.style.display = syncDropdownContent.style.display === 'block' ? 'none' : 'block';
+});
+document.addEventListener('click', (e) => {
+  if (!syncDropdown.contains(e.target)) {
+    syncDropdownContent.style.display = 'none';
+  }
+});
+
+// File select button triggers file input
+selectAudioFileBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  audioInput.click();
+});
+
+audioInput.addEventListener('change', (event) => {
+  const file = event.target.files[0];
+  if (file) {
+    if (syncedAudioUrl) {
+      URL.revokeObjectURL(syncedAudioUrl);
+    }
+    syncedAudioUrl = URL.createObjectURL(file);
+    audioPlayer.src = syncedAudioUrl;
+    syncedAudio = audioPlayer;
+    audioPlayer.currentTime = 0;
+  }
+});
+
+// Volume bar logic
+audioVolumeBar.addEventListener('input', () => {
+  audioPlayer.volume = audioVolumeBar.value;
+});
+// Set initial volume
+audioPlayer.volume = audioVolumeBar.value;
+// --- AUDIO SYNC LOGIC END ---
 
 function autoSave() {
     try {
@@ -34,53 +163,58 @@ function populateEditor(data) {
   }
 
   function addLine(begin = '', end = '', text = '', position = 'left', sublyrics = [], syllables = []) {
-      const container = document.getElementById('linesContainer');
-      const lineDiv = document.createElement('div');
-      lineDiv.className = 'line';
-      lineDiv.draggable = true;
+    const container = document.getElementById('linesContainer');
+    const lineDiv = document.createElement('div');
+    lineDiv.className = 'line';
+    lineDiv.draggable = true;
 
-      const grabHandle = document.createElement('div');
-      grabHandle.className = 'grab-handle';
-      grabHandle.innerHTML = '⋮⋮';  
+    // Add context menu listener
+    lineDiv.addEventListener('contextmenu', (e) => {
+      showContextMenu(e, lineDiv);
+    });
 
-      lineDiv.addEventListener('dragstart', (e) => {
-          e.target.classList.add('dragging');
-      });
+    const grabHandle = document.createElement('div');
+    grabHandle.className = 'grab-handle';
+    grabHandle.innerHTML = '⋮⋮';  
 
-      lineDiv.addEventListener('dragend', (e) => {
-          e.target.classList.remove('dragging');
-          updatePreview();
-          autoSave();
-      });
+    lineDiv.addEventListener('dragstart', (e) => {
+        e.target.classList.add('dragging');
+    });
 
-      const mainLineDiv = document.createElement('div');
-      mainLineDiv.className = 'main-line';
+    lineDiv.addEventListener('dragend', (e) => {
+        e.target.classList.remove('dragging');
+        updatePreview();
+        autoSave();
+    });
 
-      mainLineDiv.insertBefore(grabHandle, mainLineDiv.firstChild);
+    const mainLineDiv = document.createElement('div');
+    mainLineDiv.className = 'main-line';
 
-      const beginInput = document.createElement('input');
-      beginInput.type = 'text';
-      beginInput.placeholder = 'Begin (M:S:MS)';
-      beginInput.className = 'timestamp begin';
-      beginInput.value = begin;
-      beginInput.addEventListener('input', () => { updatePreview(); autoSave(); });
+    mainLineDiv.insertBefore(grabHandle, mainLineDiv.firstChild);
 
-      const endInput = document.createElement('input');
-      endInput.type = 'text';
-      endInput.placeholder = 'End (M:S:MS)';
-      endInput.className = 'timestamp end';
-      endInput.value = end;
-      endInput.addEventListener('input', () => { updatePreview(); autoSave(); });
+    const beginInput = document.createElement('input');
+    beginInput.type = 'text';
+    beginInput.placeholder = 'Begin (M:S:MS)';
+    beginInput.className = 'timestamp begin';
+    beginInput.value = begin;
+    beginInput.addEventListener('input', () => { updatePreview(); autoSave(); });
 
-      const textInput = document.createElement('input');
-      textInput.type = 'text';
-      textInput.placeholder = 'Lyric text';
-      textInput.className = 'lyricText';
-      textInput.style.flex = "1";
-      textInput.value = text;
-      textInput.addEventListener('input', () => { updatePreview(); autoSave(); });
+    const endInput = document.createElement('input');
+    endInput.type = 'text';
+    endInput.placeholder = 'End (M:S:MS)';
+    endInput.className = 'timestamp end';
+    endInput.value = end;
+    endInput.addEventListener('input', () => { updatePreview(); autoSave(); });
 
-      const alignmentButtons = document.createElement('div');
+    const textInput = document.createElement('input');
+    textInput.type = 'text';
+    textInput.placeholder = 'Lyric text';
+    textInput.className = 'lyricText';
+    textInput.style.flex = "1";
+    textInput.value = text;
+    textInput.addEventListener('input', () => { updatePreview(); autoSave(); });
+
+    const alignmentButtons = document.createElement('div');
     alignmentButtons.className = 'alignment-buttons';
 
     const leftBtn = document.createElement('button');
@@ -95,65 +229,54 @@ function populateEditor(data) {
 
     [leftBtn, rightBtn].forEach(btn => {
         btn.addEventListener('click', (e) => {
-
             alignmentButtons.querySelectorAll('.align-btn').forEach(b => 
                 b.classList.remove('active'));
-
             btn.classList.add('active');
             updatePreview();
             autoSave();
         });
     });
 
-      const delButton = document.createElement('button');
-      delButton.textContent = 'Delete';
-        delButton.className = 'delete-line';
-      delButton.addEventListener('click', () => {
-        container.removeChild(lineDiv);
-        updatePreview();
-        autoSave();
-      });
+    // DELETE BUTTON REMOVED - no longer creating delButton
 
-      alignmentButtons.appendChild(leftBtn);
-    alignmentButtons.appendChild(rightBtn)
+    const addSubButton = document.createElement('button');
+    addSubButton.textContent = '+';
+    addSubButton.className = 'add-sub-button';
+    addSubButton.title = 'Add background lyric';
+    addSubButton.addEventListener('click', () => {
+      addSublyric(lineDiv);
+    });
 
-      mainLineDiv.appendChild(beginInput);
-      mainLineDiv.appendChild(endInput);
-      mainLineDiv.appendChild(textInput);
-      mainLineDiv.appendChild(alignmentButtons);
-      mainLineDiv.appendChild(delButton);
+    const syllableButton = document.createElement('button');
+    syllableButton.className = 'syllable-btn';
+    syllableButton.title = 'Edit word timings';
+    syllableButton.innerHTML = '<i class="fas fa-microphone"></i>';
+    syllableButton.addEventListener('click', () => {
+      openSyllableEditor(lineDiv, text, syllables);
+    });
 
-      const addSubButton = document.createElement('button');
-      addSubButton.textContent = '+';
-      addSubButton.className = 'add-sub-button';
-      addSubButton.title = 'Add background lyric';
-      addSubButton.addEventListener('click', () => {
-        addSublyric(lineDiv);
-      });
+    alignmentButtons.appendChild(leftBtn);
+    alignmentButtons.appendChild(rightBtn);
 
+    mainLineDiv.appendChild(beginInput);
+    mainLineDiv.appendChild(endInput);
+    mainLineDiv.appendChild(textInput);
+    mainLineDiv.appendChild(alignmentButtons);
+    // DELETE BUTTON NO LONGER APPENDED
+    mainLineDiv.appendChild(syllableButton);
+    mainLineDiv.appendChild(addSubButton);
+    lineDiv.appendChild(mainLineDiv);
 
-      const syllableButton = document.createElement('button');
-      syllableButton.className = 'syllable-btn';
-      syllableButton.title = 'Edit word timings';
-      syllableButton.innerHTML = '<i class="fas fa-microphone"></i>';
-      syllableButton.addEventListener('click', () => {
-        openSyllableEditor(lineDiv, text, syllables);
-      });
+    sublyrics.forEach(sub => {
+      addSublyric(lineDiv, sub.begin, sub.end, sub.text);
+    });
 
-      mainLineDiv.appendChild(syllableButton);
-      mainLineDiv.appendChild(addSubButton);
-      lineDiv.appendChild(mainLineDiv);
+    if (syllables && syllables.length > 0) {
+      lineDiv.dataset.syllables = JSON.stringify(syllables);
+    }
 
-      sublyrics.forEach(sub => {
-        addSublyric(lineDiv, sub.begin, sub.end, sub.text);
-      });
-
-      if (syllables && syllables.length > 0) {
-        lineDiv.dataset.syllables = JSON.stringify(syllables);
-      }
-
-      container.appendChild(lineDiv);
-  }
+    container.appendChild(lineDiv);
+}
 
   function addSublyric(parentLine, begin = '', end = '', text = '') {
       const subGroup = document.createElement('div');
@@ -258,10 +381,20 @@ function populateEditor(data) {
 
   document.getElementById('playButton').addEventListener('click', () => {
     startPlayback();
+    // --- AUDIO SYNC LOGIC: Play audio if loaded ---
+    if (syncedAudio && syncedAudio.src) {
+      syncedAudio.currentTime = 0;
+      syncedAudio.play();
+    }
   });
 
   document.getElementById('stopButton').addEventListener('click', () => {
     stopPlayback();
+    // --- AUDIO SYNC LOGIC: Stop audio if loaded ---
+    if (syncedAudio && !syncedAudio.paused) {
+      syncedAudio.pause();
+      syncedAudio.currentTime = 0;
+    }
   });
 
   document.getElementById('saveButton').addEventListener('click', () => {
@@ -403,12 +536,6 @@ document.addEventListener('keydown', (e) => {
                 if (rightBtn) rightBtn.click();
             }
             break;
-        case 'O':
-            if (hoveredLine) {
-                const delBtn = hoveredLine.querySelector('.delete-line');
-                if (delBtn) delBtn.click();
-            }
-            break;
         case 'S':
             if (hoveredLine) {
                 const syllableBtn = hoveredLine.querySelector('.syllable-btn');
@@ -417,9 +544,19 @@ document.addEventListener('keydown', (e) => {
             break;
         case 'Z':
             startPlayback();
+            // --- AUDIO SYNC LOGIC: Play audio if loaded ---
+            if (syncedAudio && syncedAudio.src) {
+              syncedAudio.currentTime = 0;
+              syncedAudio.play();
+            }
             break;
         case 'X':
             stopPlayback();
+            // --- AUDIO SYNC LOGIC: Stop audio if loaded ---
+            if (syncedAudio && !syncedAudio.paused) {
+              syncedAudio.pause();
+              syncedAudio.currentTime = 0;
+            }
             break;
     }
 });
@@ -427,7 +564,7 @@ document.addEventListener('keydown', (e) => {
 document.getElementById('exampleButton').addEventListener('click', async () => {
   if (confirm('This will replace your current project with an example. Are you sure?')) {
     try {
-      const response = await fetch('https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json');
+      const response = await fetch('https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json');
       if (!response.ok) {
         throw new Error('Failed to fetch example project');
       }
@@ -460,7 +597,7 @@ if (window.innerWidth <= 768) {
 function openSyllableEditor(lineDiv, text, existingSyllables = []) {
   // Get current text from input rather than using passed text parameter
   const currentText = lineDiv.querySelector('.lyricText').value.trim();
-  
+
   if (!currentText) {
     alert('Please enter some lyrics first before editing word timings.');
     return;
@@ -493,47 +630,60 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
   const begin = lineDiv.querySelector('.timestamp.begin').value;
   const end = lineDiv.querySelector('.timestamp.end').value;
   const totalDuration = parseTimestampFlexible(end) - parseTimestampFlexible(begin);
-  const defaultWordDuration = totalDuration / words.length; 
+  const defaultWordDuration = totalDuration / words.length;
 
   const wordDivs = [];
+  let prevEndInput = null;
   words.forEach((word, i) => {
     const wordDiv = document.createElement('div');
     wordDiv.className = 'syllable-word';
 
     const existingSyllable = existingSyllables[i] || {};
-    const wordBegin = existingSyllable.begin || formatTimestamp(parseTimestampFlexible(begin) + i * defaultWordDuration);
-    const wordEnd = existingSyllable.end || formatTimestamp(parseTimestampFlexible(begin) + (i + 1) * defaultWordDuration);
+    // Begin logic: first word uses line begin, others use previous word's end
+    let wordBegin;
+    if (i === 0) {
+      wordBegin = begin;
+    } else if (existingSyllables[i - 1] && existingSyllables[i - 1].end) {
+      wordBegin = existingSyllables[i - 1].end;
+    } else {
+      wordBegin = formatTimestamp(parseTimestampFlexible(begin) + i * defaultWordDuration);
+    }
+    let wordEnd;
+    if (i === words.length - 1) {
+      wordEnd = existingSyllable.end || end;
+    } else {
+      wordEnd = existingSyllable.end || formatTimestamp(parseTimestampFlexible(begin) + (i + 1) * defaultWordDuration);
+    }
 
     const wordText = document.createElement('span');
     wordText.className = 'word-text';
     wordText.textContent = word;
 
-    const beginInput = document.createElement('input');
+    // Begin input: only for first word, readonly and always line begin
+    let beginInput = document.createElement('input');
     beginInput.type = 'text';
     beginInput.value = wordBegin;
     beginInput.placeholder = 'M:SS';
+    beginInput.readOnly = true;
+    beginInput.className = 'syllable-begin';
+    beginInput.style.background = '#222';
+    beginInput.style.color = '#aaa';
+    beginInput.style.cursor = 'not-allowed';
 
-    const endInput = document.createElement('input');
+    // End input: all words (including last) are editable
+    let endInput = document.createElement('input');
     endInput.type = 'text';
     endInput.value = wordEnd;
     endInput.placeholder = 'M:SS';
+    endInput.className = 'syllable-end';
+    // (no readonly for last word)
 
-    endInput.addEventListener('change', () => {
-      const currentEnd = parseTimestampFlexible(endInput.value);
-      const nextIndex = i + 1;
-
-      if (nextIndex < wordDivs.length) {
-        const diff = currentEnd - parseTimestampFlexible(wordDivs[nextIndex].querySelector('input:first-of-type').value);
-
-        if (diff > 0) {
-
-          for (let j = nextIndex; j < wordDivs.length; j++) {
-            const inputs = wordDivs[j].querySelectorAll('input');
-            const newBegin = parseTimestampFlexible(inputs[0].value) + diff;
-            const newEnd = parseTimestampFlexible(inputs[1].value) + diff;
-            inputs[0].value = formatTimestamp(newBegin);
-            inputs[1].value = formatTimestamp(newEnd);
-          }
+    // When endInput changes, update next word's begin input
+    endInput.addEventListener('input', () => {
+      if (wordDivs[i + 1]) {
+        const nextBeginInput = wordDivs[i + 1].querySelector('input.syllable-begin');
+        if (nextBeginInput) {
+          nextBeginInput.value = endInput.value;
         }
       }
     });
@@ -543,16 +693,19 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
     wordDiv.appendChild(endInput);
     popup.appendChild(wordDiv);
     wordDivs.push(wordDiv);
+
+    prevEndInput = endInput;
   });
 
   const saveBtn = document.createElement('button');
   saveBtn.textContent = 'Save';
   saveBtn.className = 'add-sub-button';
   saveBtn.onclick = () => {
-    const syllables = Array.from(popup.querySelectorAll('.syllable-word')).map(wordDiv => ({
+    // Fix: Use class selectors to get begin/end for each word
+    const syllables = wordDivs.map((wordDiv, idx) => ({
       text: wordDiv.querySelector('.word-text').textContent,
-      begin: wordDiv.querySelector('input:first-of-type').value,
-      end: wordDiv.querySelector('input:last-of-type').value
+      begin: wordDiv.querySelector('.syllable-begin').value,
+      end: wordDiv.querySelector('.syllable-end').value
     }));
 
     lineDiv.dataset.syllables = JSON.stringify(syllables);
@@ -589,24 +742,7 @@ function parseTimestampFlexible(ts) {
   return 0;
 }
 
-function getLyricsData() {
-  const lines = document.querySelectorAll('#linesContainer .line');
-  const data = [];
-  lines.forEach(line => {
-    const begin = line.querySelector('.timestamp.begin').value;
-    const end = line.querySelector('.timestamp.end').value;
-    const text = line.querySelector('.lyricText').value;
-    const position = line.querySelector('.align-btn.active').dataset.position;
-    const sublyrics = Array.from(line.querySelectorAll('.sublyric')).map(sub => ({
-      begin: sub.querySelector('.timestamp.begin').value,
-      end: sub.querySelector('.timestamp.end').value,
-      text: sub.querySelector('.lyricText').value
-    }));
-    const syllables = line.dataset.syllables ? JSON.parse(line.dataset.syllables) : [];
-    data.push({ begin, end, text, position, sublyrics, syllables });
-  });
-  return data;
-}
+
 
 function updatePreview() {
   const previewContainer = document.getElementById('previewContainer');

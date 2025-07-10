@@ -35,13 +35,42 @@ function updatePreview() {
   previewContainer.innerHTML = '';
   previewData = [];
 
+  // --- Tooltip element for lyric hover ---
+  let lyricTooltip = document.getElementById('lyricTooltip');
+  if (!lyricTooltip) {
+    lyricTooltip = document.createElement('div');
+    lyricTooltip.id = 'lyricTooltip';
+    lyricTooltip.style.position = 'fixed';
+    lyricTooltip.style.pointerEvents = 'none';
+    lyricTooltip.style.background = '#222';
+    lyricTooltip.style.color = '#fff';
+    lyricTooltip.style.padding = '7px 13px';
+    lyricTooltip.style.borderRadius = '8px';
+    lyricTooltip.style.fontSize = '14px';
+    lyricTooltip.style.boxShadow = '0 2px 10px rgba(0,0,0,0.4)';
+    lyricTooltip.style.zIndex = 9999;
+    lyricTooltip.style.display = 'none';
+    document.body.appendChild(lyricTooltip);
+  }
+
   const data = getLyricsData();
   data.forEach(item => {
     const lineDiv = document.createElement('div');
     lineDiv.className = 'preview-line';
     lineDiv.style.cursor = 'pointer';
+    // --- MODIFIED: Start playback and audio from clicked timestamp ---
     lineDiv.addEventListener('click', () => {
-      startPlayback(parseTimestamp(item.begin));
+      const startTime = parseTimestamp(item.begin);
+      startPlayback(startTime);
+      // Sync audio if loaded
+      const audioPlayer = document.getElementById('audioPlayer');
+      if (audioPlayer && audioPlayer.src && !audioPlayer.paused) {
+        audioPlayer.pause();
+      }
+      if (audioPlayer && audioPlayer.src) {
+        audioPlayer.currentTime = startTime;
+        audioPlayer.play();
+      }
     });
     if(item.position === 'right') {
       lineDiv.classList.add('right-lyric');
@@ -128,6 +157,27 @@ function updatePreview() {
 
     lineDiv.appendChild(sublyricsContainer);
 
+    // --- Tooltip logic on hover ---
+    lineDiv.addEventListener('mouseenter', (e) => {
+      let html = `<b>${item.begin} - ${item.end}</b>`;
+      if (item.syllables && item.syllables.length > 0) {
+        html += `<br><span style="color:#aaa;">Word timings:</span><br>`;
+        html += item.syllables.map(syl =>
+          `<span style="white-space:nowrap;">${syl.text}: <span style="color:#0ff">${syl.begin}</span> - <span style="color:#0ff">${syl.end}</span></span>`
+        ).join('<br>');
+      }
+      lyricTooltip.innerHTML = html;
+      lyricTooltip.style.display = 'block';
+    });
+    lineDiv.addEventListener('mousemove', (e) => {
+      // Offset tooltip so it doesn't cover the mouse
+      lyricTooltip.style.left = (e.clientX + 16) + 'px';
+      lyricTooltip.style.top = (e.clientY + 8) + 'px';
+    });
+    lineDiv.addEventListener('mouseleave', () => {
+      lyricTooltip.style.display = 'none';
+    });
+
     previewContainer.appendChild(lineDiv);
     const beginTime = parseTimestamp(item.begin);
     const endTime = parseTimestamp(item.end);
@@ -148,15 +198,16 @@ function updatePreview() {
 let lastFinishedIndex = -1; 
 
 function formatTime(seconds) {
-const minutes = Math.floor(seconds / 60);
-const remainingSeconds = Math.floor(seconds % 60);
-return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  const ms = Math.floor((seconds % 1) * 1000);
+  return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}.${String(ms).padStart(3, '0')}`;
 }
 
 function updateTimeDisplay(currentTime) {
-const timeDisplay = document.getElementById('timeDisplay');
-const maxEnd = Math.max(...previewData.map(line => line.end));
-timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(maxEnd)}`;
+  const timeDisplay = document.getElementById('timeDisplay');
+  const maxEnd = Math.max(...previewData.map(line => line.end));
+  timeDisplay.textContent = `${formatTime(currentTime)} / ${formatTime(maxEnd)}`;
 }
 
 function handleSyllableLine(line, currentTime) {
@@ -332,6 +383,10 @@ previewData.forEach((line, index) => {
   } 
   else if (currentTime >= line.end + 0.4) { 
 
+    const allSublyricsFinished = line.sublyrics?.every(sub => currentTime >= sub.end) ?? true;
+
+    if (allSublyricsFinished) {
+
     line.element.classList.remove('active');
     line.element.classList.add('finished');
 
@@ -370,6 +425,7 @@ previewData.forEach((line, index) => {
         }
       }
     }
+  }
   } 
   else if (currentTime >= line.begin) {
 
@@ -400,23 +456,29 @@ previewData.forEach((line, index) => {
   }
 
   line.sublyrics?.forEach(sub => {
-    if (currentTime >= line.begin && currentTime < line.end + 0.4) {  
-      sub.element.classList.add('visible');
+  // Sublyrics are visible during main line's active period OR their own span
+  if (
+    (currentTime >= line.begin && currentTime <= line.end + 0.4) ||
+    (currentTime >= sub.begin && currentTime <= sub.end + 0.4)
+  ) {
+    sub.element.classList.add('visible');
 
-      if (currentTime >= sub.begin) {  
-        sub.element.classList.add('active');
+    if (currentTime >= sub.begin) {
+      sub.element.classList.add('active');
 
-        const subLetterDuration = (sub.end - sub.begin) / sub.letters.length;
-        sub.letters.forEach((letter, idx) => {
-          if (currentTime >= sub.begin + idx * subLetterDuration) {
-            letter.classList.add('active');
-          }
-        });
-      }
-    } else {
-      sub.element.classList.remove('visible');  
+      const subLetterDuration = (sub.end - sub.begin) / sub.letters.length;
+      sub.letters.forEach((letter, idx) => {
+        if (currentTime >= sub.begin + idx * subLetterDuration) {
+          letter.classList.add('active');
+        }
+      });
     }
-  });
+  } else {
+    sub.element.classList.remove('visible');
+  }
+});
+
+
 });
 
 if (currentActiveLine !== null && previewData[currentActiveLine]) {

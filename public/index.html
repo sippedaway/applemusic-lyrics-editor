@@ -33,10 +33,23 @@
       </div>
     </div>
     <div class="div">
+      <div class="dropdown" id="syncDropdown">
+        <button id="syncAudioButton" class="button"><i class="fas fa-music"></i>Sync</button>
+        <div class="dropdown-content" id="syncDropdownContent" style="min-width:180px;">
+          <button id="selectAudioFileBtn" style="width:100%;"><i class="fas fa-folder-open"></i>Select Audio File</button>
+          <input type="file" id="audioFileInput" style="display:none;" accept="audio/*">
+          <div style="margin:10px 0;">
+            <label for="audioVolumeBar" style="font-size:13px;">Volume</label>
+            <input type="range" id="audioVolumeBar" min="0" max="1" step="0.01" value="1" style="width:90%;">
+          </div>
+        </div>
+      </div>
       <button id="playButton" class="button"><i class="fas fa-play"></i>Play</button>
       <button id="stopButton" class="button"><i class="fas fa-stop"></i>Stop</button>
     </div>
-    <div id="timeDisplay" class="time-display">00:00 / 00:00</div>
+    <div style="width: 200px;">
+      <div id="timeDisplay" class="time-display">00:00 / 00:00</div>
+    </div>
   </div>
   <div class="mobile-tabs">
     <button class="tab-button active" data-tab="editor">Editor</button>
@@ -46,7 +59,9 @@
     <div id="editor">
       <h2>Editor</h2>
       <p>This is a realistic Apple Music lyrics generator! Feel free to use it for any project.
-        <br><br>Shortcuts:<br><b>When hovering line</b><br>S - edit word timings<br>Q - select left alignment<br>E - select right alignment<br>O - delete hovered line<br><b>Project</b><br>F - add line<br>Z - play<br>X - stop<br>Ctrl+S - save project<br>Ctrl+O - open project</p>
+        <br><br><b>Right click</b> on a line to delete or duplicate the line.
+      <h2>Shortcuts</h2>
+      <p><b>When hovering line,</b><br>S - edit word timings<br>Q - select left alignment<br>E - select right alignment<br><br><b>Project</b><br>F - add line<br>Z - play<br>X - stop<br>Ctrl+S - save project<br>Ctrl+O - open project</p>
       <div id="linesContainer"></div>
       <button id="addLineButton">Add Line</button>
     </div>
@@ -58,6 +73,8 @@
         </button>
       </div>
       <div id="previewContainer"></div>
+      <!-- Add hidden audio element for playback -->
+      <audio id="audioPlayer" style="display:none;"></audio>
     </div>
   </div>
   <script src="project.js" defer></script>
