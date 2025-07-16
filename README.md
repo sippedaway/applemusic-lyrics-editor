@@ -73,8 +73,17 @@ Hovered lyric line:
 </details>
 
 ## Version
+#### 1.5
+- **Release date**: 2025-07-16
+- **QOL update and fixes.** No example project
+- **Added:**
+- Better and simpler way to edit word timings: timeline editor
+- Reset button under File dropdown
+- **Fixed:**
+- Time display stopping when all lyrics are ended
+- If two (or more) lyrics are playing at the same time, only one is actively unblurred
 #### 1.4
-- **Release date**:
+- **Release date**: 2025-07-10
 - **Added:**
 - Syncing an audio file to the preview playback
 - Updated word timings editor
