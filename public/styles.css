@@ -709,7 +709,7 @@ body.resizing {
 }
 
 #lyricTooltip {
-  /* See JS for most styles; here for mobile and accessibility */
+  
   max-width: 90vw;
   word-break: break-word;
   pointer-events: none;

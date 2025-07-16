@@ -35,7 +35,6 @@ function updatePreview() {
   previewContainer.innerHTML = '';
   previewData = [];
 
-  // --- Tooltip element for lyric hover ---
   let lyricTooltip = document.getElementById('lyricTooltip');
   if (!lyricTooltip) {
     lyricTooltip = document.createElement('div');
@@ -58,11 +57,11 @@ function updatePreview() {
     const lineDiv = document.createElement('div');
     lineDiv.className = 'preview-line';
     lineDiv.style.cursor = 'pointer';
-    // --- MODIFIED: Start playback and audio from clicked timestamp ---
+
     lineDiv.addEventListener('click', () => {
       const startTime = parseTimestamp(item.begin);
       startPlayback(startTime);
-      // Sync audio if loaded
+
       const audioPlayer = document.getElementById('audioPlayer');
       if (audioPlayer && audioPlayer.src && !audioPlayer.paused) {
         audioPlayer.pause();
@@ -157,7 +156,6 @@ function updatePreview() {
 
     lineDiv.appendChild(sublyricsContainer);
 
-    // --- Tooltip logic on hover ---
     lineDiv.addEventListener('mouseenter', (e) => {
       let html = `<b>${item.begin} - ${item.end}</b>`;
       if (item.syllables && item.syllables.length > 0) {
@@ -170,7 +168,7 @@ function updatePreview() {
       lyricTooltip.style.display = 'block';
     });
     lineDiv.addEventListener('mousemove', (e) => {
-      // Offset tooltip so it doesn't cover the mouse
+
       lyricTooltip.style.left = (e.clientX + 16) + 'px';
       lyricTooltip.style.top = (e.clientY + 8) + 'px';
     });
@@ -355,150 +353,94 @@ line.wordContainers.forEach((wordObj, wordIndex) => {
 }
 
 function updatePlayback() {
-const currentTime = (performance.now() / 1000) - playStartTime;
-let maxEnd = 0;
-let currentActiveLine = null;
+  const currentTime = (performance.now() / 1000) - playStartTime;
+  let maxEnd = 0;
 
-updateTimeDisplay(currentTime);
+  updateTimeDisplay(currentTime);
 
-previewData.forEach((line, index) => {
-  const nextLine = previewData[index + 1];
-  if (nextLine && currentTime >= nextLine.begin - 0.7) {  
-    const dotsElement = line.element.nextElementSibling;
-    if (dotsElement?.classList.contains('waiting-dots')) {
-      dotsElement.classList.add('disappearing');
-      setTimeout(() => dotsElement.remove(), 500);
-    }
-  }
-});
-
-previewData.forEach((line, index) => {
-  if (line.end > maxEnd) maxEnd = line.end;
-
-  if (currentTime < line.begin) {
-
-    line.letterSpans.forEach(span => span.classList.remove('active'));
-    line.wordContainers.forEach(wordObj => wordObj.container.classList.remove('finished'));
-    line.element.classList.remove('active', 'finished');
-  } 
-  else if (currentTime >= line.end + 0.4) { 
-
-    const allSublyricsFinished = line.sublyrics?.every(sub => currentTime >= sub.end) ?? true;
-
-    if (allSublyricsFinished) {
-
-    line.element.classList.remove('active');
-    line.element.classList.add('finished');
-
-    line.letterSpans.forEach(span => span.classList.add('active'));
-    line.wordContainers.forEach(wordObj => wordObj.container.classList.add('finished'));
-
+  previewData.forEach((line, index) => {
     const nextLine = previewData[index + 1];
-    if (nextLine && (nextLine.begin - line.end) > 5 && currentTime < nextLine.begin) {
-
-      if (!line.element.nextElementSibling?.classList.contains('waiting-dots')) {
-        const dotsDiv = document.createElement('div');
-        dotsDiv.className = 'waiting-dots';
-
-        for (let i = 0; i < 3; i++) {
-          const dot = document.createElement('div');
-          dot.className = 'waiting-dot';
-          dotsDiv.appendChild(dot);
-        }
-
-        line.element.parentNode.insertBefore(dotsDiv, line.element.nextSibling);
-        dotsDiv.offsetHeight; 
-        dotsDiv.classList.add('visible');
+    if (nextLine && currentTime >= nextLine.begin - 0.7) {  
+      const dotsElement = line.element.nextElementSibling;
+      if (dotsElement?.classList.contains('waiting-dots')) {
+        dotsElement.classList.add('disappearing');
+        setTimeout(() => dotsElement.remove(), 500);
       }
+    }
+  });
 
-      const dots = line.element.nextElementSibling.children;
-      const waitTime = nextLine.begin - line.end;
-      const dotStartTimes = [
-        line.end + (waitTime * 0.15),
-        line.end + (waitTime * 0.3),
-        line.end + (waitTime * 0.45)
-      ];
+  previewData.forEach((line, index) => {
+    if (line.end > maxEnd) maxEnd = line.end;
 
-      for (let i = 0; i < dots.length; i++) {
-        if (currentTime >= dotStartTimes[i]) {
-          dots[i].classList.add('active');
+    let sublyricActive = false;
+    if (line.sublyrics && line.sublyrics.length > 0) {
+      for (const sub of line.sublyrics) {
+        if (currentTime >= sub.begin && currentTime < sub.end) {
+          sublyricActive = true;
+          break;
         }
       }
     }
-  }
-  } 
-  else if (currentTime >= line.begin) {
 
-    if (index === 0 || currentTime >= previewData[index - 1].end) {
+    if (currentTime < line.begin) {
+      line.letterSpans.forEach(span => span.classList.remove('active'));
+      line.wordContainers.forEach(wordObj => wordObj.container.classList.remove('finished'));
+      line.element.classList.remove('active', 'finished');
+    } 
+    else if (currentTime >= line.end + 0.4) { 
+      const allSublyricsFinished = line.sublyrics?.every(sub => currentTime >= sub.end) ?? true;
+      if (allSublyricsFinished) {
+        line.element.classList.remove('active');
+        line.element.classList.add('finished');
+        line.letterSpans.forEach(span => span.classList.add('active'));
+        line.wordContainers.forEach(wordObj => wordObj.container.classList.add('finished'));
+
+      }
+    } 
+    else if (currentTime >= line.begin) {
+
       line.element.classList.add('active');
-      currentActiveLine = index;
+      line.element.classList.remove('finished');
+
+      if (line.syllables && line.syllables.length > 0) {
+        handleSyllableLine(line, currentTime);
+      } else {
+        const letterDuration = (line.end - line.begin) / line.letterSpans.length;
+        line.letterSpans.forEach((span, idx) => {
+          if (currentTime >= line.begin + idx * letterDuration) {
+            span.classList.add('active');
+          } else {
+            span.classList.remove('active');
+          }
+        });
+
+        line.wordContainers.forEach(wordObj => {
+          if (wordObj.letters.every(letter => letter.classList.contains('active'))) {
+            wordObj.container.classList.add('finished');
+          }
+        });
+      }
     }
 
-    if (line.syllables && line.syllables.length > 0) {
-      handleSyllableLine(line, currentTime);
-    } else {
+    line.sublyrics?.forEach(sub => {
 
-      const letterDuration = (line.end - line.begin) / line.letterSpans.length;
-      line.letterSpans.forEach((span, idx) => {
-        if (currentTime >= line.begin + idx * letterDuration) {
-          span.classList.add('active');
-        } else {
-          span.classList.remove('active');
-        }
-      });
+    });
+  });
 
-      line.wordContainers.forEach(wordObj => {
-        if (wordObj.letters.every(letter => letter.classList.contains('active'))) {
-          wordObj.container.classList.add('finished');
-        }
-      });
+  const firstActive = previewData.find(line =>
+    line.element.classList.contains('active')
+  );
+  if (firstActive) {
+    const currentElement = firstActive.element;
+    const container = document.getElementById('previewContainer');
+    const syncButton = document.getElementById('toggleSync');
+    if (syncButton.classList.contains('active')) {
+      const offsetTop = currentElement.offsetTop - 50;
+      container.style.transform = `translateY(-${offsetTop}px)`;
     }
   }
 
-  line.sublyrics?.forEach(sub => {
-  // Sublyrics are visible during main line's active period OR their own span
-  if (
-    (currentTime >= line.begin && currentTime <= line.end + 0.4) ||
-    (currentTime >= sub.begin && currentTime <= sub.end + 0.4)
-  ) {
-    sub.element.classList.add('visible');
-
-    if (currentTime >= sub.begin) {
-      sub.element.classList.add('active');
-
-      const subLetterDuration = (sub.end - sub.begin) / sub.letters.length;
-      sub.letters.forEach((letter, idx) => {
-        if (currentTime >= sub.begin + idx * subLetterDuration) {
-          letter.classList.add('active');
-        }
-      });
-    }
-  } else {
-    sub.element.classList.remove('visible');
-  }
-});
-
-
-});
-
-if (currentActiveLine !== null && previewData[currentActiveLine]) {
-  const currentElement = previewData[currentActiveLine].element;
-  const container = document.getElementById('previewContainer');
-  const syncButton = document.getElementById('toggleSync');
-  
-  // Only move container if sync is active
-  if (syncButton.classList.contains('active')) {
-    const offsetTop = currentElement.offsetTop - 50; // Subtract 50px for margin
-    container.style.transform = `translateY(-${offsetTop}px)`;
-  }
-}
-
-if (currentTime < maxEnd) {
   playRequestId = requestAnimationFrame(updatePlayback);
-} else {
-  cancelAnimationFrame(playRequestId);
-  isPlaying = false;
-}
 }
 
 function startPlayback(startTime = 0) {
@@ -536,11 +478,9 @@ function stopPlayback() {
 
 document.getElementById('toggleSync').addEventListener('click', function() {
   this.classList.toggle('active');
-  
-  // Stop playback when toggling sync
+
   stopPlayback();
-  
-  // Reset transform when sync is turned off
+
   const container = document.getElementById('previewContainer');
   if (!this.classList.contains('active')) {
     container.style.transform = '';

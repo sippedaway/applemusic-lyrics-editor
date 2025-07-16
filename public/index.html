@@ -14,6 +14,7 @@
         <div class="dropdown-content">
           <button id="saveButton"><i class="fas fa-save"></i>Save</button>
           <button id="openButton"><i class="fas fa-upload"></i>Open</button>
+          <button id="resetButton"><i class="fas fa-trash"></i>Reset</button>
           <input type="file" id="fileInput" style="display:none;" accept="application/json">
         </div>
       </div>
@@ -73,11 +74,27 @@
         </button>
       </div>
       <div id="previewContainer"></div>
-      <!-- Add hidden audio element for playback -->
+      
       <audio id="audioPlayer" style="display:none;"></audio>
     </div>
   </div>
   <script src="project.js" defer></script>
   <script src="playback.js" defer></script>
+  <script>
+    // Reset button logic
+    document.addEventListener('DOMContentLoaded', function() {
+      var resetBtn = document.getElementById('resetButton');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+          if (confirm('Are you sure you want to reset the project? This will clear all lyrics.')) {
+            localStorage.removeItem('lyricsProject');
+            document.getElementById('linesContainer').innerHTML = '';
+            if (typeof addLine === 'function') addLine();
+            if (typeof updatePreview === 'function') updatePreview();
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

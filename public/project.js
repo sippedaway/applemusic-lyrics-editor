@@ -28,7 +28,6 @@ function hideContextMenu() {
   currentContextLine = null;
 }
 
-// Context menu event listeners
 contextMenu.addEventListener('click', (e) => {
   if (!currentContextLine) {
     hideContextMenu();
@@ -40,10 +39,9 @@ contextMenu.addEventListener('click', (e) => {
     updatePreview();
     autoSave();
   } else if (e.target.classList.contains('duplicate')) {
-    // Clone the line (deep clone)
+
     const clone = currentContextLine.cloneNode(true);
 
-    // --- Re-attach all necessary event listeners for drag and context menu ---
     clone.draggable = true;
     clone.addEventListener('contextmenu', (evt) => {
       showContextMenu(evt, clone);
@@ -57,16 +55,14 @@ contextMenu.addEventListener('click', (e) => {
       autoSave();
     });
 
-    // Also re-attach input listeners for sublyrics (if any)
     clone.addEventListener('input', (e) => {
       if (e.target.closest('.sublyric')) {
-        // Update sublyrics dataset if needed (optional, if you use dataset for sublyrics)
+
         updatePreview();
         autoSave();
       }
     });
 
-    // Insert after the original
     if (currentContextLine.nextSibling) {
       container.insertBefore(clone, currentContextLine.nextSibling);
     } else {
@@ -85,7 +81,6 @@ document.addEventListener('contextmenu', (e) => {
   }
 });
 
-// --- AUDIO SYNC LOGIC START ---
 const audioInput = document.getElementById('audioFileInput');
 const syncAudioButton = document.getElementById('syncAudioButton');
 const audioPlayer = document.getElementById('audioPlayer');
@@ -94,7 +89,6 @@ const selectAudioFileBtn = document.getElementById('selectAudioFileBtn');
 const syncDropdown = document.getElementById('syncDropdown');
 const syncDropdownContent = document.getElementById('syncDropdownContent');
 
-// Dropdown show/hide logic
 syncAudioButton.addEventListener('click', (e) => {
   e.stopPropagation();
   syncDropdownContent.style.display = syncDropdownContent.style.display === 'block' ? 'none' : 'block';
@@ -105,7 +99,6 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// File select button triggers file input
 selectAudioFileBtn.addEventListener('click', (e) => {
   e.preventDefault();
   audioInput.click();
@@ -124,13 +117,11 @@ audioInput.addEventListener('change', (event) => {
   }
 });
 
-// Volume bar logic
 audioVolumeBar.addEventListener('input', () => {
   audioPlayer.volume = audioVolumeBar.value;
 });
-// Set initial volume
+
 audioPlayer.volume = audioVolumeBar.value;
-// --- AUDIO SYNC LOGIC END ---
 
 function autoSave() {
     try {
@@ -168,7 +159,6 @@ function populateEditor(data) {
     lineDiv.className = 'line';
     lineDiv.draggable = true;
 
-    // Add context menu listener
     lineDiv.addEventListener('contextmenu', (e) => {
       showContextMenu(e, lineDiv);
     });
@@ -237,8 +227,6 @@ function populateEditor(data) {
         });
     });
 
-    // DELETE BUTTON REMOVED - no longer creating delButton
-
     const addSubButton = document.createElement('button');
     addSubButton.textContent = '+';
     addSubButton.className = 'add-sub-button';
@@ -262,7 +250,7 @@ function populateEditor(data) {
     mainLineDiv.appendChild(endInput);
     mainLineDiv.appendChild(textInput);
     mainLineDiv.appendChild(alignmentButtons);
-    // DELETE BUTTON NO LONGER APPENDED
+
     mainLineDiv.appendChild(syllableButton);
     mainLineDiv.appendChild(addSubButton);
     lineDiv.appendChild(mainLineDiv);
@@ -381,7 +369,7 @@ function populateEditor(data) {
 
   document.getElementById('playButton').addEventListener('click', () => {
     startPlayback();
-    // --- AUDIO SYNC LOGIC: Play audio if loaded ---
+
     if (syncedAudio && syncedAudio.src) {
       syncedAudio.currentTime = 0;
       syncedAudio.play();
@@ -390,7 +378,7 @@ function populateEditor(data) {
 
   document.getElementById('stopButton').addEventListener('click', () => {
     stopPlayback();
-    // --- AUDIO SYNC LOGIC: Stop audio if loaded ---
+
     if (syncedAudio && !syncedAudio.paused) {
       syncedAudio.pause();
       syncedAudio.currentTime = 0;
@@ -502,7 +490,6 @@ document.addEventListener('mouseout', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.target.tagName === 'INPUT') return;
 
-    // Handle Ctrl+S and Ctrl+O
     if (e.ctrlKey) {
         switch(e.key.toLowerCase()) {
             case 's':
@@ -517,7 +504,6 @@ document.addEventListener('keydown', (e) => {
         return;
     }
 
-    // Handle regular shortcuts
     switch(e.key.toUpperCase()) {
         case 'F':
             addLine();
@@ -544,7 +530,7 @@ document.addEventListener('keydown', (e) => {
             break;
         case 'Z':
             startPlayback();
-            // --- AUDIO SYNC LOGIC: Play audio if loaded ---
+
             if (syncedAudio && syncedAudio.src) {
               syncedAudio.currentTime = 0;
               syncedAudio.play();
@@ -552,7 +538,7 @@ document.addEventListener('keydown', (e) => {
             break;
         case 'X':
             stopPlayback();
-            // --- AUDIO SYNC LOGIC: Stop audio if loaded ---
+
             if (syncedAudio && !syncedAudio.paused) {
               syncedAudio.pause();
               syncedAudio.currentTime = 0;
@@ -595,129 +581,392 @@ if (window.innerWidth <= 768) {
 }
 
 function openSyllableEditor(lineDiv, text, existingSyllables = []) {
-  // Get current text from input rather than using passed text parameter
-  const currentText = lineDiv.querySelector('.lyricText').value.trim();
 
+  document.querySelectorAll('.popup-overlay, .syllable-popup').forEach(el => el.remove());
+
+  const currentText = lineDiv.querySelector('.lyricText').value.trim();
   if (!currentText) {
     alert('Please enter some lyrics first before editing word timings.');
     return;
   }
 
   const overlay = document.createElement('div');
-  overlay.className = 'popup-overlay';
+  overlay.className = 'popup-overlay active';
 
   const popup = document.createElement('div');
-  popup.className = 'syllable-popup';
+  popup.className = 'syllable-popup active';
+  popup.style.maxWidth = '900px';
+  popup.style.width = '95vw';
 
   const header = document.createElement('div');
   header.className = 'popup-header';
-
   const title = document.createElement('h3');
   title.textContent = 'Word Timing Editor';
-
   const closeBtn = document.createElement('button');
   closeBtn.className = 'popup-close';
+  closeBtn.textContent = '×';
   closeBtn.onclick = () => {
     document.body.removeChild(overlay);
     document.body.removeChild(popup);
   };
-
   header.appendChild(title);
   header.appendChild(closeBtn);
   popup.appendChild(header);
 
-  const words = currentText.split(' ');
-  const begin = lineDiv.querySelector('.timestamp.begin').value;
-  const end = lineDiv.querySelector('.timestamp.end').value;
-  const totalDuration = parseTimestampFlexible(end) - parseTimestampFlexible(begin);
-  const defaultWordDuration = totalDuration / words.length;
+  const navBar = document.createElement('div');
+  navBar.style.display = 'flex';
+  navBar.style.justifyContent = 'flex-start';
+  navBar.style.gap = '10px';
+  navBar.style.marginBottom = '18px';
 
-  const wordDivs = [];
-  let prevEndInput = null;
-  words.forEach((word, i) => {
-    const wordDiv = document.createElement('div');
-    wordDiv.className = 'syllable-word';
+  const tabBtnClassic = document.createElement('button');
+  tabBtnClassic.textContent = 'Classic Editor';
+  tabBtnClassic.className = 'add-sub-button';
+  tabBtnClassic.style.background = '#0af';
+  tabBtnClassic.style.color = '#fff';
 
-    const existingSyllable = existingSyllables[i] || {};
-    // Begin logic: first word uses line begin, others use previous word's end
-    let wordBegin;
-    if (i === 0) {
-      wordBegin = begin;
-    } else if (existingSyllables[i - 1] && existingSyllables[i - 1].end) {
-      wordBegin = existingSyllables[i - 1].end;
-    } else {
-      wordBegin = formatTimestamp(parseTimestampFlexible(begin) + i * defaultWordDuration);
-    }
-    let wordEnd;
-    if (i === words.length - 1) {
-      wordEnd = existingSyllable.end || end;
-    } else {
-      wordEnd = existingSyllable.end || formatTimestamp(parseTimestampFlexible(begin) + (i + 1) * defaultWordDuration);
-    }
+  const tabBtnTimeline = document.createElement('button');
+  tabBtnTimeline.textContent = 'Timeline Editor';
+  tabBtnTimeline.className = 'add-sub-button';
+  tabBtnTimeline.style.background = '#222';
+  tabBtnTimeline.style.color = '#fff';
 
-    const wordText = document.createElement('span');
-    wordText.className = 'word-text';
-    wordText.textContent = word;
+  navBar.appendChild(tabBtnClassic);
+  navBar.appendChild(tabBtnTimeline);
+  popup.appendChild(navBar);
 
-    // Begin input: only for first word, readonly and always line begin
-    let beginInput = document.createElement('input');
-    beginInput.type = 'text';
-    beginInput.value = wordBegin;
-    beginInput.placeholder = 'M:SS';
-    beginInput.readOnly = true;
-    beginInput.className = 'syllable-begin';
-    beginInput.style.background = '#222';
-    beginInput.style.color = '#aaa';
-    beginInput.style.cursor = 'not-allowed';
+  const classicContainer = document.createElement('div');
+  const timelineContainer = document.createElement('div');
+  timelineContainer.style.display = 'none';
 
-    // End input: all words (including last) are editable
-    let endInput = document.createElement('input');
-    endInput.type = 'text';
-    endInput.value = wordEnd;
-    endInput.placeholder = 'M:SS';
-    endInput.className = 'syllable-end';
-    // (no readonly for last word)
+  (function renderClassic() {
 
-    // When endInput changes, update next word's begin input
-    endInput.addEventListener('input', () => {
-      if (wordDivs[i + 1]) {
-        const nextBeginInput = wordDivs[i + 1].querySelector('input.syllable-begin');
-        if (nextBeginInput) {
-          nextBeginInput.value = endInput.value;
-        }
+    const words = currentText.split(' ');
+    const begin = lineDiv.querySelector('.timestamp.begin').value;
+    const end = lineDiv.querySelector('.timestamp.end').value;
+    const totalDuration = parseTimestampFlexible(end) - parseTimestampFlexible(begin);
+    const defaultWordDuration = totalDuration / words.length;
+
+    const wordDivs = [];
+    words.forEach((word, i) => {
+      const wordDiv = document.createElement('div');
+      wordDiv.className = 'syllable-word';
+
+      const existingSyllable = existingSyllables[i] || {};
+      let wordBegin;
+      if (i === 0) {
+        wordBegin = begin;
+      } else if (existingSyllables[i - 1] && existingSyllables[i - 1].end) {
+        wordBegin = existingSyllables[i - 1].end;
+      } else {
+        wordBegin = formatTimestamp(parseTimestampFlexible(begin) + i * defaultWordDuration);
       }
+      let wordEnd;
+      if (i === words.length - 1) {
+        wordEnd = existingSyllable.end || end;
+      } else {
+        wordEnd = existingSyllable.end || formatTimestamp(parseTimestampFlexible(begin) + (i + 1) * defaultWordDuration);
+      }
+
+      const wordText = document.createElement('span');
+      wordText.className = 'word-text';
+      wordText.textContent = word;
+
+      let beginInput = document.createElement('input');
+      beginInput.type = 'text';
+      beginInput.value = wordBegin;
+      beginInput.placeholder = 'M:SS';
+      beginInput.readOnly = true;
+      beginInput.className = 'syllable-begin';
+      beginInput.style.background = '#222';
+      beginInput.style.color = '#aaa';
+      beginInput.style.cursor = 'not-allowed';
+
+      let endInput = document.createElement('input');
+      endInput.type = 'text';
+      endInput.value = wordEnd;
+      endInput.placeholder = 'M:SS';
+      endInput.className = 'syllable-end';
+
+      endInput.addEventListener('input', () => {
+        if (wordDivs[i + 1]) {
+          const nextBeginInput = wordDivs[i + 1].querySelector('input.syllable-begin');
+          if (nextBeginInput) {
+            nextBeginInput.value = endInput.value;
+          }
+        }
+      });
+
+      wordDiv.appendChild(wordText);
+      wordDiv.appendChild(beginInput);
+      wordDiv.appendChild(endInput);
+      classicContainer.appendChild(wordDiv);
+      wordDivs.push(wordDiv);
     });
 
-    wordDiv.appendChild(wordText);
-    wordDiv.appendChild(beginInput);
-    wordDiv.appendChild(endInput);
-    popup.appendChild(wordDiv);
-    wordDivs.push(wordDiv);
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Save';
+    saveBtn.className = 'add-sub-button';
+    saveBtn.onclick = () => {
+      const syllables = wordDivs.map((wordDiv, idx) => ({
+        text: wordDiv.querySelector('.word-text').textContent,
+        begin: wordDiv.querySelector('.syllable-begin').value,
+        end: wordDiv.querySelector('.syllable-end').value
+      }));
 
-    prevEndInput = endInput;
-  });
+      lineDiv.dataset.syllables = JSON.stringify(syllables);
+      updatePreview();
+      autoSave();
+      closeBtn.click();
+    };
+    classicContainer.appendChild(saveBtn);
+  })();
 
-  const saveBtn = document.createElement('button');
-  saveBtn.textContent = 'Save';
-  saveBtn.className = 'add-sub-button';
-  saveBtn.onclick = () => {
-    // Fix: Use class selectors to get begin/end for each word
-    const syllables = wordDivs.map((wordDiv, idx) => ({
-      text: wordDiv.querySelector('.word-text').textContent,
-      begin: wordDiv.querySelector('.syllable-begin').value,
-      end: wordDiv.querySelector('.syllable-end').value
-    }));
+  (function renderTimeline() {
 
-    lineDiv.dataset.syllables = JSON.stringify(syllables);
-    updatePreview();
-    autoSave();
-    closeBtn.click();
-  };
+    const info = document.createElement('div');
+    info.style.marginBottom = '16px';
+    info.style.color = '#aaa';
+    info.style.fontSize = '15px';
+    info.style.lineHeight = '1.6';
+    info.innerHTML = `
+      <b>Timeline Editor:</b> <br>
+      Adjust the duration for each word using the arrows. The sum of all durations must exactly match the lyric's total duration.<br>
+      Each word will glow for its duration. Gray timestamps show when each word starts.
+    `;
+    timelineContainer.appendChild(info);
 
-  popup.appendChild(saveBtn);
+    const words = currentText.split(' ');
+    const begin = lineDiv.querySelector('.timestamp.begin').value;
+    const end = lineDiv.querySelector('.timestamp.end').value;
+    const totalDuration = parseTimestampFlexible(end) - parseTimestampFlexible(begin);
 
-  overlay.classList.add('active');
-  popup.classList.add('active');
+    let durations = [];
+    if (existingSyllables && existingSyllables.length === words.length) {
+      for (let i = 0; i < words.length; ++i) {
+        const b = parseTimestampFlexible(existingSyllables[i].begin);
+        const e = parseTimestampFlexible(existingSyllables[i].end);
+        durations.push(e - b);
+      }
+    } else {
+      for (let i = 0; i < words.length; ++i) durations.push(totalDuration / words.length);
+    }
+
+    const wordWidths = [];
+    let totalChars = words.reduce((acc, w) => acc + w.length, 0);
+    for (let i = 0; i < words.length; ++i) {
+      let w = Math.max(90, Math.min(220, Math.round((words[i].length / totalChars) * 900)));
+      wordWidths.push(w);
+    }
+
+    const timelineScroll = document.createElement('div');
+    timelineScroll.style.overflowX = 'auto';
+    timelineScroll.style.overflowY = 'visible';
+    timelineScroll.style.whiteSpace = 'nowrap';
+    timelineScroll.style.paddingBottom = '10px';
+    timelineScroll.style.marginBottom = '10px';
+    timelineScroll.style.display = 'flex';
+    timelineScroll.style.gap = '24px';
+
+    const errorDiv = document.createElement('div');
+    errorDiv.style.color = '#f55';
+    errorDiv.style.margin = '10px 0 0 0';
+    errorDiv.style.fontWeight = 'bold';
+
+    let timestampSpans = [];
+
+    function updateTimestampsAndError() {
+      let sum = 0;
+      for (let i = 0; i < durations.length; ++i) {
+        timestampSpans[i].textContent = formatTimestamp(parseTimestampFlexible(begin) + sum);
+        sum += durations[i];
+      }
+      if (Math.abs(sum - totalDuration) > 0.001) {
+        errorDiv.textContent = `Total duration mismatch: ${sum.toFixed(3)}s (should be ${totalDuration.toFixed(3)}s)`;
+      } else {
+        errorDiv.textContent = '';
+      }
+    }
+
+    function updateDurDisplays() {
+      const displays = timelineScroll.querySelectorAll('.duration-display');
+      for (let i = 0; i < durations.length; ++i) {
+        displays[i].textContent = durations[i].toFixed(3) + 's';
+      }
+    }
+
+    for (let i = 0; i < words.length; ++i) {
+      const wordCol = document.createElement('div');
+      wordCol.style.display = 'flex';
+      wordCol.style.flexDirection = 'column';
+      wordCol.style.alignItems = 'center';
+      wordCol.style.boxSizing = 'border-box';
+      wordCol.style.margin = '0 0px';
+      wordCol.style.background = 'rgba(255,255,255,0.03)';
+      wordCol.style.borderRadius = '12px';
+      wordCol.style.boxShadow = '0 2px 8px rgba(0,0,0,0.08)';
+      wordCol.style.padding = '0 0 0 0';
+
+      const wordDiv = document.createElement('div');
+      wordDiv.textContent = words[i];
+      wordDiv.style.fontWeight = 'bold';
+      wordDiv.style.fontSize = '18px';
+      wordDiv.style.padding = '8px 8px 2px 8px';
+      wordDiv.style.background = 'rgba(255,255,255,0.07)';
+      wordDiv.style.borderRadius = '12px 12px 0 0';
+      wordDiv.style.textAlign = 'center';
+      wordDiv.style.width = '100%';
+      wordCol.appendChild(wordDiv);
+
+      const ts = document.createElement('span');
+      ts.style.fontSize = '12px';
+      ts.style.color = '#888';
+      ts.style.marginBottom = '2px';
+      ts.style.marginTop = '2px';
+      ts.textContent = formatTimestamp(parseTimestampFlexible(begin) + durations.slice(0, i).reduce((a, b) => a + b, 0));
+      wordCol.appendChild(ts);
+      timestampSpans.push(ts);
+
+      const durRow = document.createElement('div');
+      durRow.style.display = 'flex';
+      durRow.style.alignItems = 'center';
+      durRow.style.justifyContent = 'space-between';
+      durRow.style.width = '100%';
+      durRow.style.background = 'linear-gradient(90deg, #0af 60%, #09f 100%)';
+      durRow.style.borderRadius = '0 0 12px 12px';
+      durRow.style.padding = '10px 0';
+      durRow.style.margin = '0';
+      durRow.style.position = 'relative';
+      durRow.style.minWidth = '70px';
+
+      const leftBtn = document.createElement('button');
+      leftBtn.innerHTML = '<svg width="22" height="22" style="vertical-align:middle;" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#222"/><path d="M14 7l-4 4 4 4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      leftBtn.className = 'add-sub-button';
+      leftBtn.style.background = 'transparent';
+      leftBtn.style.border = 'none';
+      leftBtn.style.padding = '0 4px 0 0';
+      leftBtn.style.margin = '0';
+      leftBtn.style.cursor = 'pointer';
+      leftBtn.style.boxShadow = 'none';
+      leftBtn.style.fontSize = '15px';
+      leftBtn.onmousedown = e => e.preventDefault();
+      leftBtn.onclick = () => {
+        let minDur = 0.05;
+        if (durations[i] <= minDur) return;
+        let delta = Math.min(0.05, durations[i] - minDur);
+        durations[i] -= delta;
+        let others = durations.length - 1;
+        for (let j = 0; j < durations.length; ++j) {
+          if (j !== i) durations[j] += delta / others;
+        }
+        updateDurDisplays();
+        updateTimestampsAndError();
+      };
+
+      const rightBtn = document.createElement('button');
+      rightBtn.innerHTML = '<svg width="22" height="22" style="vertical-align:middle;" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="#222"/><path d="M8 7l4 4-4 4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      rightBtn.className = 'add-sub-button';
+      rightBtn.style.background = 'transparent';
+      rightBtn.style.border = 'none';
+      rightBtn.style.padding = '0 0 0 4px';
+      rightBtn.style.margin = '0';
+      rightBtn.style.cursor = 'pointer';
+      rightBtn.style.boxShadow = 'none';
+      rightBtn.style.fontSize = '15px';
+      rightBtn.onmousedown = e => e.preventDefault();
+      rightBtn.onclick = () => {
+        let maxDelta = 0.05;
+        let others = durations.length - 1;
+        let maxInc = Math.min(
+          maxDelta,
+          ...durations.filter((d, idx) => idx !== i).map(d => d - 0.05)
+        );
+        if (maxInc <= 0) return;
+        durations[i] += maxInc;
+        for (let j = 0; j < durations.length; ++j) {
+          if (j !== i) durations[j] -= maxInc / others;
+        }
+        updateDurDisplays();
+        updateTimestampsAndError();
+      };
+
+      const durDisplay = document.createElement('div');
+      durDisplay.textContent = durations[i].toFixed(3) + 's';
+      durDisplay.style.background = 'transparent';
+      durDisplay.style.color = '#fff';
+      durDisplay.style.border = 'none';
+      durDisplay.style.borderRadius = '4px';
+      durDisplay.style.padding = '0 12px';
+      durDisplay.style.margin = '0 2px';
+      durDisplay.style.fontWeight = 'bold';
+      durDisplay.style.fontSize = '15px';
+      durDisplay.className = 'duration-display';
+      durDisplay.style.pointerEvents = 'none';
+      durDisplay.style.userSelect = 'none';
+
+      durRow.appendChild(leftBtn);
+      durRow.appendChild(durDisplay);
+      durRow.appendChild(rightBtn);
+
+      wordCol.appendChild(durRow);
+      timelineScroll.appendChild(wordCol);
+    }
+
+    timelineContainer.appendChild(timelineScroll);
+    timelineContainer.appendChild(errorDiv);
+
+    const saveBtn = document.createElement('button');
+    saveBtn.textContent = 'Done';
+    saveBtn.className = 'add-sub-button';
+    saveBtn.style.marginTop = '30px';
+    saveBtn.onclick = () => {
+      let sum = 0;
+      for (let i = 0; i < durations.length; ++i) sum += durations[i];
+      if (Math.abs(sum - totalDuration) > 0.001) {
+        errorDiv.textContent = `Total duration mismatch: ${sum.toFixed(3)}s (should be ${totalDuration.toFixed(3)}s)`;
+        return;
+      }
+      let syllables = [];
+      let cur = parseTimestampFlexible(begin);
+      for (let i = 0; i < words.length; ++i) {
+        const dur = durations[i];
+        syllables.push({
+          text: words[i],
+          begin: formatTimestamp(cur),
+          end: formatTimestamp(cur + dur)
+        });
+        cur += dur;
+      }
+      lineDiv.dataset.syllables = JSON.stringify(syllables);
+      updatePreview();
+      autoSave();
+      closeBtn.click();
+    };
+    timelineContainer.appendChild(saveBtn);
+
+    updateDurDisplays();
+    updateTimestampsAndError();
+  })();
+
+  function showClassic() {
+    classicContainer.style.display = '';
+    timelineContainer.style.display = 'none';
+    tabBtnClassic.style.background = '#0af';
+    tabBtnTimeline.style.background = '#222';
+  }
+  function showTimeline() {
+    classicContainer.style.display = 'none';
+    timelineContainer.style.display = '';
+    tabBtnClassic.style.background = '#222';
+    tabBtnTimeline.style.background = '#0af';
+  }
+  tabBtnClassic.onclick = showClassic;
+  tabBtnTimeline.onclick = showTimeline;
+  showClassic();
+
+  popup.appendChild(classicContainer);
+  popup.appendChild(timelineContainer);
+
   document.body.appendChild(overlay);
   document.body.appendChild(popup);
 }
@@ -741,8 +990,6 @@ function parseTimestampFlexible(ts) {
   }
   return 0;
 }
-
-
 
 function updatePreview() {
   const previewContainer = document.getElementById('previewContainer');
