@@ -1,100 +1,234 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Apple Music Lyrics Editor</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta charset="UTF-8">
+    <title>Apple Music Lyrics Editor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
+
 <body>
-  <div id="top-bar">
-    <div class="dropdown-container">
-      <div class="dropdown">
-        <button class="dropdown-btn button">File</button>
-        <div class="dropdown-content">
-          <button id="saveButton"><i class="fas fa-save"></i>Save</button>
-          <button id="openButton"><i class="fas fa-upload"></i>Open</button>
-          <button id="resetButton"><i class="fas fa-trash"></i>Reset</button>
-          <input type="file" id="fileInput" style="display:none;" accept="application/json">
+    <div id="top-bar">
+        <div class="dropdown-container">
+            <div class="dropdown">
+                <button class="dropdown-btn button">File</button>
+                <div class="dropdown-content">
+                    <button id="saveButton"><i class="fas fa-save"></i>Save</button>
+                    <button id="openButton"><i class="fas fa-upload"></i>Open</button>
+                    <button id="resetButton"><i class="fas fa-trash"></i>Reset</button>
+                    <input type="file" id="fileInput" style="display:none;" accept="application/json">
+                </div>
+            </div>
+            <div class="dropdown dropdown-help">
+                <button class="dropdown-btn button">Help</button>
+                <div class="dropdown-content">
+                    <button id="githubButton" onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-generator', '_blank')">
+                        <i class="fab fa-github"></i>GitHub
+                    </button>
+                    <button id="kofiButton" onclick="window.open('https://ko-fi.com/sipped', '_blank')">
+                        <i class="fas fa-coffee"></i>Support me on Ko-fi
+                    </button>
+                    <button id="exampleButton">
+                        <i class="fas fa-file-alt"></i>Load Example
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="dropdown dropdown-help">
-        <button class="dropdown-btn button">Help</button>
-        <div class="dropdown-content">
-          <button id="githubButton" onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-generator', '_blank')">
-            <i class="fab fa-github"></i>GitHub
-          </button>
-          <button id="kofiButton" onclick="window.open('https://ko-fi.com/sipped', '_blank')">
-            <i class="fas fa-coffee"></i>Support me on Ko-fi
-          </button>
-          <button id="exampleButton">
-            <i class="fas fa-file-alt"></i>Load Example
-          </button>
+        <div class="div">
+            <div class="dropdown" id="syncDropdown">
+                <button id="syncAudioButton" class="button"><i class="fas fa-music"></i>Sync</button>
+                <div class="dropdown-content" id="syncDropdownContent" style="min-width:180px;">
+                    <button id="selectAudioFileBtn" style="width:100%;"><i class="fas fa-folder-open"></i>Select Audio File</button>
+                    <input type="file" id="audioFileInput" style="display:none;" accept="audio/*">
+                    <div style="margin:10px 0;">
+                        <label for="audioVolumeBar" style="font-size:13px;">Volume</label>
+                        <input type="range" id="audioVolumeBar" min="0" max="1" step="0.01" value="1" style="width:90%;">
+                    </div>
+                </div>
+            </div>
+            <button id="playButton" class="button"><i class="fas fa-play"></i>Play</button>
+            <button id="stopButton" class="button"><i class="fas fa-stop"></i>Stop</button>
         </div>
-      </div>
-    </div>
-    <div class="div">
-      <div class="dropdown" id="syncDropdown">
-        <button id="syncAudioButton" class="button"><i class="fas fa-music"></i>Sync</button>
-        <div class="dropdown-content" id="syncDropdownContent" style="min-width:180px;">
-          <button id="selectAudioFileBtn" style="width:100%;"><i class="fas fa-folder-open"></i>Select Audio File</button>
-          <input type="file" id="audioFileInput" style="display:none;" accept="audio/*">
-          <div style="margin:10px 0;">
-            <label for="audioVolumeBar" style="font-size:13px;">Volume</label>
-            <input type="range" id="audioVolumeBar" min="0" max="1" step="0.01" value="1" style="width:90%;">
-          </div>
+        <div style="width: 200px;">
+            <div id="timeDisplay" class="time-display">00:00 / 00:00</div>
         </div>
-      </div>
-      <button id="playButton" class="button"><i class="fas fa-play"></i>Play</button>
-      <button id="stopButton" class="button"><i class="fas fa-stop"></i>Stop</button>
     </div>
-    <div style="width: 200px;">
-      <div id="timeDisplay" class="time-display">00:00 / 00:00</div>
+    <div class="mobile-tabs">
+        <button class="tab-button active" data-tab="editor">Editor</button>
+        <button class="tab-button" data-tab="preview">Preview</button>
     </div>
-  </div>
-  <div class="mobile-tabs">
-    <button class="tab-button active" data-tab="editor">Editor</button>
-    <button class="tab-button" data-tab="preview">Preview</button>
-  </div>
-  <div id="container">
-    <div id="editor">
-      <h2>Editor</h2>
-      <p>This is a realistic Apple Music lyrics generator! Feel free to use it for any project.
-        <br><br><b>Right click</b> on a line to delete or duplicate the line.
-      <h2>Shortcuts</h2>
-      <p><b>When hovering line,</b><br>S - edit word timings<br>Q - select left alignment<br>E - select right alignment<br><br><b>Project</b><br>F - add line<br>Z - play<br>X - stop<br>Ctrl+S - save project<br>Ctrl+O - open project</p>
-      <div id="linesContainer"></div>
-      <button id="addLineButton">Add Line</button>
+    <div id="container">
+        <div id="editor">
+            <h2>Editor</h2>
+            <p>This is a realistic Apple Music lyrics generator! Feel free to use it for any project.
+            </p>
+
+            <div class="tutorial-section">
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Getting Started
+                    </button>
+                    <div class="tutorial-content">
+                        <p>Use the <strong>Add Line</strong> button to create new lyric lines.</p>
+                        <p><strong>Right click</strong> on a line to delete or duplicate the line.</p>
+                        <p>Check the preview and click the <strong>Play</strong> button to start playback.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Creating Lyrics
+                    </button>
+                    <div class="tutorial-content">
+                        <p>Add <strong>MM:SS:Msc</strong> (example <strong>00:01:500</strong>) to set your lyric's timestamps.</p>
+                        <p>Select <strong>Left or Right alignment</strong> to change where the lyric will appear in the preview.</p>
+                        <p>Click <strong>Edit word timings</strong> to do advanced word timing sychronization.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Censoring words and background lyrics
+                    </button>
+                    <div class="tutorial-content">
+                        <p>Click <strong>Censor words</strong> to censor explicit words in lyrics.</p>
+                        <p>Cover a word in <strong>[ ]</strong> (example <strong>[Hi]</strong>) in order to censor it in the playback, when censoring is on.</p>
+                        <p>Slurs cannot be uncensored. Please use <strong>a letter and an asterisk *</strong> (example <strong>N*</strong>) to censor slurs.</p>
+                        <p>Click the <strong>+ Add background lyric</strong> to add sublyrics to a main lyric.</p>
+                        <p>In the sublyric, add <strong>timestamps</strong> and <strong>write the lyric</strong>.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Playback
+                    </button>
+                    <div class="tutorial-content">
+                        <p>Click <strong>Sync</strong> to load an audio file for timing your lyrics.</p>
+                        <p>Use <strong>Play/Stop</strong> or <strong>Z/X shortcuts</strong> to control playback.</p>
+                        <p>Click <strong>Toggle synchronization</strong> to make the preview move with the lyrics.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Shortcuts
+                    </button>
+                    <div class="tutorial-content">
+                        <p><strong>When hovering line,</strong><br>S - edit word timings<br>Q - select left alignment<br>E - select right alignment<br><br><strong>Project</strong><br>F - add line<br>Z - play<br>X - stop<br>Ctrl+S - save project<br>Ctrl+O - open project</p>
+                        <p>Use <strong>Play/Stop</strong> or <strong>Z/X shortcuts</strong> to control playback.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Export & Save
+                    </button>
+                    <div class="tutorial-content">
+                        <p>Use <strong>File → Save</strong> to export your lyrics project.</p>
+                        <p><strong>File → Open</strong> lets you load previously saved projects.</p>
+                        <p>Your work is automatically saved to your browser's local storage.</p>
+                    </div>
+                </div>
+
+                <div class="tutorial-dropdown">
+                    <button class="tutorial-toggle">
+                        <i class="fas fa-chevron-right tutorial-icon"></i>
+                        Tips & more!
+                    </button>
+                    <div class="tutorial-content">
+                        <p>Use <strong>Shortcuts</strong> for more effective work.</p>
+                        <p>Load in an <strong>example</strong> from the project's <a href="https://github.com/sippedaway/applemusic-lyrics-generator/">GitHub</a> (there are plenty to choose!)</p>
+                        <p>The tool is better used <strong>with a PC</strong>.</p>
+
+                        <strong>Version</strong>
+                        <p>There are frequent updates, the current one being <strong>v1.6:</strong></p>
+                        <p>- Censoring words<br>- Extended guide<br>- Updates to previous example projects</p>
+                    </div>
+                </div>
+
+                <div id="linesContainer"></div>
+                <button id="addLineButton">Add Line</button>
+            </div>
+
+        </div>
+
+        <div id="divider"></div>
+        <div id="preview">
+            <div id="sync-control">
+                <button id="toggleSync" class="sync-button">
+                    <i class="fas fa-thumbtack"></i>Toggle synchronization
+                </button>
+                <button id="toggleCensor" class="sync-button" style="margin-left:10px;">
+                    <i class="fas fa-eye-slash"></i> Censor words
+                </button>
+            </div>
+            <div id="previewContainer"></div>
+
+            <audio id="audioPlayer" style="display:none;"></audio>
+        </div>
     </div>
-    <div id="divider"></div>
-    <div id="preview">
-      <div id="sync-control">
-        <button id="toggleSync" class="sync-button">
-          <i class="fas fa-thumbtack"></i>Toggle synchronization
-        </button>
-      </div>
-      <div id="previewContainer"></div>
-      
-      <audio id="audioPlayer" style="display:none;"></audio>
-    </div>
-  </div>
-  <script src="project.js" defer></script>
-  <script src="playback.js" defer></script>
-  <script>
-    // Reset button logic
-    document.addEventListener('DOMContentLoaded', function() {
-      var resetBtn = document.getElementById('resetButton');
-      if (resetBtn) {
-        resetBtn.addEventListener('click', function() {
-          if (confirm('Are you sure you want to reset the project? This will clear all lyrics.')) {
-            localStorage.removeItem('lyricsProject');
-            document.getElementById('linesContainer').innerHTML = '';
-            if (typeof addLine === 'function') addLine();
-            if (typeof updatePreview === 'function') updatePreview();
-          }
+    <script src="project.js" defer></script>
+    <script src="playback.js" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var resetBtn = document.getElementById('resetButton');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', function() {
+                    if (confirm('Are you sure you want to reset the project? This will clear all lyrics.')) {
+                        localStorage.removeItem('lyricsProject');
+                        document.getElementById('linesContainer').innerHTML = '';
+                        if (typeof addLine === 'function') addLine();
+                        if (typeof updatePreview === 'function') updatePreview();
+                    }
+                });
+            }
         });
-      }
-    });
-  </script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const censorBtn = document.getElementById('toggleCensor');
+            if (censorBtn) {
+
+                censorBtn.classList.add('active');
+                window.lyricsCensorEnabled = true;
+
+                censorBtn.addEventListener('click', function() {
+                    censorBtn.classList.toggle('active');
+                    window.lyricsCensorEnabled = censorBtn.classList.contains('active');
+                    if (typeof updatePreview === 'function') updatePreview();
+                });
+
+                if (typeof updatePreview === 'function') updatePreview();
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const tutorialToggles = document.querySelectorAll('.tutorial-toggle');
+
+            tutorialToggles.forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const dropdown = this.parentElement;
+                    const isActive = dropdown.classList.contains('active');
+
+                    tutorialToggles.forEach(otherToggle => {
+                        otherToggle.parentElement.classList.remove('active');
+                    });
+
+                    if (!isActive) {
+                        dropdown.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
