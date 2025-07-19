@@ -73,6 +73,13 @@ Hovered lyric line:
 </details>
 
 ## Version
+#### 1.6
+- **Release date**: 2025-07-19
+- **QOL update and fixes.**
+- **Added:**
+- Censoring words
+- Updated editor guide + dropdowns
+- Updated example projects
 #### 1.5
 - **Release date**: 2025-07-16
 - **QOL update and fixes.** No example project
