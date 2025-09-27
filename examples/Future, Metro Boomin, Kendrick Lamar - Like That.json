@@ -76,13 +76,16 @@
     "end": "0:36",
     "text": "20-carat ring, I put my fingers down her throat",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:35",
-        "end": "0:36",
-        "text": "Uh, uh, uh"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "0:35",
+    "end": "0:36",
+    "text": "Uh, uh, uh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -90,13 +93,16 @@
     "end": "0:39",
     "text": "If I lose a carat, she might choke",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:38",
-        "end": "0:39",
-        "text": "Uh, uh, uh"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "0:38",
+    "end": "0:39",
+    "text": "Uh, uh, uh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -104,13 +110,16 @@
     "end": "0:42",
     "text": "I know she gon' swallow, she a GOAT",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:41",
-        "end": "0:42",
-        "text": "Uh, uh, uh"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "0:41",
+    "end": "0:42",
+    "text": "Uh, uh, uh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -334,13 +343,16 @@
     "end": "1:34",
     "text": "Kickin' doors, kickin' in doors, is you like that?",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:31",
-        "end": "1:32",
-        "text": "If you like that"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "1:31",
+    "end": "1:32",
+    "text": "If you like that",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -348,13 +360,16 @@
     "end": "1:37",
     "text": "Young throwed N*, sellin' lows, is you like that?",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:37",
-        "end": "1:37",
-        "text": "Yeah"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "1:37",
+    "end": "1:37",
+    "text": "Yeah",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -370,13 +385,16 @@
     "end": "1:42",
     "text": "N* from the bottom really like that",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:40",
-        "end": "1:41",
-        "text": "If you like that"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "1:40",
+    "end": "1:41",
+    "text": "If you like that",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -776,13 +794,16 @@
     "end": "2:55",
     "text": "Young dope dealer, sellin' dope, is you like that?",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:54",
-        "end": "2:55",
-        "text": "If you like that"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "2:54",
+    "end": "2:55",
+    "text": "If you like that",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -790,18 +811,25 @@
     "end": "2:58",
     "text": "Kickin' doors, kickin' in doors, is you like that?",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:55",
-        "end": "2:56",
-        "text": "What?"
-      },
-      {
-        "begin": "2:57",
-        "end": "2:58",
-        "text": "How?"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "2:55",
+    "end": "2:56",
+    "text": "What?",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
+    "begin": "2:57",
+    "end": "2:58",
+    "text": "How?",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -809,13 +837,16 @@
     "end": "3:00",
     "text": "Young throwed N*, sellin' lows, is you like that?",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:59",
-        "end": "3:00",
-        "text": "Holy water, holy water, holy water"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "2:59",
+    "end": "3:00",
+    "text": "Holy water, holy water, holy water",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {

@@ -145,13 +145,7 @@
     "end": "0:35",
     "text": "(Ooh-ooh-ooh-ooh-ooh, ooh-ooh-ooh-ooh-ooh)",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:30",
-        "end": "0:31",
-        "text": "Oh"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "(Ooh-ooh-ooh,",
@@ -164,6 +158,15 @@
         "end": "0:35"
       }
     ]
+  },
+  {
+    "begin": "0:30",
+    "end": "0:31",
+    "text": "Oh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "0:31",
@@ -186,13 +189,7 @@
     "end": "0:40",
     "text": "I thought that we were the same",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:39",
-        "end": "0:40",
-        "text": "Thought we were the same"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "I",
@@ -232,17 +229,20 @@
     ]
   },
   {
+    "begin": "0:39",
+    "end": "0:40",
+    "text": "Thought we were the same",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "0:41",
     "end": "0:44",
     "text": "Birds of a feather, now I'm ashamed",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:41:500",
-        "end": "0:42",
-        "text": "Birds of a feather"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Birds",
@@ -280,6 +280,15 @@
         "end": "0:44"
       }
     ]
+  },
+  {
+    "begin": "0:41:500",
+    "end": "0:42",
+    "text": "Birds of a feather",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "0:44",
@@ -335,13 +344,7 @@
     "end": "0:53",
     "text": "I'm tryin' my best, don't know what's in store",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:51",
-        "end": "0:52",
-        "text": "Trying my best"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "I'm",
@@ -389,6 +392,15 @@
         "end": "0:53:334"
       }
     ]
+  },
+  {
+    "begin": "0:51",
+    "end": "0:52",
+    "text": "Trying my best",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "0:53",
@@ -550,13 +562,7 @@
     "end": "1:21",
     "text": "I'd like to mean it when I say I'm over you",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:16",
-        "end": "1:17:500",
-        "text": "Not what you need"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "I'd",
@@ -616,6 +622,15 @@
     ]
   },
   {
+    "begin": "1:16",
+    "end": "1:17:500",
+    "text": "Not what you need",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "1:22",
     "end": "1:25",
     "text": "But that's still not true, true",
@@ -659,13 +674,7 @@
     "end": "1:30",
     "text": "And I'm still so blue",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:28",
-        "end": "1:30",
-        "text": "And it's not true"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "And",
@@ -693,6 +702,15 @@
         "end": "1:27:500"
       }
     ]
+  },
+  {
+    "begin": "1:28",
+    "end": "1:30",
+    "text": "And it's not true",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "1:31",
@@ -762,13 +780,7 @@
     "end": "1:51",
     "text": "Mm, mm, mm",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:41",
-        "end": "1:51",
-        "text": "Ooh, ooh, ooh"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Mm,",
@@ -786,6 +798,15 @@
         "end": "1:50"
       }
     ]
+  },
+  {
+    "begin": "1:41",
+    "end": "1:51",
+    "text": "Ooh, ooh, ooh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "1:51",
@@ -895,13 +916,7 @@
     "end": "2:54",
     "text": "Don't hate you",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:50:500",
-        "end": "2:54",
-        "text": "Don't hate you"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Don't",
@@ -921,17 +936,20 @@
     ]
   },
   {
+    "begin": "2:50:500",
+    "end": "2:54",
+    "text": "Don't hate you",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "2:53",
     "end": "3:00",
     "text": "But we can't save you",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:58",
-        "end": "3:00",
-        "text": "Can't save you"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "But",
@@ -959,6 +977,15 @@
         "end": "3:00"
       }
     ]
+  },
+  {
+    "begin": "2:58",
+    "end": "3:00",
+    "text": "Can't save you",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "3:00",
@@ -1061,13 +1088,7 @@
     "end": "4:01",
     "text": "I don't blame you",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "3:58",
-        "end": "4:01",
-        "text": "Don't blame you"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "I",
@@ -1092,6 +1113,15 @@
     ]
   },
   {
+    "begin": "3:58",
+    "end": "4:01",
+    "text": "Don't blame you",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "4:00",
     "end": "4:06",
     "text": "But I can't change you",
@@ -1104,13 +1134,16 @@
     "end": "4:13:500",
     "text": "Don't hate you",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "4:11",
-        "end": "4:13:500",
-        "text": "Don't hate you"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "4:11",
+    "end": "4:13:500",
+    "text": "Don't hate you",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -1118,13 +1151,16 @@
     "end": "4:19",
     "text": "But we can't save you",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "4:18",
-        "end": "4:19",
-        "text": "Can't save you"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "4:18",
+    "end": "4:19",
+    "text": "Can't save you",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {

@@ -347,13 +347,7 @@
     "end": "0:56",
     "text": "I got somethin', ayy",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:55",
-        "end": "0:56",
-        "text": "I got somethin'"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "I",
@@ -378,17 +372,20 @@
     ]
   },
   {
+    "begin": "0:55",
+    "end": "0:56",
+    "text": "I got somethin'",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "0:56:500",
     "end": "1:00",
     "text": "Hol' up, we gon' function, ayy",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "0:58:500",
-        "end": "1:00",
-        "text": "We gon' function"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Hol'",
@@ -423,17 +420,20 @@
     ]
   },
   {
+    "begin": "0:58:500",
+    "end": "1:00",
+    "text": "We gon' function",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "0:59:500",
     "end": "1:02",
     "text": "No assumptions, ayy",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:00",
-        "end": "1:02",
-        "text": "No assumptions"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "No",
@@ -453,17 +453,20 @@
     ]
   },
   {
+    "begin": "1:00",
+    "end": "1:02",
+    "text": "No assumptions",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "1:01",
     "end": "1:04",
     "text": "Feelin' like Tyson with it",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:02",
-        "end": "1:04",
-        "text": "Feelin' like Tyson with it"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Feelin'",
@@ -493,17 +496,20 @@
     ]
   },
   {
+    "begin": "1:02",
+    "end": "1:04",
+    "text": "Feelin' like Tyson with it",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "1:03:500",
     "end": "1:06",
     "text": "Knock it out twice, I'm with it",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:04:500",
-        "end": "1:06",
-        "text": "Knock it out twice, I'm with it"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Knock",
@@ -543,17 +549,20 @@
     ]
   },
   {
+    "begin": "1:04:500",
+    "end": "1:06",
+    "text": "Knock it out twice, I'm with it",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
+  },
+  {
     "begin": "1:05:500",
     "end": "1:08",
     "text": "Only for the night, I'm kiddin'",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:06",
-        "end": "1:08",
-        "text": "Only for the night, I'm kiddin'"
-      }
-    ],
+    "sublyrics": [],
     "syllables": [
       {
         "text": "Only",
@@ -586,6 +595,15 @@
         "end": "1:07:200"
       }
     ]
+  },
+  {
+    "begin": "1:06",
+    "end": "1:08",
+    "text": "Only for the night, I'm kiddin'",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
+    "syllables": []
   },
   {
     "begin": "1:07",
@@ -712,13 +730,16 @@
     "end": "1:39",
     "text": "Keep it a whole one hund', don't got you, I got nuthin'",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "1:37:600",
-        "end": "1:39",
-        "text": "Uh, uh"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "1:37:600",
+    "end": "1:39",
+    "text": "Uh, uh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -1014,13 +1035,16 @@
     "end": "2:43",
     "text": "If I didn't ride blade on curb, would you still",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:43",
-        "end": "2:45",
-        "text": "If I didn't ride blade on curb, would you still"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "2:43",
+    "end": "2:45",
+    "text": "If I didn't ride blade on curb, would you still",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -1036,13 +1060,16 @@
     "end": "2:46:700",
     "text": "If I minimized my net worth, would you still",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:46:700",
-        "end": "2:48",
-        "text": "If I minimized my net worth, would you still"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "2:46:700",
+    "end": "2:48",
+    "text": "If I minimized my net worth, would you still",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
@@ -1074,13 +1101,16 @@
     "end": "2:54:900",
     "text": "Keep it a whole one hund', don't got you, I got nothin'",
     "position": "left",
-    "sublyrics": [
-      {
-        "begin": "2:53:900",
-        "end": "2:54:900",
-        "text": "Uh, uh"
-      }
-    ],
+    "sublyrics": [],
+    "syllables": []
+  },
+  {
+    "begin": "2:53:900",
+    "end": "2:54:900",
+    "text": "Uh, uh",
+    "position": "left",
+    "sublyrics": [],
+    "isBackground": true,
     "syllables": []
   },
   {
