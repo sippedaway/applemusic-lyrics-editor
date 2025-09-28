@@ -10,7 +10,7 @@
     font-weight: regular;
 }
 
-* {
+p,h1,h2,h3,h4,h5,h6,#editor div,#editor span,a,button,input,textarea,select {
     font-family: 'SF Pro Regular', sans-serif;
 }
 
@@ -160,12 +160,14 @@ body.resizing {
 
 .preview-letter {
     display: inline-block;
-    color: gray;
+    color: var(--inactive-text-color, gray);
     transition: color 0.5s ease, top 0.3s ease;
 }
 
 .preview-letter.active {
-    color: white;
+    color: var(--active-text-color, white);
+    text-shadow: 0 0 var(--glow-amount, 0.2px) var(--active-text-color, white);
+    transition: color 0.5s ease, text-shadow 0.5s ease;
 }
 
 .left-lyric {
@@ -180,7 +182,8 @@ body.resizing {
 .preview-line.finished .preview-letter {
     position: relative;
     animation: none;
-    color: gray;
+    color: var(--inactive-text-color, gray);
+    text-shadow: 0 0 0;
 }
 
 .preview-word {
@@ -192,6 +195,10 @@ body.resizing {
 
 .preview-word.single-word.finished {
     transform: none !important;
+}
+
+.preview-word.finished {
+    color: var(--inactive-text-color, gray);
 }
 
 .preview-word.active.glow {
@@ -318,11 +325,16 @@ body.resizing {
     opacity: 0;
     transition: opacity 0.3s ease;
     color: #666;
+    font-weight: bold;
 }
 
 .preview-sublyric .preview-letter {
     color: #444;
     transition: color 0.3s ease;
+}
+
+.preview-sublyric.active {
+    opacity: 1;
 }
 
 .preview-sublyric.visible {
@@ -334,6 +346,27 @@ body.resizing {
 }
 
 .preview-sublyric.active .preview-letter.active {
+    color: #999;
+}
+
+.preview-sublyric.active {
+    color: #999;
+}
+
+.preview-sublyric-letter {
+    color: #444;
+    transition: color 0.3s ease;
+}
+
+.preview-sublyric.visible {
+    opacity: 1;
+}
+
+.preview-sublyric.active .preview-sublyric-letter {
+    color: #444;
+}
+
+.preview-sublyric.active .preview-sublyric-letter.active {
     color: #999;
 }
 
@@ -583,6 +616,11 @@ body.resizing {
     cursor: pointer;
 }
 
+.syllable-btn.active {
+    background: white;
+    color: #222;
+}
+
 .syllable-btn i {
     margin-right: 0;
 }
@@ -828,4 +866,56 @@ body.resizing {
 .tutorial-content strong {
     color: rgba(255, 255, 255, 0.9);
     font-weight: 600;
+}
+
+.timestamp-invalid {
+  border-color: #f55 !important;
+  box-shadow: 0 0 0 2px rgba(255, 85, 85, 0.2) !important;
+}
+
+:root {
+    --background-primary: #000000;
+    --background-secondary: #111111;
+    --text-primary: #ffffff;
+    --text-secondary: #999999;
+    --accent-primary: #007AFF;
+    --accent-secondary: #0055FF;
+    --base-blur: 1px;
+    --active-blur: 0px;
+    --inactive-blur: 1.5px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-group label {
+    color: #fff;
+    font-size: 15px;
+}
+
+.theme-popup input[type="range"] {
+    background: #333;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+}
+
+.theme-popup input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: #0af;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.preview-line:not(.active) {
+    filter: blur(var(--inactive-blur));
+}
+
+.preview-line.active {
+    filter: blur(var(--active-blur));
 }

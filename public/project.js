@@ -148,16 +148,51 @@ function loadFromCookie() {
 function populateEditor(data) {
     const container = document.getElementById('linesContainer');
     container.innerHTML = '';
+
+    const themeEntry = data.find(item => item?.type === 'theme');
+    if (themeEntry) {
+        window.loadThemeData?.(themeEntry.settings);
+
+        data = data.filter(item => 
+            item && 
+            typeof item === 'object' && 
+            item.type !== 'theme' &&
+            typeof item.text === 'string'
+        );
+    }
+
     data.forEach(item => {
-      addLine(item.begin, item.end, item.text, item.position, item.sublyrics, item.syllables);  
+        if (item && typeof item === 'object' && typeof item.text === 'string') {
+            addLine(
+                item.begin || '', 
+                item.end || '', 
+                item.text, 
+                item.position || 'left',
+                Array.isArray(item.sublyrics) ? item.sublyrics : [],
+                Array.isArray(item.syllables) ? item.syllables : [],
+                !!item.isBackground
+            );
+        }
     });
   }
 
-  function addLine(begin = '', end = '', text = '', position = 'left', sublyrics = [], syllables = []) {
+  function addLine(begin = '', end = '', text = '', position = 'left', sublyrics = [], syllables = [], isBackground = false) {
     const container = document.getElementById('linesContainer');
     const lineDiv = document.createElement('div');
     lineDiv.className = 'line';
     lineDiv.draggable = true;
+
+    lineDiv.dataset.isBackground = isBackground ? 'true' : 'false';
+    if (isBackground) {
+      lineDiv.classList.add('background-lyric');
+    }
+
+    let initialDuration = '';
+    if (begin && end) {
+        const beginTime = parseTimestampFlexible(begin);
+        const endTime = parseTimestampFlexible(end);
+        initialDuration = formatTimestamp(endTime - beginTime);
+    }
 
     lineDiv.addEventListener('contextmenu', (e) => {
       showContextMenu(e, lineDiv);
@@ -168,13 +203,52 @@ function populateEditor(data) {
     grabHandle.innerHTML = '⋮⋮';  
 
     lineDiv.addEventListener('dragstart', (e) => {
-        e.target.classList.add('dragging');
+
+        if (e.target.tagName === 'INPUT' || e.target.closest('input')) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (!e.target.classList.contains('grab-handle') && 
+            !e.target.closest('.grab-handle') && 
+            e.target.tagName !== 'DIV') {
+            e.preventDefault();
+            return false;
+        }
+
+        e.target.closest('.line').classList.add('dragging');
     });
 
     lineDiv.addEventListener('dragend', (e) => {
-        e.target.classList.remove('dragging');
+        e.target.closest('.line').classList.remove('dragging');
         updatePreview();
         autoSave();
+    });
+
+    lineDiv.addEventListener('mousedown', (e) => {
+        if (e.target.tagName === 'INPUT') {
+
+            lineDiv.draggable = false;
+
+            setTimeout(() => {
+                lineDiv.draggable = true;
+            }, 100);
+        }
+    });
+
+    lineDiv.addEventListener('focusin', (e) => {
+        if (e.target.tagName === 'INPUT') {
+            lineDiv.draggable = false;
+        }
+    });
+
+    lineDiv.addEventListener('focusout', (e) => {
+        if (e.target.tagName === 'INPUT') {
+
+            setTimeout(() => {
+                lineDiv.draggable = true;
+            }, 50);
+        }
     });
 
     const mainLineDiv = document.createElement('div');
@@ -187,14 +261,28 @@ function populateEditor(data) {
     beginInput.placeholder = 'Begin (M:S:MS)';
     beginInput.className = 'timestamp begin';
     beginInput.value = begin;
-    beginInput.addEventListener('input', () => { updatePreview(); autoSave(); });
+    beginInput.addEventListener('input', () => { 
+    const isValid = isValidTimestamp(beginInput.value);
+    showTimestampError(beginInput, !isValid);
+    if (isValid) {
+      updatePreview(); 
+      autoSave(); 
+    }
+  });
 
-    const endInput = document.createElement('input');
-    endInput.type = 'text';
-    endInput.placeholder = 'End (M:S:MS)';
-    endInput.className = 'timestamp end';
-    endInput.value = end;
-    endInput.addEventListener('input', () => { updatePreview(); autoSave(); });
+    const durationInput = document.createElement('input');
+    durationInput.type = 'text';
+    durationInput.placeholder = 'Duration';
+    durationInput.className = 'timestamp duration';
+    durationInput.value = initialDuration;
+    durationInput.addEventListener('input', () => { 
+        const isValid = isValidTimestamp(durationInput.value);
+        showTimestampError(durationInput, !isValid);
+        if (isValid) {
+            updatePreview(); 
+            autoSave(); 
+        }
+    });
 
     const textInput = document.createElement('input');
     textInput.type = 'text';
@@ -240,18 +328,37 @@ function populateEditor(data) {
     syllableButton.title = 'Edit word timings';
     syllableButton.innerHTML = '<i class="fas fa-microphone"></i>';
     syllableButton.addEventListener('click', () => {
-      openSyllableEditor(lineDiv, text, syllables);
+      openSyllablesEditor(lineDiv);  
     });
+
+    const backgroundToggleBtn = document.createElement('button');
+  backgroundToggleBtn.className = 'syllable-btn';
+  backgroundToggleBtn.textContent = 'BG';
+  backgroundToggleBtn.title = 'Toggle Background Lyric';
+  if (isBackground) {
+    backgroundToggleBtn.classList.add('active');
+    lineDiv.classList.add('background-lyric');
+  }
+
+  backgroundToggleBtn.addEventListener('click', () => {
+    const currentlyBackground = lineDiv.dataset.isBackground === 'true';
+    lineDiv.dataset.isBackground = currentlyBackground ? 'false' : 'true';
+    backgroundToggleBtn.classList.toggle('active');
+    lineDiv.classList.toggle('background-lyric');
+    updatePreview();
+    autoSave();
+  });
 
     alignmentButtons.appendChild(leftBtn);
     alignmentButtons.appendChild(rightBtn);
 
     mainLineDiv.appendChild(beginInput);
-    mainLineDiv.appendChild(endInput);
+    mainLineDiv.appendChild(durationInput);
     mainLineDiv.appendChild(textInput);
     mainLineDiv.appendChild(alignmentButtons);
 
     mainLineDiv.appendChild(syllableButton);
+    mainLineDiv.appendChild(backgroundToggleBtn);
     mainLineDiv.appendChild(addSubButton);
     lineDiv.appendChild(mainLineDiv);
 
@@ -296,12 +403,23 @@ function populateEditor(data) {
       beginInput.value = begin;
       beginInput.style.width = '70px';
 
-      const endInput = document.createElement('input');
-      endInput.type = 'text';
-      endInput.placeholder = 'End';
-      endInput.className = 'timestamp end';
-      endInput.value = end;
-      endInput.style.width = '70px';
+      const durationInput = document.createElement('input');
+      durationInput.type = 'text';
+      durationInput.placeholder = 'Duration';
+      durationInput.className = 'timestamp duration';
+      durationInput.value = end ? formatTimestamp(parseTimestampFlexible(end) - parseTimestampFlexible(begin)) : '';
+      durationInput.style.width = '70px';
+
+      [beginInput, durationInput].forEach(input => {
+        input.addEventListener('input', () => { 
+          const isValid = isValidTimestamp(input.value);
+          showTimestampError(input, !isValid);
+          if (isValid) {
+            updatePreview(); 
+            autoSave(); 
+          }
+        });
+      });
 
       const textInput = document.createElement('input');
       textInput.type = 'text';
@@ -324,7 +442,7 @@ function populateEditor(data) {
         autoSave();
       });
 
-      subDiv.append(beginInput, endInput, textInput, delButton);
+      subDiv.append(beginInput, durationInput, textInput, delButton);
       subGroup.appendChild(arrowLabelDiv);
       subGroup.appendChild(subDiv);
 
@@ -676,11 +794,20 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
       beginInput.type = 'text';
       beginInput.value = wordBegin;
       beginInput.placeholder = 'M:SS';
-      beginInput.readOnly = true;
       beginInput.className = 'syllable-begin';
-      beginInput.style.background = '#222';
-      beginInput.style.color = '#aaa';
-      beginInput.style.cursor = 'not-allowed';
+
+      if (i === 0) {
+        beginInput.readOnly = true;
+        beginInput.style.background = '#222';
+        beginInput.style.color = '#aaa';
+        beginInput.style.cursor = 'not-allowed';
+      } else {
+
+        beginInput.readOnly = false;
+        beginInput.style.background = '';
+        beginInput.style.color = '';
+        beginInput.style.cursor = '';
+      }
 
       let endInput = document.createElement('input');
       endInput.type = 'text';
@@ -691,7 +818,7 @@ function openSyllableEditor(lineDiv, text, existingSyllables = []) {
       endInput.addEventListener('input', () => {
         if (wordDivs[i + 1]) {
           const nextBeginInput = wordDivs[i + 1].querySelector('input.syllable-begin');
-          if (nextBeginInput) {
+          if (nextBeginInput && !nextBeginInput.readOnly) {
             nextBeginInput.value = endInput.value;
           }
         }
@@ -989,6 +1116,50 @@ function parseTimestampFlexible(ts) {
     return parts[0] * 60 + parts[1] + (parts[2] / 1000);
   }
   return 0;
+}
+
+function isValidTimestamp(timestamp) {
+  if (!timestamp || timestamp.trim() === '') return true; 
+
+  const mmssPattern = /^\d{1,2}:\d{2}$/;
+  if (mmssPattern.test(timestamp)) {
+    const [minutes, seconds] = timestamp.split(':').map(Number);
+    return seconds < 60;
+  }
+
+  const mmssmscPattern = /^\d{1,2}:\d{2}:\d{3}$/;
+  if (mmssmscPattern.test(timestamp)) {
+    const [minutes, seconds, milliseconds] = timestamp.split(':').map(Number);
+    return seconds < 60 && milliseconds < 1000;
+  }
+
+  return false;
+}
+
+function showTimestampError(input, show = true) {
+
+  const existingError = input.parentNode.querySelector('.timestamp-error');
+  if (existingError) {
+    existingError.remove();
+  }
+
+  input.classList.toggle('timestamp-invalid', show);
+
+  if (show) {
+    const errorSpan = document.createElement('span');
+    errorSpan.className = 'timestamp-error';
+    errorSpan.textContent = 'Invalid format. Use MM:SS or MM:SS:MSC';
+    errorSpan.style.color = '#f55';
+    errorSpan.style.fontSize = '12px';
+    errorSpan.style.position = 'absolute';
+    errorSpan.style.top = '100%';
+    errorSpan.style.left = '0';
+    errorSpan.style.whiteSpace = 'nowrap';
+    errorSpan.style.zIndex = '1000';
+
+    input.parentNode.style.position = 'relative';
+    input.parentNode.appendChild(errorSpan);
+  }
 }
 
 function updatePreview() {

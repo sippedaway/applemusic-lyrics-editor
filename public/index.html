@@ -6,6 +6,8 @@
     <title>Apple Music Lyrics Editor</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
 </head>
 
 <body>
@@ -19,6 +21,9 @@
                     <button id="resetButton"><i class="fas fa-trash"></i>Reset</button>
                     <input type="file" id="fileInput" style="display:none;" accept="application/json">
                 </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropdown-btn button" onclick="openExamplesPopup()">Examples</button>
             </div>
             <div class="dropdown dropdown-help">
                 <button class="dropdown-btn button">Help</button>
@@ -146,12 +151,16 @@
                     </button>
                     <div class="tutorial-content">
                         <p>Use <strong>Shortcuts</strong> for more effective work.</p>
-                        <p>Load in an <strong>example</strong> from the project's <a href="https://github.com/sippedaway/applemusic-lyrics-generator/">GitHub</a> (there are plenty to choose!)</p>
+                        <p>Load in an <strong>example</strong> by going to <strong>Examples → selecting an example project!</strong></p>
                         <p>The tool is better used <strong>with a PC</strong>.</p>
 
                         <strong>Version</strong>
-                        <p>There are frequent updates, the current one being <strong>v1.6:</strong></p>
-                        <p>- Censoring words<br>- Extended guide<br>- Updates to previous example projects</p>
+                        <p>There are frequent updates, the current one being <strong>v1.7:</strong></p>
+                            <p>- Customization and themes (<strong>psst!</strong> Over 8 settings, 3 themes, full customization, and new things soon!)
+                            <br>- Loading examples from within the editor
+                            <br>- New and improved syllables/word-timings editor
+                            <br>- And more... Full list on GitHub!
+                            </p>
                     </div>
                 </div>
 
@@ -170,14 +179,20 @@
                 <button id="toggleCensor" class="sync-button" style="margin-left:10px;">
                     <i class="fas fa-eye-slash"></i> Censor words
                 </button>
+                <button id="customizeBtn" class="sync-button" style="margin-left:10px;" onclick="openThemeEditor()">
+                    <i class="fas fa-paint-brush" style="transform:rotate(0deg);"></i> Customize
+                </button>
             </div>
             <div id="previewContainer"></div>
 
             <audio id="audioPlayer" style="display:none;"></audio>
         </div>
     </div>
+    <script src="syllables-editor.js"></script>
     <script src="project.js" defer></script>
     <script src="playback.js" defer></script>
+    <script src="themes.js" defer></script>
+    <script src="examples.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var resetBtn = document.getElementById('resetButton');
