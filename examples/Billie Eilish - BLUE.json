@@ -19,54 +19,55 @@
       {
         "text": "to",
         "begin": "0:14",
-        "end": "0:14:200"
+        "end": "0:14:199"
       },
       {
         "text": "live",
-        "begin": "0:14:200",
-        "end": "0:14:400"
+        "begin": "0:14:199",
+        "end": "0:14:286"
       },
       {
         "text": "in",
-        "begin": "0:14:400",
-        "end": "0:14:500"
+        "begin": "0:14:288",
+        "end": "0:14:375"
       },
       {
         "text": "black",
-        "begin": "0:14:500",
-        "end": "0:15"
+        "begin": "0:14:375",
+        "end": "0:14:525"
       },
       {
         "text": "and",
-        "begin": "0:15",
-        "end": "0:15:150"
+        "begin": "0:14:525",
+        "end": "0:14:613"
       },
       {
         "text": "white,",
-        "begin": "0:15:150",
-        "end": "0:15:500"
+        "begin": "0:14:614",
+        "end": "0:14:734"
       },
       {
         "text": "but",
-        "begin": "0:15:500",
-        "end": "0:16"
+        "begin": "0:14:734",
+        "end": "0:14:821"
       },
       {
         "text": "I'm",
-        "begin": "0:16:250",
-        "end": "0:16:450"
+        "begin": "0:14:823",
+        "end": "0:14:910"
       },
       {
         "text": "so",
-        "begin": "0:16:450",
-        "end": "0:16:600"
+        "begin": "0:14:910",
+        "end": "0:14:998"
       },
       {
         "text": "blue",
-        "begin": "0:16:600",
-        "end": "0:18"
+        "begin": "0:14:999",
+        "end": "0:17:999"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "0:18:500",
@@ -130,7 +131,8 @@
         "begin": "0:25",
         "end": "0:26"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "0:27",
@@ -138,12 +140,13 @@
     "text": "But that's still not true",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "0:28",
     "end": "0:35",
-    "text": "(Ooh-ooh-ooh-ooh-ooh, ooh-ooh-ooh-ooh-ooh)",
+    "text": "Ooh-ooh-ooh-ooh-ooh, ooh-ooh-ooh-ooh-ooh",
     "position": "left",
     "sublyrics": [],
     "syllables": [
@@ -157,7 +160,8 @@
         "begin": "0:32",
         "end": "0:35"
       }
-    ]
+    ],
+    "isBackground": true
   },
   {
     "begin": "0:30",
@@ -165,8 +169,8 @@
     "text": "Oh",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "0:31",
@@ -174,15 +178,17 @@
     "text": "And I'm still so blue",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "0:34",
     "end": "0:34:500",
-    "text": "(Oh)",
+    "text": "Oh",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "0:37",
@@ -226,7 +232,8 @@
         "begin": "0:38:900",
         "end": "0:39"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "0:39",
@@ -234,52 +241,53 @@
     "text": "Thought we were the same",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
-    "begin": "0:41",
-    "end": "0:44",
+    "begin": "0:40",
+    "end": "0:43",
     "text": "Birds of a feather, now I'm ashamed",
     "position": "left",
     "sublyrics": [],
     "syllables": [
       {
         "text": "Birds",
-        "begin": "0:41",
-        "end": "0:41:250"
+        "begin": "0:40",
+        "end": "0:40:427"
       },
       {
         "text": "of",
-        "begin": "0:41:250",
-        "end": "0:41:400"
+        "begin": "0:40:428",
+        "end": "0:40:855"
       },
       {
         "text": "a",
-        "begin": "0:41:400",
-        "end": "0:41:500"
+        "begin": "0:40:857",
+        "end": "0:41:284"
       },
       {
         "text": "feather,",
-        "begin": "0:41:750",
-        "end": "0:42"
+        "begin": "0:41:285",
+        "end": "0:41:712"
       },
       {
         "text": "now",
-        "begin": "0:42",
-        "end": "0:42:500"
+        "begin": "0:41:714",
+        "end": "0:42:141"
       },
       {
         "text": "I'm",
-        "begin": "0:42:500",
-        "end": "0:43"
+        "begin": "0:42:142",
+        "end": "0:42:570"
       },
       {
         "text": "ashamed",
-        "begin": "0:43",
-        "end": "0:44"
+        "begin": "0:42:571",
+        "end": "0:42:998"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "0:41:500",
@@ -287,8 +295,8 @@
     "text": "Birds of a feather",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "0:44",
@@ -337,7 +345,8 @@
         "begin": "0:48:375",
         "end": "0:49"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "0:49",
@@ -391,7 +400,8 @@
         "begin": "0:52:889",
         "end": "0:53:334"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "0:51",
@@ -399,8 +409,8 @@
     "text": "Trying my best",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "0:53",
@@ -408,15 +418,17 @@
     "text": "Open up the door",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "0:55",
     "end": "1:02",
-    "text": "(Ooh-ooh-ooh-ooh-ooh, ooh-ooh-ooh-ooh-ooh)",
+    "text": "Ooh-ooh-ooh-ooh-ooh, ooh-ooh-ooh-ooh-ooh",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "0:55:500",
@@ -470,7 +482,8 @@
         "begin": "0:59:500",
         "end": "1:00"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:00",
@@ -478,7 +491,8 @@
     "text": "A bird in a cage, thought you were made for me",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "1:04",
@@ -547,7 +561,8 @@
         "begin": "1:11:600",
         "end": "1:12"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:12",
@@ -555,7 +570,8 @@
     "text": "But I'm not what you need",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "1:13",
@@ -619,7 +635,8 @@
         "begin": "1:20:400",
         "end": "1:21"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:16",
@@ -627,8 +644,8 @@
     "text": "Not what you need",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "1:22",
@@ -667,7 +684,8 @@
         "begin": "1:23:500",
         "end": "1:25"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:26:500",
@@ -701,7 +719,8 @@
         "begin": "1:27",
         "end": "1:27:500"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:28",
@@ -709,8 +728,8 @@
     "text": "And it's not true",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "1:31",
@@ -749,7 +768,8 @@
         "begin": "1:33:500",
         "end": "1:34"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:35",
@@ -773,7 +793,8 @@
         "begin": "1:37",
         "end": "1:40"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:40",
@@ -797,7 +818,8 @@
         "begin": "1:47:333",
         "end": "1:50"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "1:41",
@@ -805,8 +827,8 @@
     "text": "Ooh, ooh, ooh",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "1:51",
@@ -830,7 +852,8 @@
         "begin": "2:02",
         "end": "2:06"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "2:06",
@@ -838,7 +861,8 @@
     "text": "You were born bluer than a butterfly",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "2:10",
@@ -877,7 +901,8 @@
         "begin": "2:14",
         "end": "2:17"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "2:21",
@@ -885,7 +910,8 @@
     "text": "Colder than your father's eyes",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "2:24",
@@ -893,7 +919,8 @@
     "text": "He never learned to sympathize with anyone",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "2:33",
@@ -901,7 +928,8 @@
     "text": "I don't blame you",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "2:39:500",
@@ -909,7 +937,8 @@
     "text": "But I can't change you",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "2:47:500",
@@ -933,7 +962,8 @@
         "begin": "2:50",
         "end": "2:51"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "2:50:500",
@@ -941,8 +971,8 @@
     "text": "Don't hate you",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "2:53",
@@ -976,7 +1006,8 @@
         "begin": "2:58:599",
         "end": "3:00"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "2:58",
@@ -984,8 +1015,8 @@
     "text": "Can't save you",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "3:00",
@@ -993,7 +1024,8 @@
     "text": "You were born reaching for your mother's hands",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:05",
@@ -1001,7 +1033,8 @@
     "text": "Victim of your father's plans to rule the world",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:15",
@@ -1009,7 +1042,8 @@
     "text": "Too afraid to step outside",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:17:500",
@@ -1017,7 +1051,8 @@
     "text": "Paranoid and petrified of what you've heard",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:27",
@@ -1025,7 +1060,8 @@
     "text": "But they could say the same 'bout me",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:29",
@@ -1033,7 +1069,8 @@
     "text": "I sleep 'bout three hours each night",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:32:500",
@@ -1041,7 +1078,8 @@
     "text": "Means only twenty-one a week now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:37",
@@ -1049,7 +1087,8 @@
     "text": "Now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:41",
@@ -1057,7 +1096,8 @@
     "text": "And I could say the same 'bout you",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:43",
@@ -1065,7 +1105,8 @@
     "text": "Born blameless, grew up famous too",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:46",
@@ -1073,7 +1114,8 @@
     "text": "Just a baby born blue now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:51",
@@ -1081,7 +1123,8 @@
     "text": "Now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "3:54",
@@ -1110,7 +1153,8 @@
         "begin": "3:58",
         "end": "3:59"
       }
-    ]
+    ],
+    "isBackground": false
   },
   {
     "begin": "3:58",
@@ -1118,8 +1162,8 @@
     "text": "Don't blame you",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "4:00",
@@ -1127,7 +1171,8 @@
     "text": "But I can't change you",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "4:08",
@@ -1135,7 +1180,8 @@
     "text": "Don't hate you",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "4:11",
@@ -1143,8 +1189,8 @@
     "text": "Don't hate you",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "4:13:500",
@@ -1152,7 +1198,8 @@
     "text": "But we can't save you",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
   },
   {
     "begin": "4:18",
@@ -1160,32 +1207,35 @@
     "text": "Can't save you",
     "position": "left",
     "sublyrics": [],
-    "isBackground": true,
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "4:55",
     "end": "5:00",
-    "text": "(It's over now)",
+    "text": "It's over now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "5:02",
     "end": "5:06",
-    "text": "(It's over now)",
+    "text": "It's over now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "5:09",
     "end": "5:13",
-    "text": "(It's over now)",
+    "text": "It's over now",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": true
   },
   {
     "begin": "5:41:500",
@@ -1193,6 +1243,21 @@
     "text": "But when can I hear the next one?",
     "position": "left",
     "sublyrics": [],
-    "syllables": []
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "type": "theme",
+    "settings": {
+      "backgroundColor": "#000000",
+      "font": "Dela Gothic One",
+      "blurAmount": 1.5,
+      "activeTextColor": "#007397",
+      "inactiveTextColor": "#4d4470",
+      "activeBlurAmount": 0,
+      "glowAmount": 0.2,
+      "boundToProject": true,
+      "name": "BLUE"
+    }
   }
 ]
