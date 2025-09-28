@@ -1,4 +1,4 @@
-[![Preview header](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/github/prev.png)](#)
+[![Preview header](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/github/preview.png)](#)
 
 [![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)](#)
 [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff)](#)
@@ -73,6 +73,18 @@ Hovered lyric line:
 </details>
 
 ## Version
+#### 1.7
+- **Release date**: 2025-09-28
+- **Major update**
+- **Added:**
+- Customization + themes! **Including:** plenty of settings to customize, quick themes, and more to come!
+- An easier and better duration input for lyrics
+- Updated syllables editor (+ "Auto fix" feature)
+- Themes tied to project
+- Lyric words customizable light-up glow and color changing
+- Background lyrics toggle (Easier and better sublyrics!)
+- Accessible and updated example projects with updated background lyric support
+- and more lol i forgor
 #### 1.6
 - **Release date**: 2025-07-19
 - **QOL update and fixes.**
