@@ -38,12 +38,12 @@ const examples = [
         ]
     },
     {
-        title: "Crown",
-        artist: "Kendrick Lamar",
-        url: "placeholder_url",
-        cover: "https://i.scdn.co/image/ab67616d0000b2732e02117d76426a08ac7c174f",
+        title: "The Fate of Ophelia",
+        artist: "Taylor Swift",
+        url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/The%20Fate%20of%20Ophelia.json",
+        cover: "https://i.scdn.co/image/ab67616d0000b2733d29cbdaf500d735492c693b",
         tags: [
-            { text: "New background lyrics", color: "#007AFF" }
+            { text: "Custom theme", color: "#ff7b00ff" }
         ]
     }
 ];
