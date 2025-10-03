@@ -1,0 +1,1166 @@
+[
+  {
+    "begin": "0:11",
+    "end": "0:11",
+    "text": "(VERSE 1)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:11",
+    "end": "0:14:698",
+    "text": "I HEARD YOU CALLING ON THE MEGAPHONE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:15:200",
+    "end": "0:19:198",
+    "text": "YOU WANNA SEE ME ALL ALONE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "You",
+        "begin": "0:15:200",
+        "end": "0:15:500"
+      },
+      {
+        "text": "wanna",
+        "begin": "0:15:500",
+        "end": "0:15:800"
+      },
+      {
+        "text": "see",
+        "begin": "0:15:800",
+        "end": "0:16:199"
+      },
+      {
+        "text": "me",
+        "begin": "0:16:199",
+        "end": "0:16:699"
+      },
+      {
+        "text": "all",
+        "begin": "0:16:699",
+        "end": "0:17:199"
+      },
+      {
+        "text": "alone",
+        "begin": "0:17:199",
+        "end": "0:19:199"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "0:21",
+    "end": "0:24",
+    "text": "AS LEGEND HAS IT, YOU ARE QUITE THE PYRO",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:24:500",
+    "end": "0:27:800",
+    "text": "YOU LIGHT THE MATCH TO WATCH IT BLOW",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:28:500",
+    "end": "0:28:500",
+    "text": "(PRE-CHORUS)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:28:500",
+    "end": "0:31:500",
+    "text": "AND IF YOU'D NEVER COME FOR ME",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:32:400",
+    "end": "0:35:798",
+    "text": "I MIGHT'VE DROWNED IN THE MELANCHOLY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:36",
+    "end": "0:40",
+    "text": "I SWORE MY LOYALTY TO ME, MYSELF, AND I",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:38:600",
+    "end": "0:40:600",
+    "text": "ME, MYSELF, I",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "0:41",
+    "end": "0:46",
+    "text": "RIGHT BEFORE YOU LIT MY SKY UP",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "Right",
+        "begin": "0:41",
+        "end": "0:41:299"
+      },
+      {
+        "text": "before",
+        "begin": "0:41:299",
+        "end": "0:41:499"
+      },
+      {
+        "text": "you",
+        "begin": "0:41:500",
+        "end": "0:41:799"
+      },
+      {
+        "text": "lit",
+        "begin": "0:41:799",
+        "end": "0:42:098"
+      },
+      {
+        "text": "my",
+        "begin": "0:42:098",
+        "end": "0:43:398"
+      },
+      {
+        "text": "sky",
+        "begin": "0:43:399",
+        "end": "0:44:698"
+      },
+      {
+        "text": "up",
+        "begin": "0:44:698",
+        "end": "0:45:998"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "0:46:800",
+    "end": "0:46:799",
+    "text": "(CHORUS)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:46:800",
+    "end": "0:49:789",
+    "text": "ALL THAT TIME, I SAT ALONE IN MY TOWER",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:50",
+    "end": "0:51:798",
+    "text": "YOU WERE JUST HONING YOUR POWERS",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:52",
+    "end": "0:55",
+    "text": "NOW I CAN SEE IT ALL",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "Now",
+        "begin": "0:52",
+        "end": "0:52:299"
+      },
+      {
+        "text": "I",
+        "begin": "0:52:299",
+        "end": "0:52:598"
+      },
+      {
+        "text": "can",
+        "begin": "0:52:598",
+        "end": "0:52:998"
+      },
+      {
+        "text": "see",
+        "begin": "0:52:999",
+        "end": "0:53:399"
+      },
+      {
+        "text": "it",
+        "begin": "0:53:399",
+        "end": "0:53:899"
+      },
+      {
+        "text": "all",
+        "begin": "0:53:899",
+        "end": "0:54:999"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "0:54:500",
+    "end": "0:55:500",
+    "text": "SEE IT ALL",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "0:56:500",
+    "end": "0:59:500",
+    "text": "LATE ONE NIGHT, YOU DUG ME OUT OF MY GRAVE AND ",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "0:59:800",
+    "end": "1:02:789",
+    "text": "SAVED MY HEART FROM THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "Saved",
+        "begin": "0:59:800",
+        "end": "1:00"
+      },
+      {
+        "text": "my",
+        "begin": "1:00",
+        "end": "1:00:200"
+      },
+      {
+        "text": "heart",
+        "begin": "1:00:200",
+        "end": "1:00:500"
+      },
+      {
+        "text": "from",
+        "begin": "1:00:500",
+        "end": "1:00:700"
+      },
+      {
+        "text": "the",
+        "begin": "1:00:700",
+        "end": "1:01"
+      },
+      {
+        "text": "fate",
+        "begin": "1:01",
+        "end": "1:01:399"
+      },
+      {
+        "text": "of",
+        "begin": "1:01:399",
+        "end": "1:01:698"
+      },
+      {
+        "text": "Ophelia",
+        "begin": "1:01:698",
+        "end": "1:02:798"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "1:04",
+    "end": "1:05",
+    "text": "OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "1:05",
+    "end": "1:09",
+    "text": "KEEP IT ONE HUNDRED ON THE LAND, THE SEA, THE SKY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:07",
+    "end": "1:09",
+    "text": "LAND, SEA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "1:09:700",
+    "end": "1:12:700",
+    "text": "PLEDGE ALLEGIANCE TO YOUR HANDS, YOUR TEAM, YOUR VIBES",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:13:300",
+    "end": "1:17:298",
+    "text": "DON'T CARE WHERE THE HELL YOU BEEN, 'CAUSE NOW YOU'RE MINE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:15",
+    "end": "1:16:799",
+    "text": "BEEN, NOW",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "1:16:800",
+    "end": "1:21:798",
+    "text": "IT'S 'BOUT TO BE THE SLEEPLESS NIGHT YOU'VE BEEN DREAMING OF",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "It's",
+        "begin": "1:16:800",
+        "end": "1:17:099"
+      },
+      {
+        "text": "'bout",
+        "begin": "1:17:099",
+        "end": "1:17:399"
+      },
+      {
+        "text": "to",
+        "begin": "1:17:399",
+        "end": "1:17:599"
+      },
+      {
+        "text": "be",
+        "begin": "1:17:599",
+        "end": "1:17:899"
+      },
+      {
+        "text": "the",
+        "begin": "1:17:899",
+        "end": "1:18:198"
+      },
+      {
+        "text": "sleepless",
+        "begin": "1:18:198",
+        "end": "1:18:698"
+      },
+      {
+        "text": "night",
+        "begin": "1:18:698",
+        "end": "1:18:998"
+      },
+      {
+        "text": "you've",
+        "begin": "1:18:998",
+        "end": "1:19:298"
+      },
+      {
+        "text": "been",
+        "begin": "1:19:299",
+        "end": "1:19:699"
+      },
+      {
+        "text": "dreaming",
+        "begin": "1:19:699",
+        "end": "1:20:748"
+      },
+      {
+        "text": "of",
+        "begin": "1:20:748",
+        "end": "1:21:798"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "1:22",
+    "end": "1:24",
+    "text": "THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:26:900",
+    "end": "1:26:900",
+    "text": "(VERSE 2)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:26:900",
+    "end": "1:30",
+    "text": "THE ELDEST DAUGHTER OF A NOBLEMAN",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:30:500",
+    "end": "1:34:500",
+    "text": "OPHELIA LIVED IN FANTASY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "OPHELIA",
+        "begin": "1:30:500",
+        "end": "1:30:900"
+      },
+      {
+        "text": "LIVED",
+        "begin": "1:30:900",
+        "end": "1:31:400"
+      },
+      {
+        "text": "IN",
+        "begin": "1:31:400",
+        "end": "1:31:700"
+      },
+      {
+        "text": "FANTASY",
+        "begin": "1:31:700",
+        "end": "1:34:499"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "1:35:500",
+    "end": "1:39:700",
+    "text": "BUT LOVE WAS A COLD BED FULL OF SCORPIONS",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:39:800",
+    "end": "1:42:799",
+    "text": "THE VENOM STOLE HER SANITY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:42",
+    "end": "1:44",
+    "text": "SANITY-Y",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "1:43:900",
+    "end": "1:43:900",
+    "text": "(PRE-CHORUS)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:43:900",
+    "end": "1:46:900",
+    "text": "AND IF YOU'D NEVER COME FOR ME",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:45:700",
+    "end": "1:48:200",
+    "text": "COME FOR ME",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "1:48",
+    "end": "1:51",
+    "text": "I MIGHT'VE LINGERED IN PURGATORY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:51:500",
+    "end": "1:54:799",
+    "text": "YOU WRAP AROUND ME LIKE A CHAIN, A CROWN, A VINE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "1:53:500",
+    "end": "1:56:500",
+    "text": "CHAIN, CROWN, VINE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "1:56:500",
+    "end": "2:00:500",
+    "text": "PULLING ME INTO THE FIRE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "PULLING",
+        "begin": "1:56:500",
+        "end": "1:56:900"
+      },
+      {
+        "text": "ME",
+        "begin": "1:56:900",
+        "end": "1:57:200"
+      },
+      {
+        "text": "INTO",
+        "begin": "1:57:200",
+        "end": "1:57:600"
+      },
+      {
+        "text": "THE",
+        "begin": "1:57:600",
+        "end": "1:57:799"
+      },
+      {
+        "text": "FIRE",
+        "begin": "1:57:799",
+        "end": "2:00:498"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "2:02",
+    "end": "2:02",
+    "text": "(CHORUS)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:02",
+    "end": "2:05:200",
+    "text": "ALL THAT TIME I SAT ALONE IN MY TOWER",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:05:200",
+    "end": "2:07:500",
+    "text": "YOU WERE JUST HONING YOUR POWERS",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:07:500",
+    "end": "2:09:500",
+    "text": "NOW I CAN SEE IT ALL",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:09:500",
+    "end": "2:11:500",
+    "text": "SEE IT ALL",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "2:12",
+    "end": "2:15:199",
+    "text": "LATE ONE NIGHT, YOU DUG ME OUT OF MY GRAVE AND",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:15:199",
+    "end": "2:19:699",
+    "text": "SAVED MY HEART FROM THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "SAVED",
+        "begin": "2:15:199",
+        "end": "2:15:599"
+      },
+      {
+        "text": "MY",
+        "begin": "2:15:599",
+        "end": "2:15:798"
+      },
+      {
+        "text": "HEART",
+        "begin": "2:15:799",
+        "end": "2:16:099"
+      },
+      {
+        "text": "FROM",
+        "begin": "2:16:099",
+        "end": "2:16:399"
+      },
+      {
+        "text": "THE",
+        "begin": "2:16:399",
+        "end": "2:16:598"
+      },
+      {
+        "text": "FATE",
+        "begin": "2:16:598",
+        "end": "2:16:899"
+      },
+      {
+        "text": "OF",
+        "begin": "2:16:899",
+        "end": "2:17:098"
+      },
+      {
+        "text": "OPHELIA",
+        "begin": "2:17:098",
+        "end": "2:19:697"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "2:19",
+    "end": "2:21",
+    "text": "OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "2:21",
+    "end": "2:24:699",
+    "text": "KEEP IT ONE HUNDRED ON THE LAND, THE SEA, THE SKY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:22:699",
+    "end": "2:24:499",
+    "text": "LAND, SEA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "2:24:600",
+    "end": "2:28:599",
+    "text": "PLEDGE ALLEGIANCE TO YOUR HANDS, YOUR TEAM, YOUR VIBES",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:28:599",
+    "end": "2:32:598",
+    "text": "DON'T CARE WHERE THE HELL YOU BEEN, 'CAUSE NOW YOU'RE MINE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:32:598",
+    "end": "2:36:598",
+    "text": "IT'S 'BOUT TO BE THE SLEEPLESS NIGHT YOU'VE BEEN DREAMING OF",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "IT'S",
+        "begin": "2:32:598",
+        "end": "2:33:198"
+      },
+      {
+        "text": "'BOUT",
+        "begin": "2:33:198",
+        "end": "2:33:397"
+      },
+      {
+        "text": "TO",
+        "begin": "2:33:397",
+        "end": "2:33:596"
+      },
+      {
+        "text": "BE",
+        "begin": "2:33:597",
+        "end": "2:33:796"
+      },
+      {
+        "text": "THE",
+        "begin": "2:33:796",
+        "end": "2:34:097"
+      },
+      {
+        "text": "SLEEPLESS",
+        "begin": "2:34:097",
+        "end": "2:34:697"
+      },
+      {
+        "text": "NIGHT",
+        "begin": "2:34:697",
+        "end": "2:34:997"
+      },
+      {
+        "text": "YOU'VE",
+        "begin": "2:34:997",
+        "end": "2:35:197"
+      },
+      {
+        "text": "BEEN",
+        "begin": "2:35:197",
+        "end": "2:35:396"
+      },
+      {
+        "text": "DREAMING",
+        "begin": "2:35:396",
+        "end": "2:35:996"
+      },
+      {
+        "text": "OF",
+        "begin": "2:35:997",
+        "end": "2:36:597"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "2:37:598",
+    "end": "2:39:598",
+    "text": "THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:39:598",
+    "end": "2:39:598",
+    "text": "(BRIDGE)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:39:598",
+    "end": "2:41:598",
+    "text": "'TIS LOCKED INSIDE MY MEMORY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:41:598",
+    "end": "2:43:598",
+    "text": "AND ONLY YOU POSSESS THE KEY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:43:598",
+    "end": "2:45:598",
+    "text": "NO LONGER DROWNING AND DECEIVED",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:45:598",
+    "end": "2:47:598",
+    "text": "ALL BECAUSE YOU CAME FOR ME",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:47:598",
+    "end": "2:49:398",
+    "text": "LOCKED INSIDE MY MEMORY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:49:398",
+    "end": "2:51:298",
+    "text": "AND ONLY YOU POSSESS THE KEY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:51:298",
+    "end": "2:53:298",
+    "text": "NO LONGER DROWNING AND DECEIVED",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:53:298",
+    "end": "2:58:298",
+    "text": "ALL BECAUSE YOU CAME FOR ME",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "ALL",
+        "begin": "2:53:298",
+        "end": "2:53:497"
+      },
+      {
+        "text": "BECAUSE",
+        "begin": "2:53:497",
+        "end": "2:53:697"
+      },
+      {
+        "text": "YOU",
+        "begin": "2:53:697",
+        "end": "2:53:896"
+      },
+      {
+        "text": "CAME",
+        "begin": "2:53:896",
+        "end": "2:54:096"
+      },
+      {
+        "text": "FOR",
+        "begin": "2:54:097",
+        "end": "2:54:930"
+      },
+      {
+        "text": "ME",
+        "begin": "2:54:930",
+        "end": "2:58:296"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "2:58:298",
+    "end": "2:58:298",
+    "text": "(CHORUS)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "2:58:298",
+    "end": "3:01:497",
+    "text": "ALL THAT TIME I SAT ALONE IN MY TOWER",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:01:497",
+    "end": "3:03:497",
+    "text": "YOU WERE JUST HONING YOUR POWERS",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:03:497",
+    "end": "3:05:497",
+    "text": "NOW I CAN SEE IT ALL",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:05:200",
+    "end": "3:07:199",
+    "text": "I CAN SEE IT ALL",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "3:07:800",
+    "end": "3:11",
+    "text": "LATE ONE NIGHT, YOU DUG ME OUT OF MY GRAVE AND",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:11",
+    "end": "3:15:500",
+    "text": "SAVED MY HEART FROM THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "SAVED",
+        "begin": "3:11",
+        "end": "3:11:300"
+      },
+      {
+        "text": "MY",
+        "begin": "3:11:300",
+        "end": "3:11:500"
+      },
+      {
+        "text": "HEART",
+        "begin": "3:11:500",
+        "end": "3:11:800"
+      },
+      {
+        "text": "FROM",
+        "begin": "3:11:800",
+        "end": "3:12"
+      },
+      {
+        "text": "THE",
+        "begin": "3:12",
+        "end": "3:12:250"
+      },
+      {
+        "text": "FATE",
+        "begin": "3:12:250",
+        "end": "3:12:449"
+      },
+      {
+        "text": "OF",
+        "begin": "3:12:449",
+        "end": "3:13:973"
+      },
+      {
+        "text": "OPHELIA",
+        "begin": "3:13:973",
+        "end": "3:15:497"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "begin": "3:16:800",
+    "end": "3:20:500",
+    "text": "KEEP IT ONE HUNDRED ON THE LAND, THE SEA, THE SKY",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:18:500",
+    "end": "3:20:500",
+    "text": "LAND, THE SEA (THE SEA)",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "3:20:600",
+    "end": "3:24:599",
+    "text": "PLEDGE ALLEGIANCE TO YOUR HANDS, YOUR TEAM, YOUR VIBES",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:24:599",
+    "end": "3:28:598",
+    "text": "DON'T CARE WHERE THE HELL YOU BEEN, 'CAUSE NOW YOU'RE MINE",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:26:598",
+    "end": "3:28:298",
+    "text": "BEEN, NOW",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": true
+  },
+  {
+    "begin": "3:28:298",
+    "end": "3:32:298",
+    "text": "IT'S 'BOUT TO BE THE SLEEPLESS NIGHT YOU'VE BEEN DREAMING OF",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:33:600",
+    "end": "3:35:599",
+    "text": "THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [],
+    "isBackground": false
+  },
+  {
+    "begin": "3:36:800",
+    "end": "3:42:800",
+    "text": "YOU SAVED MY HEART FROM THE FATE OF OPHELIA",
+    "position": "left",
+    "sublyrics": [],
+    "syllables": [
+      {
+        "text": "YOU",
+        "begin": "3:36:800",
+        "end": "3:37:100"
+      },
+      {
+        "text": "SAVED",
+        "begin": "3:37:100",
+        "end": "3:37:400"
+      },
+      {
+        "text": "MY",
+        "begin": "3:37:400",
+        "end": "3:37:599"
+      },
+      {
+        "text": "HEART",
+        "begin": "3:37:599",
+        "end": "3:38"
+      },
+      {
+        "text": "FROM",
+        "begin": "3:38",
+        "end": "3:38:300"
+      },
+      {
+        "text": "THE",
+        "begin": "3:38:300",
+        "end": "3:38:450"
+      },
+      {
+        "text": "FATE",
+        "begin": "3:38:450",
+        "end": "3:38:699"
+      },
+      {
+        "text": "OF",
+        "begin": "3:38:699",
+        "end": "3:39"
+      },
+      {
+        "text": "OPHELIA",
+        "begin": "3:39",
+        "end": "3:42:799"
+      }
+    ],
+    "isBackground": false
+  },
+  {
+    "type": "theme",
+    "settings": {
+      "backgroundColor": "url('/themes/showgirl/background.jpg')",
+      "font": "Steelfish",
+      "blurAmount": 0.6,
+      "activeTextColor": "#ffffff",
+      "inactiveTextColor": "#cb5f40",
+      "activeBlurAmount": 0,
+      "glowAmount": 0.2,
+      "name": "SHOWGIRL",
+      "boundToProject": true
+    }
+  }
+]
