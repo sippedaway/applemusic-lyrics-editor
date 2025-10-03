@@ -48,6 +48,16 @@ const themePresets = {
         inactiveTextColor: '#4d4470',
         activeBlurAmount: 0,
         glowAmount: 0.2
+    },
+    showgirl: {
+        name: 'SHOWGIRL',
+        backgroundColor: "url('/themes/showgirl/background.jpg')",
+        font: 'Steelfish',
+        blurAmount: 0.6,
+        activeTextColor: '#ffffff',
+        inactiveTextColor: '#cb5f40',
+        activeBlurAmount: 0,
+        glowAmount: 0.2
     }
 };
 
@@ -167,9 +177,19 @@ function openThemeEditor() {
     blueThemeBtn.style.fontWeight = 'bold';
     blueThemeBtn.onclick = () => applyThemePreset('blue');
 
+    const showgirlBtn = document.createElement('button');
+    showgirlBtn.textContent = 'SHOWGIRL';
+    showgirlBtn.className = 'add-sub-button';
+    showgirlBtn.style.background = 'url("https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da844cfd89ef33f21c9986c7461b")';
+    showgirlBtn.style.color = '#007397';
+    showgirlBtn.style.fontFamily = 'Dela Gothic One, Helvetica, Arial';
+    showgirlBtn.style.fontWeight = 'bold';
+    showgirlBtn.onclick = () => applyThemePreset('showgirl');
+
     themeBtnsContainer.appendChild(defaultThemeBtn);
     themeBtnsContainer.appendChild(bratThemeBtn);
     themeBtnsContainer.appendChild(blueThemeBtn);
+    themeBtnsContainer.appendChild(showgirlBtn);
 
     const title = document.createElement('h2');
     title.textContent = 'Customize Preview';
@@ -212,19 +232,54 @@ function openThemeEditor() {
     const bgColorGroup = document.createElement('div');
     bgColorGroup.className = 'setting-group';
     const bgColorLabel = document.createElement('label');
-    bgColorLabel.textContent = 'Background Color';
+    bgColorLabel.textContent = 'Background';
+    
+    const bgContainer = document.createElement('div');
+    bgContainer.style.display = 'flex';
+    bgContainer.style.gap = '8px';
+    
     const bgColorInput = document.createElement('input');
     bgColorInput.type = 'text';
     bgColorInput.className = 'coloris';
     bgColorInput.value = themeSettings.backgroundColor;
-
+    bgColorInput.style.flex = '1';
+    
+    const bgImageInput = document.createElement('input');
+    bgImageInput.type = 'file';
+    bgImageInput.accept = 'image/*';
+    bgImageInput.style.display = 'none';
+    
+    const bgImageButton = document.createElement('button');
+    bgImageButton.textContent = 'Browse';
+    bgImageButton.className = 'add-sub-button';
+    bgImageButton.onclick = () => bgImageInput.click();
+    
+    bgImageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                themeSettings.backgroundColor = `url('${e.target.result}')`;
+                applyTheme();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
     bgColorInput.addEventListener('input', () => {
         themeSettings.backgroundColor = bgColorInput.value;
         applyTheme();
     });
 
+    const bgwarning = document.createElement('p');
+    bgwarning.innerHTML = 'Background image is still <strong>experimental.</strong><br>If you want to use a background image, make sure to have the top, left, right, and bottom of the image loopable.';
+    
+    bgContainer.appendChild(bgColorInput);
+    bgContainer.appendChild(bgImageButton);
     bgColorGroup.appendChild(bgColorLabel);
-    bgColorGroup.appendChild(bgColorInput);
+    bgColorGroup.appendChild(bgContainer);
+    bgColorGroup.appendChild(bgImageInput);
+    bgColorGroup.appendChild(bgwarning);
 
     const fontGroup = document.createElement('div');
     fontGroup.className = 'setting-group';
@@ -248,6 +303,7 @@ function openThemeEditor() {
         'Open Sans',
         'Segoe UI',
         'Dela Gothic One',
+        'Steelfish',
         'Times New Roman'
     ];
 
@@ -478,7 +534,16 @@ function applyTheme() {
     const preview = document.getElementById('preview');
     if (!preview) return;
 
-    preview.style.backgroundColor = themeSettings.backgroundColor;
+    // Handle background image or color with blur effect
+    if (themeSettings.backgroundColor.startsWith('url(')) {
+        preview.style.background = themeSettings.backgroundColor;
+        preview.style.backgroundSize = 'cover';
+        preview.style.backgroundPosition = 'center';
+    } else {
+        preview.style.background = themeSettings.backgroundColor;
+        preview.style.backdropFilter = 'none';
+        preview.style.webkitBackdropFilter = 'none';
+    }
 
     preview.style.fontFamily = themeSettings.font;
 

@@ -10,6 +10,7 @@ contextMenu.className = 'context-menu';
 contextMenu.innerHTML = `
   <button class="context-menu-item duplicate">Duplicate Line</button>
   <button class="context-menu-item delete">Delete Line</button>
+  <button class="context-menu-item capitalize">Capitalize All</button>
 `;
 document.body.appendChild(contextMenu);
 
@@ -70,6 +71,13 @@ contextMenu.addEventListener('click', (e) => {
     }
     updatePreview();
     autoSave();
+  } else if (e.target.classList.contains('capitalize')) {
+    const textInput = currentContextLine.querySelector('.lyricText');
+    if (textInput) {
+      textInput.value = textInput.value.toUpperCase();
+      updatePreview();
+      autoSave();
+    }
   }
   hideContextMenu();
 });
@@ -177,6 +185,21 @@ function populateEditor(data) {
   }
 
   function addLine(begin = '', end = '', text = '', position = 'left', sublyrics = [], syllables = [], isBackground = false) {
+    // If no begin time provided, calculate from last line
+    if (!begin) {
+        const lines = document.querySelectorAll('#linesContainer .line');
+        if (lines.length > 0) {
+            const lastLine = lines[lines.length - 1];
+            const lastBegin = lastLine.querySelector('.timestamp.begin').value;
+            const lastDuration = lastLine.querySelector('.timestamp.duration').value;
+            if (lastBegin && lastDuration) {
+                const lastBeginTime = parseTimestampFlexible(lastBegin);
+                const lastDurationTime = parseTimestampFlexible(lastDuration);
+                begin = formatTimestamp(lastBeginTime + lastDurationTime);
+            }
+        }
+    }
+
     const container = document.getElementById('linesContainer');
     const lineDiv = document.createElement('div');
     lineDiv.className = 'line';
