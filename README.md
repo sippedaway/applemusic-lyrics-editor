@@ -63,6 +63,16 @@ Every new update I create lyrics for a new song during the update development!
 
 > [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json) the JSON
 </details>
+<details>
+<summary>Taylor Swift - <b>The Fate of Ophelia</b></summary>
+  
+- Custom theme
+- Background lyrics
+
+> [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
+
+> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/The%20Fate%20of%20Ophelia.json) the JSON
+</details>
 
 ## Key features
 - **Realistic depiction**: looks pretty much identical to the actual Apple Music song lyrics
@@ -89,6 +99,16 @@ Hovered lyric line:
 </details>
 
 ## Version
+#### 1.8
+- **Release date**: 2025-10-03
+- **Special update!**
+- **Added:**
+- New "SHOWGIRL" theme
+- New example project! "The Fate of Ophelia"
+- Customize the preview: add background images
+- Capitalize a lyric from the right click context menu
+- QOL: new lyric's begin input is auto-filled
+- *Happy TLOAS release day!*
 #### 1.7
 - **Release date**: 2025-09-28
 - **Major update**
