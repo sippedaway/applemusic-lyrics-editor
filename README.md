@@ -10,8 +10,9 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K31AMKAQ)
 
-# [Apple Music Lyrics Generator](https://projects.sipped.org/applemusic-lyrics-generator)
-A very close depiction of the Apple Music song lyrics. Create any lyrics, background lyrics, timestamp them, choose alignment and then use it in any project you want! 
+# [Apple Music Lyrics Editor](https://projects.sipped.org/applemusic-lyrics-generator)
+A very close depiction of the Apple Music song lyrics. Create any lyrics, background lyrics, timestamp them, choose alignment and then use it in any project you want!
+Formerly _Apple Music Lyrics Generator_, now altered to make more sense
 
 [<kbd> <br> projects.sipped.org/applemusic-lyrics-generator <br> </kbd>](https://projects.sipped.org/applemusic-lyrics-generator)
 
