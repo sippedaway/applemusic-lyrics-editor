@@ -18,35 +18,50 @@ Formerly _Apple Music Lyrics Generator_, now altered to make more sense
 
 ## Examples
 Every new update I create lyrics for a new song during the update development!
-> These are JSON files that you can Open and then preview, play, share or change them
+
+**All example projects are now openable from the website!**
 
 <details>
 <summary>Future, Metro Boomin, Kendrick Lamar - <b>Like That</b></summary>
   
-Exact 1:1 lyrics experience with background noises, multiple people rapping
+- Multiple people
+- Censored swear words
 
-Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json
+> [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
+
+> [**Manual**] Alternatively, [download](https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json) the JSON 
 </details>
 <details>
 <summary>Billie Eilish - <b>BLUE</b></summary>
   
-Exact 1:1 lyrics experience with background noises, multiple singing vocals at the same time, **SYLLABLES**, details and more! It's really cool and it took me a while, please check it out! :)
+- New background lyrics and vocals
+- Advanced word timings
+  
+> [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Billie%20Eilish%20-%20BLUE.json
+> [**Manual**] Alternatively, [download](https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Billie%20Eilish%20-%20BLUE.json) the JSON
+
 </details>
 <details>
 <summary>Charli xcx, Ariana Grande - <b>Sympathy is a knife</b></summary>
   
-Exact 1:1 lyrics experience with background noises, duet lyrics, details and more!
+- Background lyrics
+- Multiple people
+  
+> [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-Download the JSON for free: https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json
+> [**Manual**] Alternatively, [download](https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json) the JSON
+
 </details>
 <details>
 <summary>Kendrick Lamar, Zacari - <b>LOVE.</b></summary>
   
-Exact 1:1 lyrics experience with duet lyrics, background vocals, and more, made using update 1.4 features!
+- Background lyrics
+- Multiple people
 
-Download the JSON for free: https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json
+> [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
+
+> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json) the JSON
 </details>
 
 ## Key features
