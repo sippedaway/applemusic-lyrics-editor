@@ -119,6 +119,7 @@ Hovered lyric line:
 - Copying repeating parts, like a chorus ("Copy part" button)
 - New themes, "Spotify" and "Brat (alt)"
 - Capitalize All in RMB context menu
+- "No word timings" toggle in "More" dropdown
 - Better UI and UX, QOL updates, bug fixes, and more consistency
 #### 1.8
 - **Release date**: 2025-10-03
