@@ -534,6 +534,11 @@ body.resizing {
     background-color: #333;
 }
 
+.dropdown-content button.active {
+    background: #333;
+    color: #0af;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }

@@ -366,7 +366,11 @@ function updatePlayback() {
         line.element.classList.add('active');
         line.element.classList.remove('finished');
 
-        if (line.syllables && line.syllables.length > 0) {
+        if (window.noWordTimings) {
+            if (currentTime <= line.end) {
+                line.letterSpans.forEach(span => span.classList.add('active'));
+            }
+        } else if (line.syllables && line.syllables.length > 0) {
             handleSyllableLine(line, currentTime);
         } else {
             const letterDuration = (line.end - line.begin) / line.letterSpans.length;

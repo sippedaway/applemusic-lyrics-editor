@@ -1239,3 +1239,20 @@ function resetwithoutasking() {
     if (typeof addLine === 'function') addLine();
     if (typeof updatePreview === 'function') updatePreview();
 }
+
+window.noWordTimings = false;
+
+document.addEventListener('DOMContentLoaded', function() {
+    const noWordTimingsBtn = document.getElementById('noWordTimingsButton');
+    if (noWordTimingsBtn) {
+        window.noWordTimings = localStorage.getItem('noWordTimings') === 'true';
+        noWordTimingsBtn.classList.toggle('active', window.noWordTimings);
+        
+        noWordTimingsBtn.addEventListener('click', function() {
+            window.noWordTimings = !window.noWordTimings;
+            this.classList.toggle('active', window.noWordTimings);
+            localStorage.setItem('noWordTimings', window.noWordTimings);
+            if (typeof updatePreview === 'function') updatePreview();
+        });
+    }
+});
