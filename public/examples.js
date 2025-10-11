@@ -1,49 +1,82 @@
-const examples = [
-    {
+const examples = [{
         title: "BLUE",
         artist: "Billie Eilish",
+        song: "https://github.com/sippedaway/applemusic-lyrics-editor/raw/refs/heads/main/examples/BLUE.mp3",
         url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Billie%20Eilish%20-%20BLUE.json",
         cover: "https://i.scdn.co/image/ab67616d0000b27371d62ea7ea8a5be92d3c1f62",
-        tags: [
-            { text: "New background lyrics", color: "#007AFF" },
-            { text: "Advanced word timings", color: "#2dffcaff" }
+        tags: [{
+                text: "New background lyrics",
+                color: "#007AFF"
+            },
+            {
+                text: "Advanced word timings",
+                color: "#2dffcaff"
+            }
         ]
     },
     {
         title: "Sympathy is a knife",
         artist: "Charli xcx, Ariana Grande",
+        song: "https://github.com/sippedaway/applemusic-lyrics-editor/raw/refs/heads/main/examples/Sympathy is a knife featuring ariana grande.mp3",
         url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json",
         cover: "https://i.scdn.co/image/ab67616d0000b273cb260d46ad3b5cc7f91dc6ee",
-        tags: [
-            { text: "Multiple people", color: "#FF2D55" },
-        ]
+        tags: [{
+            text: "Multiple people",
+            color: "#FF2D55"
+        }, ]
     },
     {
         title: "Like That",
         artist: "Future, Metro Boomin, Kendrick Lamar",
+        song: "https://github.com/sippedaway/applemusic-lyrics-editor/raw/refs/heads/main/examples/Like That.mp3",
         url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json",
         cover: "https://i.scdn.co/image/ab67616d0000b2731729574fe2a8e391a2ce1ece",
-        tags: [
-            { text: "Multiple people", color: "#FF2D55" },
-            { text: "Swear words", color: "#AF52DE" },
+        tags: [{
+                text: "Multiple people",
+                color: "#FF2D55"
+            },
+            {
+                text: "Swear words",
+                color: "#AF52DE"
+            },
         ]
     },
     {
         title: "LOVE.",
         artist: "Kendrick Lamar, Zacari",
+        song: "https://github.com/sippedaway/applemusic-lyrics-editor/raw/refs/heads/main/examples/LOVE..mp3",
         url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json",
         cover: "https://i.scdn.co/image/ab67616d0000b2738b52c6b9bc4e43d873869699",
-        tags: [
-            { text: "Multiple people", color: "#FF2D55" },
-        ]
+        tags: [{
+            text: "Multiple people",
+            color: "#FF2D55"
+        }, ]
     },
     {
         title: "The Fate of Ophelia",
         artist: "Taylor Swift",
+        song: "https://github.com/sippedaway/applemusic-lyrics-editor/raw/refs/heads/main/examples/The Fate of Ophelia.mp3",
         url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/The%20Fate%20of%20Ophelia.json",
         cover: "https://i.scdn.co/image/ab67616d0000b2733d29cbdaf500d735492c693b",
-        tags: [
-            { text: "Custom theme", color: "#ff7b00ff" }
+        tags: [{
+            text: "Custom theme",
+            color: "#ff7b00ff"
+        }]
+    },
+    {
+        title: "So I",
+        artist: "Charli xcx",
+        song: "https://github.com/sippedaway/applemusic-lyrics-editor/raw/refs/heads/main/examples/So%20I.mp3",
+        url: "https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/So%20I.json",
+        cover: "https://i.scdn.co/image/ab67616d0000b273c5c6772d1d98b2d0f3a69e37",
+        tags: [{
+                text: "Custom theme",
+                color: "rgba(150, 150, 150, 1)"
+            },
+            {
+                text: "<3 SOPHIE",
+                color: "rgba(255, 255, 255, 1)"
+            }
         ]
     }
 ];
@@ -79,6 +112,10 @@ function openExamplesPopup() {
     title.style.margin = '0';
     title.style.color = '#fff';
 
+    const expl = document.createElement('p');
+    expl.textContent = 'Click on an example project to load it. This will replace your current project.';
+    expl.style.color = 'gray';
+
     const closeBtn = document.createElement('button');
     closeBtn.innerHTML = '×';
     closeBtn.className = 'popup-close';
@@ -87,6 +124,7 @@ function openExamplesPopup() {
     header.appendChild(title);
     header.appendChild(closeBtn);
     popup.appendChild(header);
+    popup.appendChild(expl);
 
     const examplesContainer = document.createElement('div');
     examplesContainer.style.display = 'grid';
@@ -103,7 +141,7 @@ function openExamplesPopup() {
 
         exampleCard.onmouseover = () => exampleCard.style.transform = 'translateY(-5px)';
         exampleCard.onmouseout = () => exampleCard.style.transform = 'translateY(0)';
-        exampleCard.onclick = () => loadExample(example.url);
+        exampleCard.onclick = () => loadExample(example.url, example.song);
 
         const cover = document.createElement('img');
         cover.src = example.cover;
@@ -136,7 +174,7 @@ function openExamplesPopup() {
             tagElement.style.fontSize = '11px';
             tagElement.style.padding = '4px 8px';
             tagElement.style.borderRadius = '12px';
-            tagElement.style.backgroundColor = tag.color + '1A'; 
+            tagElement.style.backgroundColor = tag.color + '1A';
             tagElement.style.color = tag.color;
             tagElement.style.border = `1px solid ${tag.color}`;
             tagsContainer.appendChild(tagElement);
@@ -154,26 +192,91 @@ function openExamplesPopup() {
     document.body.appendChild(overlay);
 }
 
-async function loadExample(url) {
+function showLoadingPopup() {
+    const overlay = document.createElement('div');
+    overlay.className = 'popup-overlay active';
+    overlay.id = 'loadingOverlay';
+    overlay.style.zIndex = '1001';
+
+    const popup = document.createElement('div');
+    popup.className = 'theme-popup active';
+    popup.style.maxWidth = '400px';
+    popup.style.width = '90vw';
+    popup.style.background = '#111';
+    popup.style.borderRadius = '12px';
+    popup.style.padding = '24px';
+    popup.style.position = 'fixed';
+    popup.style.top = '50%';
+    popup.style.left = '50%';
+    popup.style.transform = 'translate(-50%, -50%)';
+    popup.style.zIndex = '1002';
+    popup.style.textAlign = 'center';
+
+    const loadingText = document.createElement('h3');
+    loadingText.textContent = 'Loading example project...';
+    loadingText.style.color = '#fff';
+    loadingText.style.marginBottom = '15px';
+
+    const spinner = document.createElement('div');
+    spinner.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="font-size: 24px; color: #0af;"></i>';
+
+    popup.appendChild(loadingText);
+    popup.appendChild(spinner);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+}
+
+function hideLoadingPopup() {
+    const overlay = document.getElementById('loadingOverlay');
+    if (overlay) {
+        document.body.removeChild(overlay);
+    }
+}
+
+async function loadExample(url, song) {
     if (confirm('This will replace your current project with an example. Are you sure?')) {
-        try {1
-            const response = await fetch(url);
-            if (!response.ok) {
+        try {
+            showLoadingPopup();
+
+            const [jsonResponse, audioLoaded] = await Promise.all([
+                fetch(url),
+                new Promise((resolve, reject) => {
+                    const audio = new Audio();
+                    audio.src = song;
+                    audio.addEventListener('canplaythrough', () => resolve(true));
+                    audio.addEventListener('error', () => reject(new Error('Failed to load audio')));
+                })
+            ]);
+
+            if (!jsonResponse.ok) {
                 throw new Error('Failed to fetch example project');
             }
-            const data = await response.json();
 
+            const data = await jsonResponse.json();
             document.getElementById('linesContainer').innerHTML = '';
             localStorage.removeItem('lyricsProject');
+
+            if (song) {
+                const audioPlayer = document.getElementById('audioPlayer');
+                audioPlayer.src = song;
+                if (syncedAudioUrl) {
+                    URL.revokeObjectURL(syncedAudioUrl);
+                }
+                syncedAudioUrl = song;
+                syncedAudio = audioPlayer;
+            }
 
             populateEditor(data);
             updatePreview();
             autoSave();
 
-            const overlay = document.querySelector('.popup-overlay');
-            if (overlay) document.body.removeChild(overlay);
+            hideLoadingPopup();
+            const exampleOverlay = document.querySelector('.popup-overlay:not(#loadingOverlay)');
+            if (exampleOverlay) document.body.removeChild(exampleOverlay);
+
         } catch (error) {
             console.error('Error loading example:', error);
+            hideLoadingPopup();
             alert('Failed to load example project. Please try again later.');
         }
     }

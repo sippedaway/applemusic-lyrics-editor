@@ -29,12 +29,32 @@ const themePresets = {
         activeBlurAmount: 0,
         glowAmount: 0.2
     },
+    spotify: {
+        name: 'Spotify',
+        backgroundColor: '#808080',
+        font: 'Circular',
+        blurAmount: 0,
+        activeTextColor: '#ffffff',
+        inactiveTextColor: '#000000ff',
+        activeBlurAmount: 0,
+        glowAmount: 0
+    },
     brat: {
         name: 'Brat',
         backgroundColor: '#8ACE00',
         font: 'Arial Narrow',
         blurAmount: 1.5,
         activeTextColor: '#000000',
+        inactiveTextColor: '#808080',
+        activeBlurAmount: 1,
+        glowAmount: 0
+    },
+    bratalt: {
+        name: 'Brat (alt)',
+        backgroundColor: '#000000',
+        font: 'Arial Narrow',
+        blurAmount: 1.5,
+        activeTextColor: '#ffffff',
         inactiveTextColor: '#808080',
         activeBlurAmount: 1,
         glowAmount: 0
@@ -54,7 +74,7 @@ const themePresets = {
         backgroundColor: "url('/themes/showgirl/background.jpg')",
         font: 'Steelfish',
         blurAmount: 0.6,
-        activeTextColor: '#ffffff',
+        activeTextColor: '#cb5f40',
         inactiveTextColor: '#cb5f40',
         activeBlurAmount: 0,
         glowAmount: 0.2
@@ -160,6 +180,14 @@ function openThemeEditor() {
     defaultThemeBtn.className = 'add-sub-button';
     defaultThemeBtn.onclick = () => applyThemePreset('default');
 
+    const spotifyThBtn = document.createElement('button');
+    spotifyThBtn.textContent = 'Spotify';
+    spotifyThBtn.className = 'add-sub-button';
+    spotifyThBtn.style.background = '#808080';
+    spotifyThBtn.style.color = '#ffffff';
+    spotifyThBtn.style.fontFamily = 'Circular';
+    spotifyThBtn.onclick = () => applyThemePreset('spotify');
+
     const bratThemeBtn = document.createElement('button');
     bratThemeBtn.textContent = 'Brat';
     bratThemeBtn.className = 'add-sub-button';
@@ -167,6 +195,14 @@ function openThemeEditor() {
     bratThemeBtn.style.color = '#000000';
     bratThemeBtn.style.fontFamily = 'Arial Narrow';
     bratThemeBtn.onclick = () => applyThemePreset('brat');
+
+    const brataltThemeBtn = document.createElement('button');
+    brataltThemeBtn.textContent = 'Brat (alt)';
+    brataltThemeBtn.className = 'add-sub-button';
+    brataltThemeBtn.style.background = '#000000';
+    brataltThemeBtn.style.color = '#ffffff';
+    brataltThemeBtn.style.fontFamily = 'Arial Narrow';
+    brataltThemeBtn.onclick = () => applyThemePreset('bratalt');
 
     const blueThemeBtn = document.createElement('button');
     blueThemeBtn.textContent = 'BLUE';
@@ -180,14 +216,16 @@ function openThemeEditor() {
     const showgirlBtn = document.createElement('button');
     showgirlBtn.textContent = 'SHOWGIRL';
     showgirlBtn.className = 'add-sub-button';
-    showgirlBtn.style.background = 'url("https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da844cfd89ef33f21c9986c7461b")';
-    showgirlBtn.style.color = '#007397';
-    showgirlBtn.style.fontFamily = 'Dela Gothic One, Helvetica, Arial';
-    showgirlBtn.style.fontWeight = 'bold';
+    showgirlBtn.style.background = 'darkorange';
+    showgirlBtn.style.color = 'darkslategray';
+    showgirlBtn.style.fontFamily = 'Steelfish, Helvetica';
+    showgirlBtn.style.fontSize = '18px';
     showgirlBtn.onclick = () => applyThemePreset('showgirl');
 
     themeBtnsContainer.appendChild(defaultThemeBtn);
+    themeBtnsContainer.appendChild(spotifyThBtn);
     themeBtnsContainer.appendChild(bratThemeBtn);
+    themeBtnsContainer.appendChild(brataltThemeBtn);
     themeBtnsContainer.appendChild(blueThemeBtn);
     themeBtnsContainer.appendChild(showgirlBtn);
 
@@ -272,6 +310,9 @@ function openThemeEditor() {
     });
 
     const bgwarning = document.createElement('p');
+    bgwarning.style.color = 'gray';
+    bgwarning.style.margin = '0';
+    bgwarning.style.fontSize = '13px';
     bgwarning.innerHTML = 'Background image is still <strong>experimental.</strong><br>If you want to use a background image, make sure to have the top, left, right, and bottom of the image loopable.';
     
     bgContainer.appendChild(bgColorInput);
@@ -298,7 +339,7 @@ function openThemeEditor() {
         'SF Pro',
         'Arial Narrow',
         'Helvetica',
-        'Inter',
+        'Circular',
         'Roboto',
         'Open Sans',
         'Segoe UI',
@@ -469,6 +510,7 @@ function openThemeEditor() {
 
     const bindContainer = document.createElement('div');
     bindContainer.className = 'setting-group';
+    bindContainer.style.display = 'block';
     bindContainer.style.marginTop = '20px';
     bindContainer.style.padding = '12px';
     bindContainer.style.background = '#151515';

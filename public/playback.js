@@ -311,7 +311,7 @@ function updatePlayback() {
     updateTimeDisplay(currentTime);
 
     previewData.forEach((line, index) => {
-    if (line.end > maxEnd) maxEnd = line.end;
+        if (line.end > maxEnd) maxEnd = line.end;
 
     if (line.isBackground) {
         const isActive = currentTime >= line.begin && currentTime <= line.end + 0.4;
@@ -423,11 +423,10 @@ function updatePlayback() {
         }
     }
 
-    if (currentTime < maxEnd) {
+    if (isPlaying) {
         playRequestId = requestAnimationFrame(updatePlayback);
     } else {
         cancelAnimationFrame(playRequestId);
-        isPlaying = false;
     }
 }
 

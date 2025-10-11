@@ -15,6 +15,10 @@
             font-weight: normal;
             font-style: italic;
         }
+        @font-face {
+            font-family: 'Circular';
+            src: url('/themes/spotify/Circular.otf') format('opentype');
+        }
     </style>
 </head>
 
@@ -22,7 +26,7 @@
     <div id="top-bar">
         <div class="dropdown-container">
             <div class="dropdown">
-                <button class="dropdown-btn button">File</button>
+                <button class="dropdown-btn button"><i class="fas fa-file"></i>File</button>
                 <div class="dropdown-content">
                     <button id="saveButton"><i class="fas fa-save"></i>Save</button>
                     <button id="openButton"><i class="fas fa-upload"></i>Open</button>
@@ -31,19 +35,19 @@
                 </div>
             </div>
             <div class="dropdown">
-                <button class="dropdown-btn button" onclick="openExamplesPopup()">Examples</button>
+                <button class="dropdown-btn button" onclick="openExamplesPopup()"><i class="fas fa-folder-open"></i>Examples</button>
             </div>
             <div class="dropdown dropdown-help">
-                <button class="dropdown-btn button">Help</button>
+                <button class="dropdown-btn button"><i class="fas fa-ellipsis-v"></i>More</button>
                 <div class="dropdown-content">
+                    <button id="onboardingButton" onclick="createOnboardingPopup()">
+                        <i class="fas fa-sync"></i>Onboarding
+                    </button>
                     <button id="githubButton" onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-editor', '_blank')">
                         <i class="fab fa-github"></i>GitHub
                     </button>
                     <button id="kofiButton" onclick="window.open('https://ko-fi.com/sipped', '_blank')">
                         <i class="fas fa-coffee"></i>Support me on Ko-fi
-                    </button>
-                    <button id="exampleButton">
-                        <i class="fas fa-file-alt"></i>Load Example
                     </button>
                 </div>
             </div>
@@ -112,8 +116,7 @@
                         <p>Click <strong>Censor words</strong> to censor explicit words in lyrics.</p>
                         <p>Cover a word in <strong>[ ]</strong> (example <strong>[Hi]</strong>) in order to censor it in the playback, when censoring is on.</p>
                         <p>Slurs cannot be uncensored. Please use <strong>a letter and an asterisk *</strong> (example <strong>N*</strong>) to censor slurs.</p>
-                        <p>Click the <strong>+ Add background lyric</strong> to add sublyrics to a main lyric.</p>
-                        <p>In the sublyric, add <strong>timestamps</strong> and <strong>write the lyric</strong>.</p>
+                        <p>Click the <strong>BG button</strong> to make a lyric, a <strong>background</strong> lyric.</p>
                     </div>
                 </div>
 
@@ -172,8 +175,9 @@
                     </div>
                 </div>
 
+                <button id="addLineButtonalt"><i class="fas fa-plus" style="margin-right: 8px;"></i>Add Line</button>
                 <div id="linesContainer"></div>
-                <button id="addLineButton">Add Line</button>
+                <button id="addLineButton"><i class="fas fa-plus" style="margin-right: 8px;"></i>Add Line</button>
             </div>
 
         </div>
@@ -196,6 +200,8 @@
             <audio id="audioPlayer" style="display:none;"></audio>
         </div>
     </div>
+    <script src="onboarding.js"></script>
+    <script src="copying-parts.js"></script>
     <script src="syllables-editor.js"></script>
     <script src="project.js" defer></script>
     <script src="playback.js" defer></script>
