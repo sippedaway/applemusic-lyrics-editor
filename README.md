@@ -73,6 +73,18 @@ Every new update I create lyrics for a new song during the update development!
 
 > [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/The%20Fate%20of%20Ophelia.json) the JSON
 </details>
+<details>
+<summary>Charli xcx - <b>So I</b></summary>
+  
+- Background lyrics
+- Custom theme
+- <3 SOPHIE
+  
+> [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
+
+> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/So%20I.json) the JSON
+
+</details>
 
 ## Key features
 - **Realistic depiction**: looks pretty much identical to the actual Apple Music song lyrics
