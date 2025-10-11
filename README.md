@@ -99,6 +99,15 @@ Hovered lyric line:
 </details>
 
 ## Version
+#### 1.9
+- **Release date**: 2025-10-11
+- **QOL update and fixes.**
+- **Added:**
+- Onboarding I'm very happy with
+- Copying repeating parts, like a chorus ("Copy part" button)
+- New themes, "Spotify" and "Brat (alt)"
+- Capitalize All in RMB context menu
+- Better UI and UX, QOL updates, bug fixes, and more consistency
 #### 1.8
 - **Release date**: 2025-10-03
 - **Special update!**
