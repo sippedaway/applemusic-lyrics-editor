@@ -3,10 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Apple Music Lyrics Editor</title>
+    <title>LyricsEditor</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+
+    <meta name="description" content="LyricsEditor lets you easily create, sync, and style song lyrics with themes and timing tools. Export in SRT, VTT, LRC, and more formats.">
+    <meta name="keywords" content="lyrics editor, subtitle maker, LRC, SRT, VTT, timed lyrics, music tools, karaoke editor, song sync, lyric styling">
+    <meta name="author" content="sipped">
+    <meta name="robots" content="index, follow">
+
+    <meta property="og:title" content="LyricsEditor">
+    <meta property="og:description" content="Design and export synchronized lyrics in plenty of beautiful styles. Export in any format.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://lyricseditor.sipped.org">
+
+    <meta name="twitter:title" content="LyricsEditor">
+    <meta name="twitter:description" content="Design and export synchronized lyrics in plenty of beautiful styles. Export in any format.">
+
+    <link rel="canonical" href="https://lyricseditor.sipped.org">
+
     <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
     <style>
         @font-face {
@@ -28,32 +45,18 @@
             <div class="dropdown">
                 <button class="dropdown-btn button"><i class="fas fa-file"></i>File</button>
                 <div class="dropdown-content">
-                    <button id="saveButton"><i class="fas fa-save"></i>Save</button>
+                    <button id="saveButton"><i class="fas fa-save"></i>Export</button>
                     <button id="openButton"><i class="fas fa-upload"></i>Open</button>
                     <button id="resetButton"><i class="fas fa-trash"></i>Reset</button>
                     <input type="file" id="fileInput" style="display:none;" accept="application/json">
                 </div>
             </div>
-            <div class="dropdown">
-                <button class="dropdown-btn button" onclick="openExamplesPopup()"><i class="fas fa-folder-open"></i>Examples</button>
-            </div>
-            <div class="dropdown dropdown-help">
-                <button class="dropdown-btn button"><i class="fas fa-ellipsis-v"></i>More</button>
-                <div class="dropdown-content">
-                    <button id="onboardingButton" onclick="createOnboardingPopup()">
-                        <i class="fas fa-sync"></i>Onboarding
-                    </button>
-                    <button id="noWordTimingsButton">
-                        <i class="fas fa-font"></i>No word timings
-                    </button>
-                    <button id="githubButton" onclick="window.open('https://github.com/sippedaway/applemusic-lyrics-editor', '_blank')">
-                        <i class="fab fa-github"></i>GitHub
-                    </button>
-                    <button id="kofiButton" onclick="window.open('https://ko-fi.com/sipped', '_blank')">
-                        <i class="fas fa-coffee"></i>Support me on Ko-fi
-                    </button>
-                </div>
-            </div>
+            <button class="button" onclick="createOptionsMenu()">
+                <i class="fas fa-cog"></i>Options
+            </button>
+            <button class="button" onclick="openexamples()">
+                <i class="fas fa-folder-open"></i>Examples
+            </button>
         </div>
         <div class="div">
             <div class="dropdown" id="syncDropdown">
@@ -80,8 +83,8 @@
     </div>
     <div id="container">
         <div id="editor">
-            <h2>Editor</h2>
-            <p>This is a realistic Apple Music lyrics editor! Feel free to use it for any project.
+            <img src="./assets/lyricseditor.png" alt="LyricsEditor logo" style="width: 300px; height: auto;"></img>
+            <p>Welcome to an advanced lyrics editor and previewer. Feel free to use it for any project.
             </p>
 
             <div class="tutorial-section">
@@ -152,7 +155,7 @@
                         Export & Save
                     </button>
                     <div class="tutorial-content">
-                        <p>Use <strong>File → Save</strong> to export your lyrics project.</p>
+                        <p>Use <strong>File → Export</strong> (or go to Options) to export your lyrics project.</p>
                         <p><strong>File → Open</strong> lets you load previously saved projects.</p>
                         <p>Your work is automatically saved to your browser's local storage.</p>
                     </div>
@@ -169,10 +172,9 @@
                         <p>The tool is better used <strong>with a PC</strong>.</p>
 
                         <strong>Version</strong>
-                        <p>There are frequent updates, the current one being <strong>v1.7:</strong></p>
-                            <p>- Customization and themes (<strong>psst!</strong> Over 8 settings, 3 themes, full customization, and new things soon!)
-                            <br>- Loading examples from within the editor
-                            <br>- New and improved syllables/word-timings editor
+                        <p>There are frequent updates, the current one being <strong>v2.0:</strong></p>
+                            <p>- Options menu with... NEW exporting (a lot of options)!
+                            <br>- UI and UX changes: more consistency, better experience
                             <br>- And more... Full list on GitHub!
                             </p>
                     </div>
@@ -194,6 +196,9 @@
                 <button id="toggleCensor" class="sync-button" style="margin-left:10px;">
                     <i class="fas fa-eye-slash"></i> Censor words
                 </button>
+                <button id="toggleFullscreen" class="sync-button" style="margin-left:10px;">
+                    <i class="fas fa-expand"></i> Fullscreen
+                </button>
                 <button id="customizeBtn" class="sync-button" style="margin-left:10px;" onclick="openThemeEditor()">
                     <i class="fas fa-paint-brush" style="transform:rotate(0deg);"></i> Customize
                 </button>
@@ -210,6 +215,8 @@
     <script src="playback.js" defer></script>
     <script src="themes.js" defer></script>
     <script src="examples.js" defer></script>
+    <script src="export.js"></script>
+    <script src="options.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var resetBtn = document.getElementById('resetButton');

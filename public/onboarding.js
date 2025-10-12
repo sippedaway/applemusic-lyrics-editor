@@ -1,8 +1,11 @@
 const onboardingSteps = [{
         title: 'Welcome',
         content: `
-            <h2>Welcome to Apple Music Lyrics Editor</h2>
-            <p>Create realistic Apple Music-style lyrics with advanced features like:</p>
+            <div style="display: flex; height: 40px; gap: 20px; align-items: center;">
+                <img src="./assets/favicon.png" alt="LyricsEditor Logo" style="width:40px; height:auto;">
+                <h2>Welcome to LyricsEditor!</h2>
+            </div>
+            <p>Create realistic lyrics of any style with advanced features like:</p>
             <div class="feature-grid">
                 <div class="feature-item">
                     <i class="fas fa-clock"></i>

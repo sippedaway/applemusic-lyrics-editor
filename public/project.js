@@ -540,7 +540,20 @@ document.getElementById('stopButton').addEventListener('click', () => {
 });
 
 document.getElementById('saveButton').addEventListener('click', () => {
-    saveProject();
+    const optionsPopup = document.querySelector('.options-popup');
+
+    if (optionsPopup) {
+        // Popup already exists: switch to Examples tab
+        activeTab = 'export';
+        const tabButton = optionsPopup.querySelector('.options-tabs button[data-tab="export"]');
+        if (tabButton) tabButton.click();
+    } else if (typeof createOptionsMenu === 'function') {
+        // Set activeTab before creating the popup
+        activeTab = 'export';
+        createOptionsMenu();
+    } else {
+        console.warn('createOptionsMenu() is not defined. Cannot open Export tab.');
+    }
 });
 
 document.getElementById('openButton').addEventListener('click', () => {
@@ -1255,4 +1268,30 @@ document.addEventListener('DOMContentLoaded', function() {
             if (typeof updatePreview === 'function') updatePreview();
         });
     }
+
+    const toggleFullscreen = document.getElementById('toggleFullscreen');
+    const editor = document.getElementById('editor');
+    const divider = document.getElementById('divider');
+    const preview = document.getElementById('preview');
+
+    toggleFullscreen.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const isFullscreen = this.classList.contains('active');
+        
+        // Toggle icon
+        const icon = this.querySelector('i');
+        icon.className = isFullscreen ? 'fas fa-compress' : 'fas fa-expand';
+        
+        // Save editor width for restoration
+        if (isFullscreen) {
+            this.dataset.prevWidth = editor.style.width;
+            editor.style.display = 'none';
+            divider.style.display = 'none';
+            preview.style.paddingLeft = '0';
+        } else {
+            editor.style.display = 'block';
+            divider.style.display = '';
+            preview.style.paddingLeft = '';
+        }
+    });
 });

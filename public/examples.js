@@ -81,6 +81,25 @@ const examples = [{
     }
 ];
 
+function openexamples() {
+    // Check if the options popup already exists
+    const optionsPopup = document.querySelector('.options-popup');
+
+    if (optionsPopup) {
+        // Popup already exists: switch to Examples tab
+        activeTab = 'examples';
+        const tabButton = optionsPopup.querySelector('.options-tabs button[data-tab="examples"]');
+        if (tabButton) tabButton.click();
+    } else if (typeof createOptionsMenu === 'function') {
+        // Set activeTab before creating the popup
+        activeTab = 'examples';
+        createOptionsMenu();
+    } else {
+        console.warn('createOptionsMenu() is not defined. Cannot open Examples tab.');
+    }
+}
+
+
 function openExamplesPopup() {
     const overlay = document.createElement('div');
     overlay.className = 'popup-overlay active';

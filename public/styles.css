@@ -331,6 +331,20 @@ body.resizing {
     background: #444;
 }
 
+.option-button {
+    padding: 8px 15px;
+    background: #333;
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-button:hover {
+    background: #444;
+}
+
 .delete-sub {
     padding: 5px 9px;
     background: #444;
@@ -1146,4 +1160,140 @@ body.resizing {
     margin: 0;
     color: #888;
     font-size: 14px;
+}
+
+.options-popup {
+    display: flex;
+    width: 1000px;
+    max-width: 95vw;
+    height: 80vh;
+    background: #111;
+    border-radius: 12px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.options-sidebar {
+    width: 200px;
+    border-right: 1px solid #222;
+    display: flex;
+    flex-direction: column;
+}
+
+.options-header {
+    padding: 20px;
+    border-bottom: 1px solid #222;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.options-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.options-tabs {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.options-tabs button {
+    padding: 12px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: #888;
+    border-radius: 12px;
+    margin: 5px 0;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.options-tabs button i {
+    width: 20px;
+    margin-right: 8px;
+}
+
+.options-tabs button:hover {
+    background: #222;
+    color: #fff;
+}
+
+.options-tabs button.active {
+    background: #333;
+    color: #fff;
+}
+
+.options-content {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.option-row {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #1a1a1a;
+    border-radius: 8px;
+}
+
+.option-row label {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.option-row input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.option-description {
+    margin: 0;
+    color: #888;
+    font-size: 13px;
+}
+
+.options-section {
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.version {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.github-button {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    background: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: none;
+    cursor: poiner;
+}
+
+.github-button:hover {
+    background: #444;
+}
+
+.legal {
+    color: #666;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.coming-soon {
+    color: #666;
+    font-style: italic;
 }
