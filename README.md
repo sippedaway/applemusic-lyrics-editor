@@ -1,4 +1,4 @@
-[![Preview header](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/github/preview.png)](#)
+[![Preview header](https://raw.githubusercontent.com/sippedaway/lyricseditor/refs/heads/main/github/preview.png)](#)
 
 [![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)](#)
 [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff)](#)
@@ -10,11 +10,11 @@
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K31AMKAQ)
 
-# [Apple Music Lyrics Editor](https://projects.sipped.org/applemusic-lyrics-generator)
-A very close depiction of the Apple Music song lyrics. Create any lyrics, background lyrics, timestamp them, choose alignment and then use it in any project you want!
-Formerly _Apple Music Lyrics Generator_, now altered to make more sense
+# [LyricsEditor](https://lyricseditor.sipped.org)
+Write, create, design, sync, and style lyrics however you want, create realistic replicas of Apple Music, Spotify, YouTube Music (and other) lyrics.
+Formerly _Apple Music Lyrics Editor_, now it's literally 'any streaming service and theme lyrics editor'
 
-[<kbd> <br> projects.sipped.org/applemusic-lyrics-generator <br> </kbd>](https://projects.sipped.org/applemusic-lyrics-generator)
+[<kbd> <br> lyricseditor.sipped.org/ <br> </kbd>](https://lyricseditor.sipped.org/)
 
 ## Examples
 Every new update I create lyrics for a new song during the update development!
@@ -29,7 +29,7 @@ Every new update I create lyrics for a new song during the update development!
 
 > [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-> [**Manual**] Alternatively, [download](https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json) the JSON 
+> [**Manual**] Alternatively, [download](https://github.com/sippedaway/lyricseditor/blob/main/examples/Future%2C%20Metro%20Boomin%2C%20Kendrick%20Lamar%20-%20Like%20That.json) the JSON 
 </details>
 <details>
 <summary>Billie Eilish - <b>BLUE</b></summary>
@@ -39,7 +39,7 @@ Every new update I create lyrics for a new song during the update development!
   
 > [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-> [**Manual**] Alternatively, [download](https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Billie%20Eilish%20-%20BLUE.json) the JSON
+> [**Manual**] Alternatively, [download](https://github.com/sippedaway/lyricseditor/blob/main/examples/Billie%20Eilish%20-%20BLUE.json) the JSON
 
 </details>
 <details>
@@ -50,7 +50,7 @@ Every new update I create lyrics for a new song during the update development!
   
 > [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-> [**Manual**] Alternatively, [download](https://github.com/sippedaway/applemusic-lyrics-generator/blob/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json) the JSON
+> [**Manual**] Alternatively, [download](https://github.com/sippedaway/lyricseditor/blob/main/examples/Charli%20xcx%2C%20Ariana%20Grande%20-%20Sympathy%20is%20a%20knife.json) the JSON
 
 </details>
 <details>
@@ -61,7 +61,7 @@ Every new update I create lyrics for a new song during the update development!
 
 > [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-generator/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json) the JSON
+> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/lyricseditor/refs/heads/main/examples/Kendrick%20Lamar%2C%20Zacari%20-%20LOVE..json) the JSON
 </details>
 <details>
 <summary>Taylor Swift - <b>The Fate of Ophelia</b></summary>
@@ -71,7 +71,7 @@ Every new update I create lyrics for a new song during the update development!
 
 > [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/The%20Fate%20of%20Ophelia.json) the JSON
+> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/lyricseditor/refs/heads/main/examples/The%20Fate%20of%20Ophelia.json) the JSON
 </details>
 <details>
 <summary>Charli xcx - <b>So I</b></summary>
@@ -82,7 +82,7 @@ Every new update I create lyrics for a new song during the update development!
   
 > [**Recommended**] Go to [the website](https://projects.sipped.org/) and click "Examples" in the nav-bar!
 
-> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/applemusic-lyrics-editor/refs/heads/main/examples/So%20I.json) the JSON
+> [**Manual**] Alternatively, [download](https://raw.githubusercontent.com/sippedaway/lyricseditor/refs/heads/main/examples/So%20I.json) the JSON
 
 </details>
 
@@ -111,6 +111,16 @@ Hovered lyric line:
 </details>
 
 ## Version
+#### 2.0
+- **Release date**: 2025-10-12
+- **QOL update and fixes.**
+- Rebrand to LyricsEditor!
+- Options menu
+- Exporting (to many formats)
+- Fullscreen preview
+- New theme setting: No word timings
+- New theme, "YouTube Music"
+- Better UI and UX, QOL updates, bug fixes, and more consistency
 #### 1.9
 - **Release date**: 2025-10-11
 - **QOL update and fixes.**
@@ -121,6 +131,10 @@ Hovered lyric line:
 - Capitalize All in RMB context menu
 - "No word timings" toggle in "More" dropdown
 - Better UI and UX, QOL updates, bug fixes, and more consistency
+
+<details>
+<summary>1.8 - 1.0</summary>
+
 #### 1.8
 - **Release date**: 2025-10-03
 - **Special update!**
@@ -196,8 +210,10 @@ Hovered lyric line:
 - **Release date**: 2025-03-15
 - Hosted on Vercel
 
+</details>
+
 ## Legal
-Apple Music Lyrics Generator is a passion/hobby project made by [me, sipped,](https://github.com/sippedaway) and is **NOT** affiliated with Apple, Apple Music and any of the artists in the [examples](#examples) section
+LyricsEditor is a passion/hobby project made by [me, sipped,](https://github.com/sippedaway) and is **NOT** affiliated with Apple, Apple Music and any of the artists in the [examples](#examples) section
 
 ## Contact me
 An email for - feedback, found bugs/issues, questions, recommendations, help, and more - hello@sipped.org
@@ -208,5 +224,3 @@ Alternatively, leave a GitHub issue. Thanks! :)
 
 ## Credits
 - [sipped](https://github.com/sippedaway)
-
-Support me and get early access to this lyrics generator project (and all my other projects) updates, changes and early looks __for as low as $3__: https://ko-fi.com/sipped
