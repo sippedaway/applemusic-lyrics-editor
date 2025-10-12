@@ -95,6 +95,17 @@ const themes = {
         activeBlurAmount: 0,
         glowAmount: 0
     },
+    youtubemusic: {
+        name: 'YouTube Music',
+        backgroundColor: '#111111ff',
+        font: 'SF Pro',
+        blurAmount: 0,
+        activeTextColor: '#ffffff',
+        inactiveTextColor: '#705d68',
+        activeBlurAmount: 0,
+        glowAmount: 0,
+        nowordtimings: false
+    },
     brat: {
         themename: 'brat',
         name: 'Brat',
